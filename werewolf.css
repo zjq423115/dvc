@@ -1,0 +1,1015 @@
+/* ===== Werewolf App Styles ===== */
+
+.werewolf-app-page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 855;
+  overflow: hidden;
+  color: #f7f2e8;
+  background: #050507;
+  transform: translateX(100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(.25,.46,.45,.94), visibility 0s linear 0.28s;
+}
+
+@supports (height: 100dvh) {
+  .werewolf-app-page {
+    height: 100dvh;
+  }
+}
+
+.werewolf-app-page.active {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.werewolf-setup-view,
+.werewolf-loading-view,
+.werewolf-game-view {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.werewolf-setup-view.active,
+.werewolf-loading-view.active,
+.werewolf-game-view.active {
+  display: flex;
+}
+
+.werewolf-setup-view {
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 16% 8%, rgba(188, 38, 44, 0.22), transparent 30%),
+    radial-gradient(circle at 86% 14%, rgba(239, 183, 85, 0.12), transparent 28%),
+    linear-gradient(180deg, #0a0809, #171012 54%, #070708);
+}
+
+.werewolf-nav {
+  color: #f7f2e8;
+  background: rgba(5, 5, 7, 0.62);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.werewolf-nav .chat-nav-btn,
+.werewolf-nav .chat-nav-back {
+  color: #f7f2e8;
+}
+
+.werewolf-nav-subtitle {
+  margin-top: 1px;
+  color: rgba(247, 242, 232, 0.64);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.werewolf-setup-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 14px 108px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.werewolf-setup-block {
+  margin-bottom: 16px;
+}
+
+.werewolf-setup-title {
+  color: #fff7ea;
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+
+.werewolf-setup-hint {
+  color: rgba(247, 242, 232, 0.62);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.werewolf-count-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.werewolf-count-card,
+.werewolf-config-card,
+.werewolf-select-card,
+.werewolf-lineup-chip,
+.werewolf-status-card,
+.werewolf-user-identity,
+.werewolf-speech-panel,
+.werewolf-action-panel,
+.werewolf-review-panel,
+.werewolf-api-error-panel,
+.werewolf-loading-card {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(12, 12, 17, 0.56);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+}
+
+.werewolf-count-card {
+  min-height: 54px;
+  border-radius: 14px;
+  color: #f7f2e8;
+  font: inherit;
+  font-weight: 900;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)),
+    rgba(12, 12, 17, 0.54);
+}
+
+.werewolf-count-card span {
+  display: block;
+  color: rgba(247, 242, 232, 0.56);
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.werewolf-count-card.selected,
+.werewolf-config-card.selected,
+.werewolf-select-card.selected {
+  border-color: rgba(245, 69, 80, 0.78);
+  background:
+    linear-gradient(135deg, rgba(173, 31, 42, 0.58), rgba(38, 21, 27, 0.64)),
+    rgba(16, 16, 22, 0.72);
+  box-shadow: 0 0 0 1px rgba(245, 69, 80, 0.22), 0 18px 46px rgba(0, 0, 0, 0.42);
+}
+
+.werewolf-config-list,
+.werewolf-persona-list,
+.werewolf-role-list,
+.werewolf-lineup-preview,
+.werewolf-forward-list {
+  display: grid;
+  gap: 8px;
+}
+
+.werewolf-config-card {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  color: #f7f2e8;
+  padding: 12px;
+  text-align: left;
+  font: inherit;
+}
+
+.werewolf-config-card strong {
+  display: block;
+  color: #fff7ea;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.werewolf-config-card span {
+  display: block;
+  color: rgba(247, 242, 232, 0.7);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.werewolf-config-card em {
+  display: block;
+  color: rgba(245, 197, 118, 0.9);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+
+.werewolf-select-card {
+  min-height: 68px;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.werewolf-select-card:active,
+.werewolf-count-card:active,
+.werewolf-config-card:active,
+.werewolf-vote-target:active,
+.werewolf-primary-btn:active,
+.werewolf-secondary-btn:active {
+  transform: scale(0.985);
+}
+
+.werewolf-avatar,
+.werewolf-lineup-avatar,
+.werewolf-player-avatar {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff7ea;
+  background:
+    radial-gradient(circle at 35% 24%, rgba(255, 255, 255, 0.22), transparent 34%),
+    linear-gradient(135deg, rgba(91, 35, 42, 0.95), rgba(27, 23, 30, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-weight: 900;
+}
+
+.werewolf-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+
+.werewolf-avatar img,
+.werewolf-lineup-avatar img,
+.werewolf-player-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.werewolf-select-main {
+  min-width: 0;
+}
+
+.werewolf-select-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff7ea;
+  font-size: 14px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-select-meta {
+  color: rgba(247, 242, 232, 0.58);
+  font-size: 12px;
+  line-height: 1.35;
+  margin-top: 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.werewolf-empty {
+  color: rgba(247, 242, 232, 0.56);
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.werewolf-lineup-preview {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.werewolf-lineup-chip {
+  min-width: 0;
+  border-radius: 16px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.werewolf-lineup-avatar {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 7px;
+  border-radius: 14px;
+}
+
+.werewolf-lineup-chip strong {
+  display: block;
+  color: #fff7ea;
+  font-size: 12px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-lineup-chip span {
+  display: block;
+  color: rgba(247, 242, 232, 0.55);
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.werewolf-setup-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0));
+  background: rgba(5, 5, 7, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.werewolf-setup-count {
+  min-width: 0;
+  color: rgba(247, 242, 232, 0.72);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.werewolf-primary-btn,
+.werewolf-secondary-btn,
+.werewolf-icon-btn {
+  border: 0;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.werewolf-primary-btn {
+  min-height: 40px;
+  border-radius: 999px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #e13948, #7d1723);
+  box-shadow: 0 12px 28px rgba(151, 28, 40, 0.35);
+}
+
+.werewolf-primary-btn:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.werewolf-secondary-btn {
+  min-height: 40px;
+  border-radius: 999px;
+  padding: 0 16px;
+  color: #f7f2e8;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.werewolf-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff7ea;
+}
+
+.werewolf-loading-view,
+.werewolf-game-view {
+  flex-direction: column;
+  background: #050507;
+}
+
+.werewolf-loading-bg,
+.werewolf-game-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 2, 4, 0.12), rgba(2, 2, 4, 0.86)),
+    radial-gradient(circle at 50% 40%, rgba(204, 44, 50, 0.2), transparent 34%),
+    url("../111/werewolf-loading.png") center / cover no-repeat;
+  filter: saturate(1.04) contrast(1.08);
+}
+
+.werewolf-game-bg::after,
+.werewolf-loading-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 48%, transparent 0 26%, rgba(0, 0, 0, 0.34) 52%, rgba(0, 0, 0, 0.74) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.66));
+}
+
+.werewolf-floating-back {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top, 0));
+  left: 12px;
+  z-index: 2;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  padding: 0 12px;
+  color: #fff7ea;
+  background: rgba(10, 10, 14, 0.44);
+  backdrop-filter: blur(16px);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.werewolf-loading-card {
+  position: relative;
+  z-index: 1;
+  width: min(82vw, 310px);
+  margin: auto;
+  border-radius: 28px;
+  padding: 32px 22px 26px;
+  text-align: center;
+}
+
+.werewolf-orbit-loader {
+  position: relative;
+  width: 118px;
+  height: 118px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 36%, transparent 37%),
+    conic-gradient(from 0deg, transparent, rgba(255, 226, 155, 0.3), #e93d4e, transparent 70%);
+  animation: werewolfSpin 1.55s linear infinite;
+}
+
+.werewolf-orbit-loader::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: rgba(5, 5, 7, 0.84);
+  box-shadow: inset 0 0 34px rgba(231, 58, 72, 0.2);
+}
+
+.werewolf-orbit-loader span {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff0c3;
+  box-shadow: 0 0 18px #f04455;
+}
+
+.werewolf-orbit-loader span:nth-child(1) { left: 54px; top: 0; }
+.werewolf-orbit-loader span:nth-child(2) { right: 8px; bottom: 24px; }
+.werewolf-orbit-loader span:nth-child(3) { left: 10px; bottom: 22px; }
+
+@keyframes werewolfSpin {
+  to { transform: rotate(360deg); }
+}
+
+.werewolf-loading-title {
+  color: #fff7ea;
+  font-size: 20px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+.werewolf-loading-text {
+  color: rgba(247, 242, 232, 0.66);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-top: 8px;
+}
+
+.werewolf-game-nav {
+  position: relative;
+  z-index: 2;
+}
+
+.werewolf-game-shell {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom, 0));
+}
+
+.werewolf-status-card {
+  border-radius: 18px;
+  padding: 10px 12px;
+}
+
+.werewolf-status-main {
+  color: #fff7ea;
+  font-size: 15px;
+  font-weight: 1000;
+}
+
+.werewolf-status-sub {
+  color: rgba(247, 242, 232, 0.62);
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 3px;
+}
+
+.werewolf-player-strip {
+  min-height: 116px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 74px;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.werewolf-player-card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 7px 6px 8px;
+  background: rgba(11, 11, 16, 0.5);
+  backdrop-filter: blur(14px);
+  text-align: center;
+}
+
+.werewolf-player-card.active {
+  border-color: rgba(255, 229, 166, 0.9);
+  box-shadow: 0 0 0 1px rgba(255, 229, 166, 0.25), 0 0 24px rgba(255, 188, 84, 0.32);
+}
+
+.werewolf-player-card.dead {
+  opacity: 0.52;
+  filter: grayscale(0.86);
+}
+
+.werewolf-player-card.no-vote::after {
+  content: "禁票";
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-radius: 999px;
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.werewolf-player-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  margin: 0 auto 5px;
+}
+
+.werewolf-player-name {
+  color: #fff7ea;
+  font-size: 11px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-player-seat {
+  display: block;
+  color: rgba(255, 229, 166, 0.62);
+  font-size: 9px;
+  line-height: 1.1;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-player-role {
+  display: block;
+  color: rgba(247, 242, 232, 0.54);
+  font-size: 10px;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-user-identity {
+  border-radius: 18px;
+  padding: 10px 12px;
+  color: rgba(247, 242, 232, 0.76);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.werewolf-user-identity strong {
+  color: #fff7ea;
+  font-size: 15px;
+  font-weight: 1000;
+  margin-right: 6px;
+}
+
+.werewolf-user-identity em {
+  color: #ffc96b;
+  font-style: normal;
+}
+
+.werewolf-speech-panel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.werewolf-panel-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.werewolf-panel-head span {
+  color: #fff7ea;
+  font-size: 14px;
+  font-weight: 1000;
+}
+
+.werewolf-panel-head em {
+  color: rgba(247, 242, 232, 0.58);
+  font-size: 11px;
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-speech-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.werewolf-log-entry,
+.werewolf-speech-entry {
+  border-radius: 16px;
+  margin-bottom: 9px;
+  padding: 10px 11px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.werewolf-log-entry {
+  color: rgba(247, 242, 232, 0.68);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.werewolf-log-entry.important {
+  border-color: rgba(230, 54, 68, 0.35);
+  background: rgba(119, 20, 32, 0.24);
+  color: rgba(255, 236, 221, 0.86);
+}
+
+.werewolf-speech-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.werewolf-speech-name {
+  color: #fff7ea;
+  font-size: 13px;
+  font-weight: 1000;
+}
+
+.werewolf-speech-phase {
+  color: rgba(247, 242, 232, 0.48);
+  font-size: 10px;
+}
+
+.werewolf-speech-text {
+  color: rgba(255, 250, 240, 0.9);
+  font-size: 14px;
+  line-height: 1.58;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.werewolf-speech-suspect,
+.werewolf-vote-reason {
+  margin-top: 7px;
+  color: rgba(255, 206, 127, 0.9);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.werewolf-action-panel {
+  min-height: 58px;
+  border-radius: 20px;
+  padding: 11px 12px;
+}
+
+.werewolf-action-title {
+  color: #fff7ea;
+  font-size: 13px;
+  font-weight: 1000;
+  margin-bottom: 7px;
+}
+
+.werewolf-action-hint {
+  color: rgba(247, 242, 232, 0.62);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.werewolf-speech-input {
+  width: 100%;
+  min-height: 92px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  padding: 10px 11px;
+  color: #fff7ea;
+  background: rgba(0, 0, 0, 0.24);
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.werewolf-speech-input::placeholder {
+  color: rgba(247, 242, 232, 0.42);
+}
+
+.werewolf-vote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin: 9px 0 10px;
+}
+
+.werewolf-vote-target {
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+  color: rgba(247, 242, 232, 0.82);
+  background: rgba(255, 255, 255, 0.08);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-vote-target.selected {
+  color: #fff;
+  border-color: rgba(245, 69, 80, 0.74);
+  background: linear-gradient(135deg, rgba(225, 57, 72, 0.8), rgba(125, 23, 35, 0.78));
+}
+
+.werewolf-vote-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.werewolf-vote-line {
+  color: rgba(247, 242, 232, 0.78);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.werewolf-api-error-overlay,
+.werewolf-review-overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(14px);
+}
+
+.werewolf-api-error-overlay.active,
+.werewolf-review-overlay.active {
+  display: flex;
+}
+
+.werewolf-api-error-panel {
+  width: min(88vw, 360px);
+  border-radius: 24px;
+  padding: 18px;
+}
+
+.werewolf-api-error-title {
+  color: #fff7ea;
+  font-size: 17px;
+  font-weight: 1000;
+  margin-bottom: 8px;
+}
+
+.werewolf-api-error-message {
+  max-height: 260px;
+  overflow-y: auto;
+  color: rgba(247, 242, 232, 0.72);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.werewolf-api-error-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.werewolf-review-overlay {
+  position: fixed;
+}
+
+.werewolf-review-panel {
+  width: min(92vw, 430px);
+  max-height: min(84vh, 720px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.werewolf-review-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.werewolf-review-title {
+  color: #fff7ea;
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.werewolf-review-subtitle {
+  color: rgba(247, 242, 232, 0.58);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 3px;
+}
+
+.werewolf-review-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px 16px;
+}
+
+.werewolf-review-generate {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.werewolf-review-textarea {
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 18px;
+  padding: 12px;
+  color: #fff7ea;
+  background: rgba(0, 0, 0, 0.25);
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.werewolf-forward-title {
+  color: #fff7ea;
+  font-size: 13px;
+  font-weight: 1000;
+  margin: 13px 0 8px;
+}
+
+.werewolf-forward-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 16px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.werewolf-forward-name {
+  display: block;
+  color: #fff7ea;
+  font-size: 13px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.werewolf-forward-meta {
+  display: block;
+  color: rgba(247, 242, 232, 0.55);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.werewolf-review-actions {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-retro .werewolf-count-card,
+body.theme-retro .werewolf-config-card,
+body.theme-retro .werewolf-select-card,
+body.theme-retro .werewolf-lineup-chip,
+body.theme-retro .werewolf-status-card,
+body.theme-retro .werewolf-user-identity,
+body.theme-retro .werewolf-speech-panel,
+body.theme-retro .werewolf-action-panel {
+  border-radius: 0;
+}
+
+/* Theme-aware frameless controls for Werewolf navigation and review actions */
+.werewolf-nav .chat-nav-back,
+.werewolf-nav .chat-nav-btn,
+.werewolf-floating-back,
+.werewolf-review-head .werewolf-icon-btn {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: var(--text) !important;
+  background: var(--glass-strong) !important;
+  background: color-mix(in srgb, var(--glass-strong) 76%, transparent) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
+  backdrop-filter: blur(18px) saturate(1.2) !important;
+}
+
+.werewolf-nav .chat-nav-back svg,
+.werewolf-nav .chat-nav-btn svg,
+.werewolf-floating-back svg,
+.werewolf-review-head .werewolf-icon-btn svg {
+  filter: none !important;
+}
+
+.werewolf-review-panel .werewolf-primary-btn,
+.werewolf-review-panel .werewolf-secondary-btn {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.werewolf-review-panel .werewolf-primary-btn {
+  color: var(--bg) !important;
+  background: var(--text) !important;
+}
+
+.werewolf-review-panel .werewolf-secondary-btn {
+  color: var(--text) !important;
+  background: var(--glass-strong) !important;
+}
+
+body.theme-retro .werewolf-nav .chat-nav-back,
+body.theme-retro .werewolf-nav .chat-nav-btn,
+body.theme-retro .werewolf-floating-back,
+body.theme-retro .werewolf-review-head .werewolf-icon-btn,
+body.theme-retro .werewolf-review-panel .werewolf-primary-btn,
+body.theme-retro .werewolf-review-panel .werewolf-secondary-btn {
+  border: 0 !important;
+  box-shadow: none !important;
+}

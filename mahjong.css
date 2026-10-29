@@ -1,0 +1,1792 @@
+/* ===== Mahjong App Styles ===== */
+
+.mahjong-app-page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 850;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--bg);
+  transform: translateX(100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(.25,.46,.45,.94), visibility 0s linear 0.28s;
+}
+
+@supports (height: 100dvh) {
+  .mahjong-app-page {
+    height: 100dvh;
+  }
+}
+
+.mahjong-app-page.active {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.mahjong-setup-view,
+.mahjong-table-view {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.mahjong-setup-view.active,
+.mahjong-table-view.active {
+  display: flex;
+}
+
+.mahjong-setup-view {
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(42, 128, 110, 0.16), transparent 30%),
+    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 88%, var(--text) 12%));
+}
+
+.mahjong-setup-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px 96px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mahjong-setup-block {
+  margin-bottom: 14px;
+}
+
+.mahjong-setup-title {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.mahjong-setup-hint {
+  color: var(--text3);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.mahjong-persona-list,
+.mahjong-role-list,
+.mahjong-seat-preview,
+.mahjong-forward-list {
+  display: grid;
+  gap: 8px;
+}
+
+.mahjong-persona-list,
+.mahjong-role-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mahjong-select-card {
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  padding: 9px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mahjong-select-card.selected {
+  border-color: var(--text);
+  background: var(--glass-strong);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--text) 16%, transparent);
+}
+
+.mahjong-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.mahjong-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mahjong-select-main {
+  min-width: 0;
+}
+
+.mahjong-select-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mahjong-voice-badge {
+  flex-shrink: 0;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text2);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.mahjong-select-meta {
+  color: var(--text3);
+  font-size: 11px;
+  line-height: 1.35;
+  margin-top: 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mahjong-empty {
+  grid-column: 1 / -1;
+  padding: 18px 10px;
+  border: 1px dashed var(--glass-border);
+  border-radius: 8px;
+  color: var(--text3);
+  font-size: 12px;
+  text-align: center;
+}
+
+.mahjong-seat-preview {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.mahjong-seat-chip {
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  color: var(--text2);
+  font-size: 11px;
+  text-align: center;
+  padding: 8px 5px;
+}
+
+.mahjong-seat-chip strong {
+  color: var(--text);
+  font-size: 12px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mahjong-voice-block {
+  margin-bottom: 8px;
+}
+
+.mahjong-voice-toggle {
+  position: relative;
+  min-height: 42px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  padding: 7px 9px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mahjong-voice-toggle input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mahjong-toggle-track {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+  border: 1px solid var(--glass-border);
+  transition: background 0.16s ease;
+}
+
+.mahjong-toggle-track::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.18);
+  transition: transform 0.16s ease;
+}
+
+.mahjong-voice-toggle input:checked + .mahjong-toggle-track {
+  background: var(--text);
+}
+
+.mahjong-voice-toggle input:checked + .mahjong-toggle-track::after {
+  transform: translateX(14px);
+}
+
+.mahjong-voice-toggle-main {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.mahjong-voice-toggle-main strong {
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mahjong-voice-toggle-main em {
+  color: var(--text3);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mahjong-setup-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0));
+  background: var(--glass-strong);
+  border-top: 1px solid var(--glass-border);
+}
+
+.mahjong-setup-count {
+  color: var(--text2);
+  font-size: 12px;
+  min-width: 0;
+}
+
+.mahjong-primary-btn,
+.mahjong-secondary-btn,
+.mahjong-icon-btn {
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.mahjong-primary-btn {
+  min-height: 38px;
+  padding: 0 15px;
+  background: var(--text);
+  color: var(--bg);
+}
+
+.mahjong-secondary-btn {
+  min-height: 38px;
+  padding: 0 14px;
+  background: var(--glass);
+  color: var(--text);
+}
+
+.mahjong-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass);
+  color: var(--text);
+}
+
+.mahjong-primary-btn:disabled,
+.mahjong-secondary-btn:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Table */
+.mahjong-table-view {
+  background: #101821;
+}
+
+.mahjong-landscape-shell {
+  --mahjong-felt: #176d64;
+  --mahjong-felt2: #1c8278;
+  --mahjong-rail: #16202b;
+  --mahjong-gold: #d8b84c;
+  --mahjong-tile: #f8f5ed;
+  --mahjong-tile-side: #d9d4c9;
+  --mahjong-green-side: #159060;
+  --mahjong-ui: rgba(14, 22, 32, 0.72);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,0.06), transparent 38%),
+    radial-gradient(circle at 48% 42%, rgba(255,255,255,0.11), transparent 28%),
+    linear-gradient(135deg, var(--mahjong-felt), #0f4544 58%, var(--mahjong-rail));
+  color: #eefcf8;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.mahjong-landscape-shell::before {
+  content: "";
+  position: absolute;
+  inset: 26px 46px 22px;
+  border: 4px solid rgba(235, 200, 78, 0.62);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.09),
+    inset 0 18px 45px rgba(255,255,255,0.06),
+    0 20px 55px rgba(0,0,0,0.34);
+  pointer-events: none;
+}
+
+.mahjong-menu-btn {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 20;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  background: rgba(12, 18, 27, 0.58);
+  color: #edf8f4;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.mahjong-status-strip {
+  position: absolute;
+  left: 50%;
+  bottom: 88px;
+  z-index: 22;
+  transform: translateX(-50%);
+  max-width: 48vw;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  border-radius: 4px;
+  background: rgba(12, 20, 31, 0.72);
+  color: #eef8f4;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mahjong-ai-busy {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  z-index: 24;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 999px;
+  background: rgba(13, 22, 31, 0.75);
+  color: #edf8f4;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mahjong-ai-busy.active {
+  display: flex;
+}
+
+.mahjong-user-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 154px;
+  z-index: 27;
+  width: min(390px, 46vw);
+  display: none;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  background: rgba(9, 17, 27, 0.84);
+  color: #f1fffa;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.28);
+  overflow: hidden;
+}
+
+.mahjong-user-prompt.active {
+  display: block;
+}
+
+.mahjong-user-prompt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.mahjong-user-prompt-title {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.mahjong-user-prompt-title strong {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mahjong-user-prompt-badge {
+  flex-shrink: 0;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: #f0c84f;
+  color: #17211f;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.mahjong-user-prompt-body {
+  padding: 7px 10px 9px;
+  color: rgba(241,255,250,0.82);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.mahjong-dice-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 59;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.mahjong-dice-overlay.active {
+  display: flex;
+}
+
+.mahjong-dice-panel {
+  width: min(360px, 84vw);
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: rgba(12, 20, 31, 0.94);
+  color: #f2fff9;
+  padding: 18px 18px 16px;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.42);
+}
+
+.mahjong-dice-title {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.mahjong-dice-row {
+  display: flex;
+  gap: 14px;
+}
+
+.mahjong-die {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border-radius: 10px;
+  border: 1px solid rgba(25, 30, 28, 0.24);
+  background: linear-gradient(145deg, #fffdf7, #dcd8cd);
+  box-shadow: inset -5px -6px 10px rgba(0,0,0,0.12), inset 4px 4px 8px rgba(255,255,255,0.72), 0 8px 18px rgba(0,0,0,0.28);
+}
+
+.mahjong-die.rolling {
+  animation: mahjongDiceRoll 0.32s linear infinite;
+}
+
+.mahjong-die-dot {
+  width: 10px;
+  height: 10px;
+  align-self: center;
+  justify-self: center;
+  border-radius: 50%;
+  background: #17201e;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.32);
+}
+
+.mahjong-die-question {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  color: #17201e;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.mahjong-dice-result {
+  min-height: 36px;
+  color: rgba(242,255,249,0.8);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+@keyframes mahjongDiceRoll {
+  0% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(12deg) translateY(-5px); }
+  50% { transform: rotate(-8deg) translateY(2px); }
+  75% { transform: rotate(10deg) translateY(-3px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.mahjong-deal-animation,
+.mahjong-discard-animation,
+.mahjong-result-banner {
+  position: absolute;
+  inset: 0;
+  z-index: 58;
+  display: none;
+  pointer-events: none;
+}
+
+.mahjong-deal-animation.active,
+.mahjong-discard-animation.active,
+.mahjong-result-banner.active {
+  display: block;
+}
+
+.mahjong-deal-title {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  min-width: 220px;
+  padding: 9px 14px;
+  border-radius: 6px;
+  background: rgba(10, 18, 28, 0.78);
+  color: #f4fff9;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+}
+
+.mahjong-deal-tile {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 22px;
+  height: 32px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #f4f1e8 0 25%, var(--mahjong-green-side) 26% 100%);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.28);
+  transform: translate(-50%, -50%);
+  animation: mahjongDealTile 0.92s ease-out both;
+  animation-delay: calc(var(--i) * 0.026s);
+}
+
+.mahjong-discard-fly {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mahjong-discard-fly.from-0 { animation: mahjongDiscardFromBottom 0.46s ease-out both; }
+.mahjong-discard-fly.from-1 { animation: mahjongDiscardFromRight 0.46s ease-out both; }
+.mahjong-discard-fly.from-2 { animation: mahjongDiscardFromTop 0.46s ease-out both; }
+.mahjong-discard-fly.from-3 { animation: mahjongDiscardFromLeft 0.46s ease-out both; }
+
+.mahjong-animated-discard-tile {
+  width: 50px;
+  height: 70px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(30, 36, 32, 0.2);
+  border-bottom: 6px solid rgba(30, 36, 32, 0.34);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fffcf4, var(--mahjong-tile));
+  padding: 6px 5px 9px;
+  box-shadow: 0 16px 28px rgba(0,0,0,0.38);
+}
+
+.mahjong-result-banner {
+  z-index: 63;
+  background: rgba(0,0,0,0.22);
+}
+
+.mahjong-result-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(560px, 78vw);
+  padding: 18px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(12, 20, 31, 0.92);
+  color: #f8fff9;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.28;
+  text-align: center;
+  box-shadow: 0 20px 54px rgba(0,0,0,0.44), 0 0 42px rgba(143,240,189,0.2);
+  animation: mahjongResultPop 0.72s cubic-bezier(.2,1.2,.25,1) both;
+}
+
+.mahjong-result-banner.win .mahjong-result-main {
+  color: #fff6bb;
+  box-shadow: 0 20px 54px rgba(0,0,0,0.44), 0 0 46px rgba(242,210,90,0.38);
+}
+
+.mahjong-result-banner.lose .mahjong-result-main {
+  color: #ffd5d5;
+  box-shadow: 0 20px 54px rgba(0,0,0,0.44), 0 0 42px rgba(213,70,80,0.28);
+}
+
+@keyframes mahjongDealTile {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.05) rotate(var(--rot));
+  }
+}
+
+@keyframes mahjongDiscardFromBottom {
+  from { transform: translate(-50%, 210%) scale(0.92); opacity: 0.15; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes mahjongDiscardFromRight {
+  from { transform: translate(220%, -50%) scale(0.92); opacity: 0.15; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes mahjongDiscardFromTop {
+  from { transform: translate(-50%, -220%) scale(0.92); opacity: 0.15; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes mahjongDiscardFromLeft {
+  from { transform: translate(-220%, -50%) scale(0.92); opacity: 0.15; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes mahjongResultPop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.72); }
+  62% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes mahjongHandDealIn {
+  from { opacity: 0; transform: translateY(-28px) scale(0.86); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.mahjong-api-error-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 62;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.mahjong-api-error-overlay.active {
+  display: flex;
+}
+
+.mahjong-api-error-panel {
+  width: min(420px, 86vw);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  background: rgba(12, 20, 31, 0.94);
+  color: #f2fff9;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.38);
+  overflow: hidden;
+}
+
+.mahjong-api-error-title {
+  padding: 12px 14px 8px;
+  font-size: 16px;
+  font-weight: 900;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.mahjong-api-error-message {
+  max-height: 170px;
+  overflow-y: auto;
+  padding: 11px 14px;
+  color: rgba(242,255,249,0.82);
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.mahjong-api-error-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 14px 14px;
+}
+
+.mahjong-busy-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8ff0bd;
+  animation: mahjongPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes mahjongPulse {
+  from { transform: scale(0.72); opacity: 0.55; }
+  to { transform: scale(1.1); opacity: 1; }
+}
+
+.mahjong-wall {
+  position: absolute;
+  z-index: 8;
+  display: flex;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.mahjong-wall-top {
+  top: 36px;
+  left: 36%;
+  right: 36%;
+  justify-content: center;
+}
+
+.mahjong-wall-left {
+  top: 22%;
+  bottom: 31%;
+  left: 13%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mahjong-wall-right {
+  top: 22%;
+  bottom: 31%;
+  right: 13%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mahjong-wall-tile {
+  width: 22px;
+  height: 12px;
+  border-radius: 2px 2px 4px 4px;
+  background: linear-gradient(180deg, #e9e8df 0 27%, var(--mahjong-green-side) 28% 100%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.28);
+}
+
+.mahjong-wall-left .mahjong-wall-tile,
+.mahjong-wall-right .mahjong-wall-tile {
+  width: 12px;
+  height: 30px;
+  background: linear-gradient(90deg, #e9e8df 0 27%, var(--mahjong-green-side) 28% 100%);
+}
+
+.mahjong-board {
+  position: absolute;
+  inset: 74px 18% 106px;
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.07), transparent 45%),
+    linear-gradient(160deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12)),
+    var(--mahjong-felt2);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: inset 0 0 52px rgba(0,0,0,0.16);
+}
+
+.mahjong-board-title {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(7, 35, 38, 0.58);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.mahjong-center-indicator {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 98px;
+  height: 86px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(20, 48, 50, 0.92), rgba(14, 26, 35, 0.92));
+  border: 2px solid rgba(170, 222, 206, 0.36);
+  box-shadow: inset 0 0 12px rgba(143, 240, 189, 0.18), 0 6px 18px rgba(0,0,0,0.26);
+}
+
+.mahjong-center-indicator strong {
+  color: #8ff0bd;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.mahjong-center-indicator em {
+  margin-top: 4px;
+  color: rgba(238,248,244,0.78);
+  font-size: 11px;
+  font-style: normal;
+}
+
+.mahjong-center-winds {
+  position: absolute;
+  inset: 7px;
+  color: rgba(238,248,244,0.48);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.mahjong-center-winds span {
+  position: absolute;
+}
+
+.mahjong-center-winds span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.mahjong-center-winds span:nth-child(2) { right: 0; top: 50%; transform: translateY(-50%); }
+.mahjong-center-winds span:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.mahjong-center-winds span:nth-child(4) { left: 0; top: 50%; transform: translateY(-50%); }
+
+.mahjong-river {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-content: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mahjong-river-top {
+  top: 18px;
+  left: 28%;
+  right: 28%;
+  height: 50px;
+}
+
+.mahjong-river-bottom {
+  bottom: 16px;
+  left: 24%;
+  right: 24%;
+  height: 54px;
+}
+
+.mahjong-river-left {
+  left: 18px;
+  top: 24%;
+  bottom: 22%;
+  width: 74px;
+  align-content: center;
+}
+
+.mahjong-river-right {
+  right: 18px;
+  top: 24%;
+  bottom: 22%;
+  width: 74px;
+  align-content: center;
+}
+
+.mahjong-mini-tile,
+.mahjong-tile {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(30, 36, 32, 0.2);
+  border-bottom-color: rgba(30, 36, 32, 0.34);
+  background: linear-gradient(180deg, #fffcf4, var(--mahjong-tile));
+  color: #171a19;
+  box-shadow: 0 5px 8px rgba(0,0,0,0.22);
+  user-select: none;
+  overflow: hidden;
+}
+
+.mahjong-mini-tile {
+  width: 24px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 2px 2px 4px;
+}
+
+.mahjong-tile {
+  width: 50px;
+  height: 70px;
+  border-radius: 6px;
+  border-bottom-width: 6px;
+  font-size: 26px;
+  font-weight: 900;
+  padding: 6px 5px 9px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.mahjong-tile.selected {
+  transform: translateY(-16px);
+  box-shadow: 0 12px 18px rgba(0,0,0,0.28), 0 0 0 2px #f2d25a;
+}
+
+.mahjong-tile.disabled {
+  opacity: 0.56;
+  pointer-events: none;
+}
+
+.mahjong-user-hand.dealing .mahjong-tile {
+  animation: mahjongHandDealIn 0.48s ease-out both;
+  animation-delay: calc(var(--mahjong-tile-order, 0) * 0.035s);
+}
+
+.mahjong-tile-red {
+  color: #a81d2b;
+}
+
+.mahjong-tile-green {
+  color: #197c55;
+}
+
+.mahjong-tile-face {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #141817;
+}
+
+.mahjong-face-m {
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mahjong-wan-rank {
+  color: #171817;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.mahjong-wan-unit {
+  color: #b51926;
+  font-size: 17px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.mahjong-face-p,
+.mahjong-face-s {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  padding: 1px;
+}
+
+.mahjong-dot {
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  align-self: center;
+  justify-self: center;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.86) 0 28%, transparent 30%),
+    radial-gradient(circle, currentColor 0 64%, transparent 66%);
+}
+
+.mahjong-dot.red {
+  color: #b51f2b;
+}
+
+.mahjong-dot.green {
+  color: #167b52;
+}
+
+.mahjong-dot.blue {
+  color: #1f4f9a;
+}
+
+.mahjong-bamboo-stick {
+  width: 7px;
+  height: 15px;
+  align-self: center;
+  justify-self: center;
+  border-radius: 5px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.45), transparent 34%),
+    linear-gradient(180deg, #26a16f, #0f6c48);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.14),
+    inset 0 6px 0 rgba(255,255,255,0.18),
+    inset 0 -6px 0 rgba(0,0,0,0.08);
+}
+
+.mahjong-bamboo-stick.red {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.45), transparent 34%),
+    linear-gradient(180deg, #cd4050, #8f1722);
+}
+
+.mahjong-face-z {
+  font-family: 'STKaiti', 'KaiTi', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.mahjong-honor-char {
+  font-size: 29px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.mahjong-tile-red .mahjong-honor-char,
+.mahjong-tile-red .mahjong-wan-unit {
+  color: #b51926;
+}
+
+.mahjong-tile-green .mahjong-honor-char {
+  color: #167b52;
+}
+
+.mahjong-honor-white {
+  border: 2px solid rgba(30, 44, 48, 0.64);
+  border-radius: 4px;
+}
+
+.mahjong-honor-white .mahjong-honor-char {
+  color: #1a2628;
+  font-size: 20px;
+}
+
+.mahjong-tile-face.mini .mahjong-wan-rank {
+  font-size: 12px;
+}
+
+.mahjong-tile-face.mini .mahjong-wan-unit {
+  font-size: 9px;
+}
+
+.mahjong-tile-face.mini.mahjong-face-p,
+.mahjong-tile-face.mini.mahjong-face-s {
+  gap: 1px;
+  padding: 0;
+}
+
+.mahjong-tile-face.mini .mahjong-dot {
+  width: 4px;
+  height: 4px;
+  border-width: 1px;
+}
+
+.mahjong-tile-face.mini .mahjong-bamboo-stick {
+  width: 3px;
+  height: 7px;
+  border-radius: 3px;
+}
+
+.mahjong-tile-face.mini .mahjong-honor-char {
+  font-size: 13px;
+}
+
+.mahjong-tile-face.mini.mahjong-honor-white {
+  border-width: 1px;
+  border-radius: 2px;
+}
+
+.mahjong-tile-face.mini.mahjong-honor-white .mahjong-honor-char {
+  font-size: 10px;
+}
+
+.mahjong-seat {
+  position: absolute;
+  z-index: 15;
+  min-width: 118px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  color: #f4fffb;
+}
+
+.mahjong-seat-top {
+  top: 30px;
+  right: 25%;
+}
+
+.mahjong-seat-left {
+  top: 39%;
+  left: 14px;
+}
+
+.mahjong-seat-right {
+  top: 39%;
+  right: 14px;
+}
+
+.mahjong-seat-bottom {
+  left: 16px;
+  bottom: 82px;
+}
+
+.mahjong-seat-avatar {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.74);
+  background: rgba(255,255,255,0.14);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #e9fff9;
+}
+
+.mahjong-seat-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mahjong-dealer-badge {
+  position: absolute;
+  right: -5px;
+  bottom: -3px;
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #b42228;
+  color: #ffe88c;
+  border: 1px solid rgba(255,255,255,0.75);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mahjong-seat-info {
+  min-width: 0;
+}
+
+.mahjong-seat-name {
+  font-size: 13px;
+  font-weight: 900;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mahjong-seat-score {
+  margin-top: 2px;
+  color: #ffd966;
+  font-size: 13px;
+  font-weight: 900;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+}
+
+.mahjong-seat-meta {
+  margin-top: 2px;
+  color: rgba(239,252,248,0.72);
+  font-size: 10px;
+}
+
+.mahjong-seat-melds {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.mahjong-seat-melds .mahjong-mini-tile {
+  width: 18px;
+  height: 24px;
+  font-size: 11px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.22);
+}
+
+.mahjong-seat.current .mahjong-seat-avatar {
+  box-shadow: 0 0 0 3px rgba(143,240,189,0.72), 0 0 20px rgba(143,240,189,0.38);
+}
+
+.mahjong-seat.speaking .mahjong-seat-avatar {
+  box-shadow: 0 0 0 3px rgba(242,210,90,0.72), 0 0 22px rgba(242,210,90,0.36);
+}
+
+.mahjong-speech-bubble {
+  position: absolute;
+  max-width: 210px;
+  min-height: 28px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: rgba(10, 18, 28, 0.78);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #effbf8;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.mahjong-speech-bubble.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.mahjong-speech-text {
+  display: block;
+}
+
+.mahjong-voice-chip,
+.mahjong-voice-play-btn {
+  margin-top: 5px;
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.mahjong-voice-chip {
+  padding: 0 8px;
+  color: rgba(239,252,248,0.72);
+  background: rgba(255,255,255,0.08);
+}
+
+.mahjong-voice-play-btn {
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(143,240,189,0.16);
+  color: #effbf8;
+  padding: 0 9px;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.mahjong-voice-play-btn.error {
+  background: rgba(255,180,120,0.18);
+}
+
+.mahjong-seat-top .mahjong-speech-bubble { top: 60px; right: 0; }
+.mahjong-seat-left .mahjong-speech-bubble,
+.mahjong-seat-right .mahjong-speech-bubble {
+  top: 20px;
+  width: max-content;
+  max-width: min(330px, 36vw);
+  min-width: 190px;
+}
+
+.mahjong-seat-left .mahjong-speech-bubble { left: 62px; }
+.mahjong-seat-right .mahjong-speech-bubble { right: 62px; }
+.mahjong-seat-bottom .mahjong-speech-bubble { left: 62px; bottom: 58px; }
+
+.mahjong-user-hand {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  bottom: 8px;
+  z-index: 18;
+  min-height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mahjong-action-panel {
+  position: absolute;
+  right: 9%;
+  bottom: 104px;
+  z-index: 28;
+  width: min(340px, 48vw);
+  display: none;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  background: rgba(11, 18, 28, 0.78);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.26);
+}
+
+.mahjong-action-panel.active {
+  display: grid;
+}
+
+.mahjong-action-panel.compact {
+  width: auto;
+  grid-template-columns: auto;
+}
+
+.mahjong-action-panel.compact .mahjong-action-buttons {
+  grid-column: 1;
+}
+
+.mahjong-speech-input {
+  grid-column: 1;
+  min-width: 0;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  color: #f2fff9;
+  padding: 0 10px;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+}
+
+.mahjong-action-panel .mahjong-primary-btn,
+.mahjong-action-panel .mahjong-secondary-btn {
+  min-height: 32px;
+  padding: 0 11px;
+}
+
+.mahjong-speech-input::placeholder {
+  color: rgba(239,252,248,0.52);
+}
+
+.mahjong-action-buttons {
+  grid-column: 2;
+  display: flex;
+  gap: 6px;
+}
+
+.mahjong-log-panel {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  z-index: 21;
+  width: 220px;
+  max-height: 182px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(10, 18, 28, 0.72);
+  overflow: hidden;
+}
+
+.mahjong-log-title {
+  width: 100%;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  background: rgba(255,255,255,0.04);
+  padding: 0 9px;
+  color: rgba(239,252,248,0.84);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+
+.mahjong-log-chevron {
+  flex-shrink: 0;
+  color: rgba(239,252,248,0.58);
+  font-size: 10px;
+}
+
+.mahjong-log-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 7px 9px;
+  color: rgba(239,252,248,0.76);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.mahjong-log-panel.collapsed {
+  width: 120px;
+}
+
+.mahjong-log-panel.collapsed .mahjong-log-title {
+  border-bottom: 0;
+}
+
+.mahjong-log-panel.collapsed .mahjong-log-list {
+  display: none;
+}
+
+.mahjong-log-item {
+  margin-bottom: 5px;
+}
+
+.mahjong-review-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,0.52);
+}
+
+.mahjong-review-overlay.active {
+  display: flex;
+}
+
+.mahjong-review-overlay.keyboard-safe-modal {
+  align-items: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+}
+
+.mahjong-review-panel {
+  width: min(560px, 100%);
+  max-height: min(680px, 92vh);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.mahjong-review-overlay.keyboard-safe-modal .mahjong-review-panel {
+  max-height: min(680px, 92vh, calc(var(--app-visual-viewport-height, 100vh) - 32px));
+  margin-top: var(--app-visual-viewport-offset-top, 0px);
+}
+
+.mahjong-review-head,
+.mahjong-review-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  background: var(--glass-strong);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.mahjong-review-actions {
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 0;
+  justify-content: flex-end;
+}
+
+.mahjong-review-title {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.mahjong-review-subtitle {
+  margin-top: 2px;
+  color: var(--text3);
+  font-size: 11px;
+}
+
+.mahjong-review-body {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+
+.mahjong-review-generate {
+  justify-self: start;
+}
+
+.mahjong-review-textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  color: var(--text);
+  padding: 10px;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.mahjong-forward-title {
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mahjong-forward-item {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  padding: 8px;
+  color: var(--text);
+}
+
+.mahjong-forward-item input {
+  width: 16px;
+  height: 16px;
+}
+
+.mahjong-forward-name {
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mahjong-forward-meta {
+  margin-top: 2px;
+  color: var(--text3);
+  font-size: 11px;
+}
+
+body.theme-white .mahjong-select-card,
+body.theme-white .mahjong-seat-chip,
+body.theme-white .mahjong-voice-toggle,
+body.theme-white .mahjong-review-panel,
+body.theme-line .mahjong-select-card,
+body.theme-line .mahjong-seat-chip,
+body.theme-line .mahjong-voice-toggle,
+body.theme-line .mahjong-review-panel {
+  box-shadow: none;
+}
+
+body.theme-retro .mahjong-select-card,
+body.theme-retro .mahjong-seat-chip,
+body.theme-retro .mahjong-voice-toggle,
+body.theme-retro .mahjong-primary-btn,
+body.theme-retro .mahjong-secondary-btn,
+body.theme-retro .mahjong-icon-btn,
+body.theme-retro .mahjong-review-panel {
+  border-radius: 0;
+}
+
+body.theme-pink .mahjong-landscape-shell {
+  --mahjong-felt: #6b4b58;
+  --mahjong-felt2: #7a5a66;
+  --mahjong-rail: #241e20;
+  --mahjong-green-side: #b9788e;
+}
+
+body.theme-blue .mahjong-landscape-shell {
+  --mahjong-felt: #235d76;
+  --mahjong-felt2: #2c6d88;
+  --mahjong-rail: #141e2a;
+  --mahjong-green-side: #2d8bb0;
+}
+
+body.theme-white .mahjong-landscape-shell,
+body.theme-line .mahjong-landscape-shell {
+  --mahjong-felt: #d9e8df;
+  --mahjong-felt2: #d1e2d8;
+  --mahjong-rail: #f7f7f7;
+  --mahjong-green-side: #4f9d77;
+  color: #101818;
+}
+
+body.theme-white.dark-mode .mahjong-landscape-shell,
+body.theme-line.dark-mode .mahjong-landscape-shell {
+  --mahjong-felt: #202a26;
+  --mahjong-felt2: #26342f;
+  --mahjong-rail: #0e1112;
+}
+
+@media (orientation: portrait) {
+  .mahjong-table-view.active {
+    background: #101821;
+  }
+
+  .mahjong-landscape-shell {
+    width: 100vh;
+    height: 100vw;
+    left: 50%;
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
+  .mahjong-tile {
+    width: 42px;
+    height: 60px;
+    font-size: 22px;
+    padding: 5px 4px 8px;
+  }
+
+  .mahjong-tile .mahjong-wan-rank {
+    font-size: 20px;
+  }
+
+  .mahjong-tile .mahjong-wan-unit {
+    font-size: 14px;
+  }
+
+  .mahjong-tile .mahjong-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mahjong-tile .mahjong-bamboo-stick {
+    width: 6px;
+    height: 13px;
+  }
+
+  .mahjong-tile .mahjong-honor-char {
+    font-size: 25px;
+  }
+
+  .mahjong-action-panel {
+    right: 9%;
+    bottom: 90px;
+    width: min(300px, 52vw);
+    gap: 6px;
+    padding: 3px;
+  }
+
+  .mahjong-speech-input {
+    height: 30px;
+    padding: 0 8px;
+  }
+
+  .mahjong-action-panel .mahjong-primary-btn,
+  .mahjong-action-panel .mahjong-secondary-btn {
+    min-height: 30px;
+    padding: 0 9px;
+  }
+
+  .mahjong-user-prompt {
+    bottom: 132px;
+    width: min(330px, 50vw);
+  }
+
+  .mahjong-log-panel {
+    width: 184px;
+    max-height: 132px;
+  }
+
+  .mahjong-log-panel.collapsed {
+    width: 112px;
+  }
+
+  .mahjong-result-main {
+    font-size: 22px;
+    max-width: min(460px, 74vw);
+  }
+
+  .mahjong-status-strip {
+    bottom: 78px;
+  }
+}

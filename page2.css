@@ -1,0 +1,672 @@
+﻿/* ===== 第二页：图片大气泡 ===== */
+.photo-bubble {
+  background: var(--glass-strong); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  border: 1.5px solid var(--glass-border); border-radius: 24px;
+  padding: 12px; margin-bottom: 10px;
+  position: relative;
+  box-shadow: 0 6px 24px var(--glass-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+#page2 .p2-main > .photo-bubble {
+  margin-bottom: 0;
+  min-width: 0;
+}
+.gallery-container {
+  position: relative; width: 100%;
+  aspect-ratio: 16/10; border-radius: 16px; overflow: hidden;
+  touch-action: pan-y;
+  user-select: none; -webkit-user-select: none;
+}
+.gallery-track {
+  display: flex; width: 300%; height: 100%;
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.gallery-slide {
+  width: calc(100%/3); height: 100%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--glass); cursor: pointer; position: relative;
+  border-radius: 16px;
+}
+.gallery-slide img {
+  width: 100%; height: 100%; object-fit: cover; display: none;
+  border-radius: 16px;
+}
+.gallery-slide-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  color: var(--text3); font-size: 11px;
+}
+.gallery-slide-placeholder span { font-size: 28px; }
+.gallery-dots {
+  position: absolute; bottom: 8px; left: 50%;
+  transform: translateX(-50%); display: flex; gap: 5px;
+}
+.gallery-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.5); transition: all 0.3s; cursor: pointer;
+}
+.gallery-dot.active {
+  background: #fff; width: 16px; border-radius: 3px;
+}
+.social-bar {
+  display: flex; align-items: center;
+  gap: 12px; background: var(--glass); border-radius: 20px;
+  padding: 8px 16px; margin-top: 10px;
+}
+.social-text-input {
+  flex: 1; min-width: 0; border: none; background: transparent;
+  outline: none; font-family: 'Nunito', 'Quicksand', sans-serif;
+  font-size: 13px; font-weight: 900; color: var(--text);
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 0 var(--glass-border), 0 2px 4px var(--glass-shadow);
+  padding: 0;
+}
+.social-text-input::placeholder { color: var(--text3); font-weight: 700; }
+.social-icons-group {
+  display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+}
+.social-icon {
+  color: var(--text);
+  display: flex; align-items: center;
+}
+
+/* ===== 第二页：封面唱片小组件 ===== */
+.p2-record-widget {
+  position: relative;
+  min-height: 190px;
+  padding: 8px 2px;
+  overflow: visible;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform 0.15s;
+}
+.p2-record-widget:active { transform: scale(0.97); }
+.p2-record-sleeve {
+  position: absolute;
+  left: 4px;
+  top: 18px;
+  width: 64%;
+  height: 144px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.72);
+  border: 2px solid rgba(255,255,255,0.86);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.13), inset 0 0 0 1px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.p2-record-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.p2-record-cover-placeholder,
+.p2-record-label-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+  color: rgba(70,70,70,0.58);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+.p2-record-cover-placeholder em {
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(90,90,90,0.48);
+}
+.p2-record-disc-wrap {
+  position: absolute;
+  right: -1px;
+  top: 30px;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.22));
+  z-index: 2;
+}
+.p2-record-disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at center, rgba(255,255,255,0.08) 0 1px, transparent 1px 7px),
+    radial-gradient(circle at center, #070707 0 35%, #151515 36% 66%, #050505 67% 100%);
+  border: 7px solid rgba(255,255,255,0.84);
+  animation: p2RecordSpin 7s linear infinite;
+}
+.p2-record-label {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(245,245,245,0.92);
+  border: 1px solid rgba(255,255,255,0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.p2-record-label-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.p2-record-hole {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #050505;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+}
+.p2-record-note,
+.p2-record-star {
+  position: absolute;
+  color: rgba(80,80,80,0.52);
+  pointer-events: none;
+  z-index: 0;
+}
+.p2-record-note {
+  left: -2px;
+  bottom: 16px;
+  font-size: 25px;
+  transform: rotate(8deg);
+}
+.p2-record-star-a {
+  right: 3px;
+  bottom: 9px;
+  font-size: 19px;
+  transform: rotate(12deg);
+}
+.p2-record-star-b {
+  left: 76px;
+  bottom: 1px;
+  font-size: 9px;
+  opacity: 0.72;
+}
+.dark-mode .p2-record-sleeve {
+  background: rgba(45,45,45,0.72);
+  border-color: rgba(255,255,255,0.18);
+}
+.dark-mode .p2-record-cover-placeholder,
+.dark-mode .p2-record-label-placeholder,
+.dark-mode .p2-record-note,
+.dark-mode .p2-record-star {
+  color: rgba(230,230,230,0.58);
+}
+.dark-mode .p2-record-label {
+  background: rgba(42,42,42,0.92);
+  border-color: rgba(255,255,255,0.14);
+}
+@keyframes p2RecordSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== 第二页：小票打印机小组件 ===== */
+.receipt-printer-widget {
+  position: relative;
+  align-self: stretch;
+  min-height: 130px;
+  padding: 4px 8px 0;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform 0.15s;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.receipt-printer-widget:active { transform: scale(0.97); }
+.receipt-printer-widget::before,
+.receipt-printer-widget::after {
+  content: none !important;
+  display: none !important;
+}
+.receipt-printer-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  pointer-events: none;
+  z-index: -1;
+}
+.dark-mode .receipt-printer-overlay { background: transparent !important; }
+.printer-body {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  right: 12px;
+  height: 36px;
+  border-radius: 10px 10px 4px 4px;
+  background: rgba(180,180,180,0.72);
+  border: 1px solid rgba(255,255,255,0.42);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.45);
+  z-index: 1;
+}
+.printer-slot {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 10px;
+  height: 14px;
+  border-radius: 999px;
+  background: #1f1f1f;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.12);
+}
+.receipt-paper {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 132px);
+  min-height: 100px;
+  margin-top: 26px;
+  padding: 7px 9px 5px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(210,210,210,0.8);
+  border-radius: 2px 2px 6px 6px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  color: rgba(80,80,80,0.72);
+}
+.receipt-paper::before,
+.receipt-paper::after {
+  content: '';
+  position: absolute;
+  bottom: 22px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.receipt-paper::before {
+  left: -10px;
+  box-shadow:
+    inset -4px 0 5px rgba(0,0,0,0.11),
+    inset -1px 0 0 rgba(255,255,255,0.5),
+    1px 1px 2px rgba(0,0,0,0.06);
+}
+.receipt-paper::after {
+  right: -10px;
+  box-shadow:
+    inset 4px 0 5px rgba(0,0,0,0.11),
+    inset 1px 0 0 rgba(255,255,255,0.5),
+    -1px 1px 2px rgba(0,0,0,0.06);
+}
+.receipt-ticket-frame {
+  width: 100%;
+  height: 58px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(235,235,235,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.receipt-ticket-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  filter: saturate(0.45) contrast(0.96);
+}
+.receipt-ticket-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  color: rgba(110,110,110,0.62);
+  text-align: center;
+}
+.receipt-ticket-placeholder span {
+  font-size: 12px;
+  font-weight: 800;
+}
+.receipt-ticket-placeholder em {
+  font-style: normal;
+  font-size: 9px;
+}
+.receipt-ornament {
+  margin-top: 4px;
+  text-align: center;
+  font-size: 8px;
+  line-height: 1;
+  color: rgba(90,90,90,0.52);
+  white-space: nowrap;
+}
+.receipt-tear {
+  height: 9px;
+  margin: 4px -5px 0;
+  background: repeating-linear-gradient(90deg, transparent 0 5px, rgba(140,140,140,0.34) 5px 10px, transparent 10px 15px);
+}
+.receipt-caption {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(120,120,120,0.62);
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.dark-mode .printer-slot { background: #08090a; }
+.dark-mode .receipt-paper {
+  background: rgba(42,42,42,0.94);
+  border-color: rgba(255,255,255,0.1);
+  color: rgba(230,230,230,0.66);
+}
+.dark-mode .receipt-paper::before {
+  box-shadow:
+    inset -4px 0 6px rgba(0,0,0,0.32),
+    inset -1px 0 0 rgba(255,255,255,0.06),
+    1px 1px 2px rgba(0,0,0,0.16);
+}
+.dark-mode .receipt-paper::after {
+  box-shadow:
+    inset 4px 0 6px rgba(0,0,0,0.32),
+    inset 1px 0 0 rgba(255,255,255,0.06),
+    -1px 1px 2px rgba(0,0,0,0.16);
+}
+.dark-mode .receipt-ticket-frame { background: rgba(255,255,255,0.08); }
+.dark-mode .receipt-ticket-placeholder,
+.dark-mode .receipt-ornament,
+.dark-mode .receipt-caption { color: rgba(230,230,230,0.54); }
+
+/* ===== 第二页布局 ===== */
+#page2 > * { flex-shrink: 0; }
+#page2 {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+}
+#page2 > .p2-main {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.p2-main {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  align-items: start; align-content: start;
+}
+.p2-right-col {
+  display: flex; flex-direction: column; gap: 10px;
+  overflow: hidden; align-self: stretch;
+}
+.p2-bottom-bubble {
+  margin-top: 4px;
+  flex: 1; min-height: 56px; overflow: hidden;
+}
+.p2-bottom-bubble .text-bubble {
+  min-height: 0; height: 100%;
+}
+.p2-bottom-bubble .bubble-textarea {
+  min-height: 0; height: 100%;
+}
+
+@media (max-height: 820px) {
+  #page2 {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  }
+
+  #page2 .photo-bubble {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+
+  #page2 .gallery-container {
+    aspect-ratio: 16 / 9.2;
+  }
+
+  #page2 .social-bar {
+    margin-top: 8px;
+    padding: 7px 14px;
+  }
+
+  #page2 .p2-main,
+  #page2 .p2-right-col {
+    gap: 8px;
+  }
+
+  #page2 .p2-record-widget {
+    min-height: 170px;
+    padding: 6px 2px;
+  }
+
+  #page2 .p2-record-sleeve {
+    top: 16px;
+    height: 126px;
+  }
+
+  #page2 .p2-record-disc-wrap {
+    top: 28px;
+    width: 100px;
+    height: 100px;
+  }
+
+  #page2 .receipt-printer-widget {
+    min-height: 116px;
+    padding: 5px 7px 0;
+  }
+
+  #page2 .receipt-paper {
+    width: min(100%, 118px);
+    min-height: 88px;
+    margin-top: 24px;
+    padding: 6px 9px 5px;
+  }
+
+  #page2 .receipt-ticket-frame {
+    height: 48px;
+  }
+
+  #page2 .p2-bottom-bubble {
+    margin-top: 2px;
+    min-height: 52px;
+  }
+
+  #page2 .p2-bottom-bubble .text-bubble {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-height: 720px) {
+  #page2 {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+  }
+
+  #page2 .gallery-container {
+    aspect-ratio: 16 / 8.4;
+  }
+
+  #page2 .glass-app {
+    gap: 4px;
+  }
+
+  #page2 .glass-app-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    font-size: 22px;
+  }
+
+  #page2 .glass-app-label {
+    font-size: 10px;
+    max-width: 58px;
+  }
+
+  #page2 .p2-record-widget {
+    min-height: 152px;
+  }
+
+  #page2 .p2-record-sleeve {
+    top: 14px;
+    height: 108px;
+  }
+
+  #page2 .p2-record-disc-wrap {
+    top: 25px;
+    width: 86px;
+    height: 86px;
+  }
+
+  #page2 .receipt-printer-widget {
+    min-height: 104px;
+  }
+
+  #page2 .printer-body {
+    height: 32px;
+  }
+
+  #page2 .receipt-paper {
+    width: min(100%, 108px);
+    min-height: 78px;
+    margin-top: 22px;
+    padding: 5px 8px 5px;
+  }
+
+  #page2 .receipt-ticket-frame {
+    height: 39px;
+  }
+
+  #page2 .receipt-ornament {
+    margin-top: 5px;
+  }
+
+  #page2 .text-bubble {
+    min-height: 60px;
+  }
+}
+
+/* ===== 第二页唱片小组件弹窗额外样式 ===== */
+.p2-record-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.p2-record-modal-preview {
+  position: relative;
+  width: 100%;
+  height: 138px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--glass);
+  border: 1.5px solid var(--glass-border);
+}
+.p2-record-modal-cover {
+  position: absolute;
+  left: 28px;
+  top: 16px;
+  width: 118px;
+  height: 106px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.68);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  font-size: 12px;
+}
+.p2-record-modal-disc {
+  position: absolute;
+  right: 34px;
+  top: 18px;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at center, rgba(255,255,255,0.09) 0 1px, transparent 1px 7px),
+    radial-gradient(circle at center, #090909 0 35%, #171717 36% 66%, #050505 67% 100%);
+  border: 7px solid rgba(255,255,255,0.84);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.62);
+  font-size: 12px;
+  text-align: center;
+  animation: p2RecordSpin 7s linear infinite;
+}
+.p2-record-modal-cover img,
+.p2-record-modal-disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.p2-record-modal-disc img {
+  width: 64%;
+  height: 64%;
+  border-radius: 50%;
+}
+.p2-record-local-upload-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.p2-record-local-upload-btn:active { transform: scale(0.95); }
+
+/* ===== 小票打印机弹窗额外样式 ===== */
+.receipt-printer-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.receipt-modal-preview {
+  width: 100%;
+  height: 130px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--glass);
+  border: 1.5px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  font-size: 12px;
+}
+.receipt-modal-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.receipt-local-upload-btn {
+  min-height: 44px;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+}
+.media-bg-section {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.media-bg-section label {
+  font-size: 12px; color: var(--text2); font-weight: 600;
+}

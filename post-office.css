@@ -1,0 +1,1123 @@
+/* 慢递邮局原始视觉样式：仅作用于原生桌面应用容器。 */
+.post-office-app.is-active { display: flex !important; }
+.post-office-app[aria-hidden="true"] { display: none !important; }
+/* ================= 核心色彩与铅笔细线变量 ================= */
+.post-office-app {
+            /* 浅灰素描纸张底色与卡片色 */
+            --bg-paper: #efefec;
+            --bg-paper-light: #f7f7f5;
+            --bg-paper-card: #fafaf8;
+            --bg-paper-pure: #ffffff;
+            --bg-paper-dark: #e5e5e0;
+
+            /* 铅笔石墨墨色与细线条灰度 (1px 极细铅笔线) */
+            --pencil-line: #2e3138;
+            --pencil-line-medium: #545863;
+            --pencil-line-thin: #888d98;
+            --pencil-line-ultra-thin: #cbd0d8;
+            --pencil-hatch: rgba(46, 49, 56, 0.12);
+
+            /* 低饱和度彩铅点缀色 */
+            --tint-post-red: #c05c59;
+            --tint-post-red-faint: #f7ebea;
+            --tint-stamp-gray: #6b707c;
+
+            /* 字体 */
+            --font-sketch: 'Caveat', cursive, serif;
+            --font-text: 'Noto Serif SC', -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+        }
+.post-office-app, .post-office-app * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        /* 纯真素描纸张底纹：平直严谨的细点阵与方格稿纸线 */
+.post-office-app {
+            position: fixed;
+            inset: 0;
+            z-index: 832;
+            display: none;
+            overflow-y: auto;
+            font-family: var(--font-text);
+            background-color: var(--bg-paper);
+            background-image: 
+                radial-gradient(var(--pencil-hatch) 0.65px, transparent 0.65px),
+                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 18px 18px, 36px 36px, 36px 36px;
+            color: var(--pencil-line);
+            min-height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+.post-office-app::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 70%, rgba(0,0,0,0.035) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 页面主体内容容器 */
+        .post-office-app .post-container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px 20px 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ================= 导航栏 (工整端庄 · 细线条极简素描风) ================= */
+        .post-office-app .top-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
+            padding: 0 14px;
+            background: var(--bg-paper-card);
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        /* 导航栏左侧返回键 & 右侧收信箱按钮 */
+        .post-office-app .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--bg-paper-pure);
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.18s ease;
+            outline: none;
+            color: var(--pencil-line);
+        }
+
+        .post-office-app .nav-btn:hover {
+            border-color: var(--pencil-line);
+            background: var(--bg-paper-light);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+        }
+
+        .post-office-app .nav-btn:active {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+
+        .post-office-app .nav-icon-svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 1.3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* 导航栏中间标题 (居中对称) */
+        .post-office-app .nav-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .post-office-app .nav-title h1 {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--pencil-line);
+            line-height: 1.2;
+        }
+
+        .post-office-app .nav-title span {
+            font-family: var(--font-sketch);
+            font-size: 11px;
+            color: var(--pencil-line-thin);
+            letter-spacing: 1px;
+            margin-top: 1px;
+        }
+
+        /* 收信箱总数：空信箱也明确显示 0，不伪造未读提示。 */
+        .post-office-app .inbox-badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            min-width: 13px;
+            height: 13px;
+            padding: 0 3px;
+            background-color: var(--tint-post-red);
+            border: 1px solid var(--bg-paper-pure);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #fff;
+        }
+
+        /* ================= 中间区域：工整精致铅笔细线条邮箱 ================= */
+        .post-office-app .mailbox-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: auto 0;
+            padding: 10px 0;
+        }
+
+        /* 背景平整微印戳 (端正无倾斜) */
+        .post-office-app .postmark-bg {
+            position: absolute;
+            top: 0px;
+            right: 28px;
+            width: 76px;
+            height: 76px;
+            border: 1px dashed var(--pencil-line-ultra-thin);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .post-office-app .postmark-bg .mark-line {
+            width: 65%;
+            height: 1px;
+            background: var(--pencil-line-ultra-thin);
+            margin: 2px 0;
+        }
+
+        .post-office-app .postmark-bg .mark-text {
+            font-size: 8px;
+            letter-spacing: 1px;
+            color: var(--pencil-line-thin);
+            font-family: monospace;
+        }
+
+        /* 邮箱主体交互容器 */
+        .post-office-app .mailbox-art-wrapper {
+            position: relative;
+            width: 260px;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .post-office-app .mailbox-art-wrapper:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 细线精密绘制 SVG 邮箱 */
+        .post-office-app .mailbox-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* 信旗晃动动画 */
+        .post-office-app .flag-group {
+            cursor: pointer;
+            transform-origin: 200px 115px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .post-office-app .flag-group.flag-up {
+            transform: rotate(-90deg);
+        }
+
+        /* 邮箱下方的简素文字 */
+        .post-office-app .status-whisper {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--pencil-line-medium);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 1px;
+        }
+
+        .post-office-app .status-whisper::before,
+        .post-office-app .status-whisper::after {
+            content: '·';
+            color: var(--pencil-line-thin);
+            font-weight: bold;
+        }
+
+        /* ================= 动态投信信件飞行演员 (发信动画元素) ================= */
+        .post-office-app .fly-actor-envelope {
+            position: absolute;
+            width: 58px;
+            height: 40px;
+            background: var(--bg-paper-pure);
+            border: 1px solid var(--pencil-line-medium);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            top: 20px;
+            left: 50%;
+            transform: translate(-50%, -60px) scale(1);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .post-office-app .fly-actor-envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            border-bottom: 1px solid var(--pencil-line-thin);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            background: var(--bg-paper-light);
+        }
+
+        .post-office-app .fly-actor-envelope .stamp-dot {
+            position: absolute;
+            bottom: 4px;
+            right: 5px;
+            width: 8px;
+            height: 8px;
+            background: var(--tint-post-red);
+            border-radius: 50%;
+            opacity: 0.85;
+        }
+
+        .post-office-app .fly-actor-envelope.animating {
+            animation: glideIntoMailbox 1.1s cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+        }
+
+        @keyframes glideIntoMailbox {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -40px) scale(1.15);
+            }
+            25% {
+                opacity: 1;
+                transform: translate(-45%, 15px) scale(1);
+            }
+            65% {
+                opacity: 1;
+                transform: translate(-50%, 65px) scale(0.85);
+            }
+            90% {
+                opacity: 0.9;
+                transform: translate(-50%, 82px) scale(0.65);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, 88px) scale(0.45);
+            }
+        }
+
+        /* ================= 底部按键区域 (细线条精致按钮) ================= */
+        .post-office-app .action-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .post-office-app .pencil-btn {
+            position: relative;
+            height: 48px;
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 8px;
+            background-color: var(--bg-paper-pure);
+            color: var(--pencil-line);
+            font-family: var(--font-text);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: all 0.18s ease;
+            outline: none;
+            overflow: hidden;
+        }
+
+        .post-office-app .pencil-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--pencil-hatch),
+                var(--pencil-hatch) 1px,
+                transparent 1px,
+                transparent 5px
+            );
+            transition: opacity 0.18s ease;
+            pointer-events: none;
+        }
+
+        .post-office-app .pencil-btn:hover {
+            border-color: var(--pencil-line);
+            transform: translateY(-1.5px);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.06);
+            background-color: var(--bg-paper-light);
+        }
+
+        .post-office-app .pencil-btn:hover::before {
+            opacity: 0.5;
+        }
+
+        .post-office-app .pencil-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        .post-office-app .pencil-btn:disabled {
+            opacity: 0.55;
+            cursor: default;
+            transform: none;
+        }
+
+        .post-office-app .btn-receive {
+            background-color: #fbfbfa;
+        }
+
+        .post-office-app .btn-send {
+            background-color: #f8f7f4;
+        }
+
+        .post-office-app .btn-icon-svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 1.3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ================= 细线条工整模态弹窗系统 ================= */
+        .post-office-app .pencil-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(30, 33, 38, 0.32);
+            backdrop-filter: blur(2px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.22s ease;
+        }
+
+        .post-office-app .pencil-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .post-office-app .pencil-modal-card {
+            width: 100%;
+            max-width: 420px;
+            min-height: 280px;
+            max-height: calc(100dvh - 32px);
+            overflow-y: auto;
+            background: var(--bg-paper-pure);
+            border: 1px solid var(--pencil-line-medium);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            position: relative;
+            transform: translateY(12px);
+            transition: transform 0.22s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .post-office-app .pencil-modal-overlay.active .pencil-modal-card {
+            transform: translateY(0);
+        }
+
+        .post-office-app .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--pencil-line-ultra-thin);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .post-office-app .modal-header h3 {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            color: var(--pencil-line);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .post-office-app .modal-close-btn {
+            background: transparent;
+            border: 1px solid var(--pencil-line-thin);
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            font-size: 15px;
+            line-height: 1;
+            cursor: pointer;
+            color: var(--pencil-line-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .post-office-app .modal-close-btn:hover {
+            border-color: var(--pencil-line);
+            color: var(--pencil-line);
+            background: var(--bg-paper-light);
+        }
+
+        /* ================= 铅笔细线条加载动效 (Pencil Loading Animation) ================= */
+        .post-office-app .pencil-loading-layer {
+            position: absolute;
+            inset: 50px 0 60px 0;
+            background: var(--bg-paper-pure);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .post-office-app .pencil-loading-layer.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .post-office-app .sketch-loader-spinner {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 14px;
+        }
+
+        .post-office-app .loader-svg {
+            width: 100%;
+            height: 100%;
+            animation: pencilSpin 1.4s cubic-bezier(0.4, 0.1, 0.2, 1) infinite;
+        }
+
+        @keyframes pencilSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .post-office-app .loader-track {
+            fill: none;
+            stroke: var(--pencil-line-ultra-thin);
+            stroke-width: 1;
+            stroke-dasharray: 4 3;
+        }
+
+        .post-office-app .loader-head {
+            fill: none;
+            stroke: var(--pencil-line-medium);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-dasharray: 45 120;
+        }
+
+        .post-office-app .loader-center-emblem {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            animation: emblemPulse 0.9s ease-in-out infinite alternate;
+            color: var(--pencil-line-medium);
+        }
+
+        @keyframes emblemPulse {
+            0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        .post-office-app .loader-label {
+            font-size: 13px;
+            color: var(--pencil-line-medium);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .post-office-app .dot-bounce {
+            animation: dotBlink 1.2s infinite both;
+        }
+        .post-office-app .dot-bounce:nth-child(2) { animation-delay: 0.2s; }
+        .post-office-app .dot-bounce:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotBlink {
+            0%, 80%, 100% { opacity: 0; }
+            40% { opacity: 1; }
+        }
+
+        .post-office-app .sketch-progress-track {
+            width: 160px;
+            height: 6px;
+            background: var(--bg-paper-light);
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .post-office-app .sketch-progress-bar {
+            height: 100%;
+            width: 0%;
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--pencil-line-medium) 0,
+                var(--pencil-line-medium) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+            background-color: #f0ede6;
+            transition: width 0.3s ease;
+        }
+
+        /* ================= 抽取信封动画舞台与信封结构 ================= */
+        .post-office-app .envelope-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 210px;
+            position: relative;
+            padding-top: 40px;
+            perspective: 800px;
+        }
+
+        .post-office-app .envelope-interactive {
+            position: relative;
+            width: 230px;
+            height: 136px;
+            background: var(--bg-paper-card);
+            border: 1px solid var(--pencil-line-medium);
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .post-office-app .envelope-interactive:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 信纸 (可点击放大查看) */
+        .post-office-app .env-letter-sheet {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            top: 8px;
+            height: 120px;
+            background: #ffffff;
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 4px;
+            padding: 10px 12px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(0);
+            transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 0.3s ease, box-shadow 0.2s;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 19px,
+                rgba(46, 49, 56, 0.05) 20px
+            );
+            cursor: pointer;
+        }
+
+        .post-office-app .envelope-interactive.opened .env-letter-sheet {
+            opacity: 1;
+            transform: translateY(-84px);
+            z-index: 5;
+        }
+
+        .post-office-app .envelope-interactive.opened .env-letter-sheet:hover {
+            box-shadow: 0 -4px 14px rgba(0,0,0,0.12);
+            border-color: var(--pencil-line);
+        }
+
+        .post-office-app .sheet-zoom-tag {
+            position: absolute;
+            bottom: 6px;
+            left: 10px;
+            font-size: 9px;
+            color: var(--pencil-line-thin);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--pencil-line-ultra-thin);
+            border-radius: 3px;
+            padding: 1px 4px;
+            background: var(--bg-paper-light);
+            transition: all 0.2s ease;
+        }
+
+        .post-office-app .env-letter-sheet:hover .sheet-zoom-tag {
+            color: var(--pencil-line);
+            border-color: var(--pencil-line-thin);
+            background: #fff;
+        }
+
+        .post-office-app .sheet-stamp-mark {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            font-size: 8px;
+            color: var(--tint-post-red);
+            border: 0.8px dashed var(--tint-post-red);
+            padding: 1px 4px;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .post-office-app .sheet-sender {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--pencil-line);
+            margin-bottom: 6px;
+            padding-right: 46px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-office-app .sheet-body {
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--pencil-line-medium);
+            letter-spacing: 0.5px;
+            height: 38px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            overflow-wrap: anywhere;
+        }
+
+        .post-office-app .sheet-date {
+            text-align: right;
+            font-size: 9px;
+            color: var(--pencil-line-thin);
+            margin-top: 4px;
+            font-family: monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 信封正面折痕遮罩 (Pocket) */
+        .post-office-app .env-pocket-cover {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .post-office-app .env-pocket-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* 信封翻盖 (Flap) - 翻开动画 */
+        .post-office-app .env-flap-element {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            transform-origin: top center;
+            z-index: 4;
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .post-office-app .envelope-interactive.opened .env-flap-element {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .post-office-app .env-flap-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .post-office-app .draw-guide-text {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--pencil-line-thin);
+            text-align: center;
+            letter-spacing: 0.8px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        /* ================= 核心：【放大看信】全屏沉浸式信笺弹窗 ================= */
+        .post-office-app .zoom-letter-container {
+            width: 100%;
+            max-width: 440px;
+            max-height: 88vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .post-office-app .zoom-letter-paper {
+            background: #ffffff;
+            border: 1px solid var(--pencil-line-medium);
+            border-radius: 10px;
+            box-shadow: 0 12px 36px rgba(30, 33, 38, 0.16), 0 2px 6px rgba(0,0,0,0.06);
+            padding: 24px 26px 20px;
+            position: relative;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 27px,
+                rgba(46, 49, 56, 0.06) 28px
+            );
+            animation: zoomLetterIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes zoomLetterIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.88) translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .post-office-app .zoom-letter-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--pencil-line-ultra-thin);
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .post-office-app .zoom-post-badge {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-office-app .zoom-post-badge .badge-sub {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: var(--pencil-line-thin);
+            font-family: var(--font-sketch);
+        }
+
+        .post-office-app .zoom-post-badge .badge-id {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--pencil-line);
+            letter-spacing: 1px;
+            margin-top: 2px;
+            font-family: monospace;
+        }
+
+        .post-office-app .zoom-header-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* 放大信笺顶部的精致手绘邮票 */
+        .post-office-app .zoom-postage-stamp {
+            width: 44px;
+            height: 52px;
+            border: 1px dashed var(--tint-post-red);
+            background: var(--tint-post-red-faint);
+            border-radius: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .post-office-app .zoom-postage-stamp .stamp-text {
+            font-size: 8px;
+            font-family: monospace;
+            color: var(--tint-post-red);
+            letter-spacing: 1px;
+        }
+
+        .post-office-app .zoom-postage-stamp .stamp-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--tint-post-red);
+            font-family: var(--font-sketch);
+            line-height: 1;
+        }
+
+        /* 信件放大正文排版 */
+        .post-office-app .zoom-letter-content {
+            margin: 8px 0 20px;
+        }
+
+        .post-office-app .zoom-letter-greeting {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--pencil-line);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+            overflow-wrap: anywhere;
+        }
+
+        .post-office-app .zoom-letter-body {
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--pencil-line);
+            letter-spacing: 0.8px;
+            white-space: pre-wrap;
+            user-select: text;
+            min-height: 130px;
+            font-family: 'Noto Serif SC', serif;
+            word-break: break-word;
+        }
+
+        .post-office-app .zoom-letter-sign-block {
+            text-align: right;
+            margin-top: 24px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--pencil-line-ultra-thin);
+        }
+
+        .post-office-app .zoom-letter-sender {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--pencil-line);
+            margin-bottom: 4px;
+        }
+
+        .post-office-app .zoom-letter-date {
+            font-size: 11px;
+            color: var(--pencil-line-thin);
+            font-family: monospace;
+        }
+
+        /* 放大信笺底栏 */
+        .post-office-app .zoom-letter-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid var(--pencil-line-ultra-thin);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .post-office-app .zoom-postmark-tag {
+            font-size: 10px;
+            color: var(--pencil-line-thin);
+            border: 1px solid var(--pencil-line-ultra-thin);
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: var(--bg-paper-light);
+        }
+
+        .post-office-app .zoom-letter-footer > div {
+            flex-wrap: wrap;
+        }
+
+        /* ================= 发送表单区域 ================= */
+        .post-office-app .letter-write-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.35s ease;
+        }
+
+        .post-office-app .sketch-input, .post-office-app .sketch-textarea {
+            width: 100%;
+            background: var(--bg-paper-light);
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 6px;
+            padding: 8px 11px;
+            font-family: var(--font-text);
+            font-size: 13px;
+            color: var(--pencil-line);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .post-office-app .sketch-select {
+            appearance: auto;
+            min-height: 36px;
+            cursor: pointer;
+        }
+
+        .post-office-app .sketch-select:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        .post-office-app .letter-recipient-hint {
+            margin: 5px 0 0;
+            color: var(--pencil-line-thin);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .post-office-app .sketch-input:focus, .post-office-app .sketch-textarea:focus {
+            border-color: var(--pencil-line);
+            background: var(--bg-paper-pure);
+        }
+
+        .post-office-app .sketch-textarea {
+            resize: none;
+            height: 96px;
+            line-height: 1.6;
+        }
+
+        .post-office-app .modal-footer {
+            margin-top: 14px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* 留存信件列表 (收信箱内) */
+        .post-office-app .inbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 230px;
+            overflow-y: auto;
+            margin: 10px 0;
+            padding-right: 4px;
+        }
+
+        .post-office-app .inbox-item-card {
+            background: var(--bg-paper-light);
+            border: 1px solid var(--pencil-line-thin);
+            border-radius: 6px;
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            text-align: left;
+            font-family: inherit;
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        .post-office-app .inbox-item-card:hover {
+            border-color: var(--pencil-line);
+            background: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .post-office-app .inbox-item-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--pencil-line);
+            margin-bottom: 4px;
+            overflow-wrap: anywhere;
+        }
+
+        .post-office-app .inbox-item-date {
+            color: var(--pencil-line-thin);
+            font-size: 10px;
+            margin-bottom: 5px;
+            overflow-wrap: anywhere;
+        }
+
+        .post-office-app .inbox-item-preview {
+            font-size: 11px;
+            color: var(--pencil-line-medium);
+            line-height: 1.5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 全局轻柔 Toast 提示 */
+        .post-office-app .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            background: var(--pencil-line);
+            color: var(--bg-paper-pure);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: all 0.22s ease;
+            z-index: 200;
+            max-width: calc(100vw - 32px);
+            overflow-wrap: anywhere;
+        }
+
+        .post-office-app .toast-msg.show {
+            opacity: 1;
+            transform: translateY(0);
+        }

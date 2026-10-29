@@ -1,0 +1,1714 @@
+/* ===== Dating App ===== */
+.dating-page {
+  position: fixed;
+  inset: 0;
+  z-index: 839;
+  display: none;
+  flex-direction: column;
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.dating-bedtime-page {
+  position: fixed;
+  inset: 0;
+  z-index: 839;
+  display: none;
+  flex-direction: column;
+  color: #f7e8f3;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(233, 79, 151, 0.18), transparent 32%),
+    linear-gradient(180deg, #100814 0%, #09070f 48%, #030205 100%);
+  overflow: hidden;
+}
+
+.dating-page.active,
+.dating-bedtime-page.active {
+  display: flex;
+}
+
+.dating-nav {
+  background: var(--glass);
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--text);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.bedtime-nav {
+  background: rgba(8, 5, 13, 0.92);
+  border-bottom: 1px solid rgba(242, 113, 181, 0.26);
+  color: #ffd6eb;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.dating-nav .chat-nav-back,
+.dating-nav .chat-nav-btn {
+  color: var(--text) !important;
+  background: var(--glass-strong) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 8px 18px var(--glass-shadow);
+}
+
+.bedtime-nav .chat-nav-back,
+.bedtime-nav .chat-nav-btn {
+  color: #ffd0e7 !important;
+  background: linear-gradient(180deg, rgba(42, 17, 34, 0.98), rgba(12, 7, 17, 0.98)) !important;
+  border: 1px solid rgba(242, 116, 181, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 227, 242, 0.12),
+    0 8px 18px rgba(0, 0, 0, 0.34);
+}
+
+.dating-nav .chat-nav-title {
+  color: var(--text);
+}
+
+.bedtime-nav .chat-conv-nav-title {
+  color: #ffd6eb;
+}
+
+.bedtime-nav .chat-conv-nav-subtitle {
+  color: rgba(255, 199, 229, 0.68);
+}
+
+.dating-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 18px 14px calc(20px + env(safe-area-inset-bottom));
+}
+
+.dating-feature-card {
+  width: min(680px, 100%);
+  min-height: 86px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  color: var(--text);
+  box-shadow: 0 16px 34px var(--glass-shadow);
+  cursor: pointer;
+  text-align: left;
+}
+
+.dating-feature-card:active {
+  transform: scale(0.992);
+  border-color: var(--text);
+}
+
+.dating-feature-icon {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+}
+
+.dating-feature-main {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.dating-feature-title {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.dating-feature-meta {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+.dating-feature-arrow {
+  color: var(--text2);
+}
+
+.dating-modal.chat-modal-overlay {
+  z-index: 910;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.dating-modal-panel {
+  width: min(380px, calc(100vw - 28px));
+  max-height: min(78vh, 620px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-strong);
+  color: var(--text);
+  box-shadow: 0 26px 62px rgba(0, 0, 0, 0.36);
+  overflow: hidden;
+}
+
+.bedtime-word-panel,
+.bedtime-continue-panel,
+.bedtime-history-panel,
+.bedtime-export-panel {
+  border: 1px solid rgba(250, 140, 203, 0.28);
+  background: linear-gradient(180deg, rgba(22, 12, 28, 0.98), rgba(10, 7, 15, 0.98));
+  color: #f8e8f2;
+  box-shadow: 0 26px 62px rgba(0, 0, 0, 0.52);
+}
+
+.dating-modal-head {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.bedtime-word-panel .dating-modal-head,
+.bedtime-continue-panel .dating-modal-head,
+.bedtime-history-panel .dating-modal-head,
+.bedtime-export-panel .dating-modal-head {
+  border-bottom-color: rgba(250, 140, 203, 0.18);
+}
+
+.dating-modal-title {
+  min-width: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dating-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dating-icon-btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dating-icon-btn:active {
+  transform: scale(0.96);
+  background: var(--glass-strong);
+}
+
+.bedtime-word-panel .dating-modal-title,
+.bedtime-continue-panel .dating-modal-title,
+.bedtime-history-panel .dating-modal-title,
+.bedtime-export-panel .dating-modal-title {
+  color: #ffe1f0;
+}
+
+.bedtime-word-panel .dating-icon-btn,
+.bedtime-continue-panel .dating-icon-btn,
+.bedtime-history-panel .dating-icon-btn,
+.bedtime-export-panel .dating-icon-btn {
+  border-color: rgba(250, 140, 203, 0.34);
+  background: rgba(255, 127, 190, 0.1);
+  color: #ffd9ec;
+}
+
+.bedtime-role-list,
+.bedtime-wb-list,
+.bedtime-history-list {
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px;
+}
+
+.bedtime-role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bedtime-role-card {
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--glass);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.bedtime-role-card:active {
+  transform: scale(0.992);
+  border-color: var(--text);
+}
+
+.bedtime-role-avatar,
+.bedtime-history-avatar {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-strong);
+  color: var(--text);
+}
+
+.bedtime-role-avatar img,
+.bedtime-history-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bedtime-role-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.bedtime-role-name {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bedtime-role-meta {
+  margin-top: 6px;
+  color: var(--text3);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dating-empty {
+  padding: 28px 14px;
+  text-align: center;
+  color: var(--text3);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.bedtime-wb-item {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--glass-border);
+  cursor: pointer;
+}
+
+.bedtime-wb-item input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--text);
+}
+
+.bedtime-wb-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.bedtime-wb-name {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bedtime-wb-meta {
+  margin-top: 4px;
+  color: var(--text3);
+  font-size: 12px;
+}
+
+.dating-modal-footer {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.dating-primary-btn,
+.dating-secondary-btn {
+  flex: 1;
+  min-height: 40px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dating-primary-btn {
+  background: var(--text);
+  color: var(--bg);
+  box-shadow: 0 10px 22px var(--glass-shadow);
+}
+
+.dating-secondary-btn {
+  background: var(--glass);
+  color: var(--text2);
+  border: 1px solid var(--glass-border);
+}
+
+.bedtime-word-panel .dating-modal-footer,
+.bedtime-continue-panel .dating-modal-footer,
+.bedtime-history-panel .dating-modal-footer,
+.bedtime-export-panel .dating-modal-footer {
+  border-top-color: rgba(250, 140, 203, 0.16);
+}
+
+.bedtime-word-panel .dating-primary-btn,
+.bedtime-continue-panel .dating-primary-btn,
+.bedtime-history-panel .dating-primary-btn,
+.bedtime-export-panel .dating-primary-btn {
+  background: linear-gradient(135deg, #ff76b7, #f25da3);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(238, 67, 151, 0.28);
+}
+
+.bedtime-word-panel .dating-secondary-btn,
+.bedtime-continue-panel .dating-secondary-btn,
+.bedtime-history-panel .dating-secondary-btn,
+.bedtime-export-panel .dating-secondary-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 222, 240, 0.86);
+  border-color: rgba(255, 157, 211, 0.22);
+}
+
+.dating-primary-btn:disabled,
+.dating-secondary-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.bedtime-word-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px;
+}
+
+.bedtime-word-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: rgba(255, 220, 239, 0.78);
+  font-size: 13px;
+}
+
+.bedtime-word-field input {
+  width: 100%;
+  height: 42px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 157, 211, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffe7f4;
+  outline: none;
+}
+
+.bedtime-continue-text {
+  padding: 20px 14px 8px;
+  color: rgba(255, 225, 241, 0.88);
+  text-align: center;
+  font-size: 15px;
+}
+
+.bedtime-story-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 14px calc(24px + env(safe-area-inset-bottom));
+}
+
+.bedtime-avatar-stage {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: auto 0;
+}
+
+.bedtime-story-body.has-story .bedtime-avatar-stage {
+  margin: 12px 0 14px;
+  gap: 8px;
+}
+
+.bedtime-avatar-ring {
+  position: relative;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.bedtime-note {
+  position: absolute;
+  z-index: 2;
+  color: #ff9ccc;
+  font-size: 19px;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(255, 112, 188, 0.76);
+  pointer-events: none;
+  animation: bedtimeNoteFloat 2.7s ease-in-out infinite;
+}
+
+.note-a {
+  left: 4px;
+  top: 28px;
+  animation-delay: 0s;
+}
+
+.note-b {
+  right: -2px;
+  top: 54px;
+  font-size: 22px;
+  animation-delay: 0.55s;
+}
+
+.note-c {
+  left: 20px;
+  bottom: 14px;
+  font-size: 16px;
+  animation-delay: 1.05s;
+}
+
+.bedtime-story-body.has-story .bedtime-avatar-ring {
+  width: 86px;
+  height: 86px;
+}
+
+.bedtime-story-body.has-story .bedtime-note {
+  font-size: 13px;
+}
+
+.bedtime-story-body.has-story .note-a {
+  left: -2px;
+  top: 14px;
+}
+
+.bedtime-story-body.has-story .note-b {
+  right: -6px;
+  top: 30px;
+  font-size: 15px;
+}
+
+.bedtime-story-body.has-story .note-c {
+  left: 12px;
+  bottom: 2px;
+}
+
+.bedtime-avatar-ring::before,
+.bedtime-avatar-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 134, 199, 0.48);
+  box-shadow:
+    0 0 26px rgba(255, 106, 187, 0.36),
+    inset 0 0 22px rgba(255, 129, 199, 0.18);
+  animation: bedtimeGlow 2.8s ease-in-out infinite;
+}
+
+.bedtime-avatar-ring::after {
+  inset: -10px;
+  border-color: rgba(255, 182, 222, 0.22);
+  animation-delay: -1.4s;
+}
+
+.bedtime-avatar {
+  position: relative;
+  z-index: 1;
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255, 123, 189, 0.24), rgba(30, 16, 39, 0.96));
+  border: 1px solid rgba(255, 196, 227, 0.4);
+  color: #ffc1df;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.46);
+}
+
+.bedtime-story-body.has-story .bedtime-avatar {
+  width: 72px;
+  height: 72px;
+}
+
+.bedtime-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bedtime-avatar-name {
+  max-width: min(76vw, 420px);
+  color: #ffe2f0;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bedtime-story-body.has-story .bedtime-avatar-name {
+  font-size: 13px;
+  color: rgba(255, 224, 241, 0.72);
+}
+
+.bedtime-story-content {
+  width: min(720px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 2px 24px;
+}
+
+.bedtime-story-title {
+  color: #ffe2f0;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 800;
+  text-align: center;
+  margin: 0 0 2px;
+}
+
+.bedtime-story-meta {
+  text-align: center;
+  color: rgba(255, 214, 236, 0.58);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.bedtime-segment {
+  margin: 0;
+  padding: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.86;
+  font-size: 16px;
+}
+
+.bedtime-segment.story {
+  color: rgba(244, 235, 255, 0.92);
+}
+
+.bedtime-segment.comment {
+  color: #ff97cb;
+  font-weight: 600;
+}
+
+.bedtime-history-panel {
+  width: min(420px, calc(100vw - 24px));
+}
+
+.bedtime-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: min(68vh, 560px);
+}
+
+.bedtime-history-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 48px 10px 10px;
+  border: 1px solid rgba(255, 157, 211, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 127, 190, 0.08);
+  color: inherit;
+  cursor: pointer;
+}
+
+.bedtime-history-export-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 157, 211, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 127, 190, 0.1);
+  color: #ffd9ec;
+  cursor: pointer;
+}
+
+.bedtime-history-export-btn:active {
+  transform: scale(0.94);
+  background: rgba(255, 127, 190, 0.18);
+}
+
+.bedtime-history-avatar {
+  border-color: rgba(255, 159, 212, 0.35);
+  background: rgba(255, 128, 190, 0.12);
+  color: #ffadd6;
+}
+
+.bedtime-history-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.bedtime-history-title {
+  color: #ffe3f2;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bedtime-history-meta,
+.bedtime-history-preview {
+  margin-top: 5px;
+  color: rgba(255, 216, 238, 0.58);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bedtime-history-loading {
+  padding: 12px;
+  color: rgba(255, 216, 238, 0.6);
+  text-align: center;
+  font-size: 12px;
+}
+
+.bedtime-export-panel {
+  width: min(360px, calc(100vw - 24px));
+}
+
+.bedtime-export-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  color: rgba(255, 220, 239, 0.78);
+  font-size: 13px;
+}
+
+.bedtime-export-field input {
+  width: 100%;
+  height: 42px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 157, 211, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffe7f4;
+  outline: none;
+}
+
+.bedtime-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 935;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 86, 170, 0.12), transparent 34%),
+    rgba(0, 0, 0, 0.82);
+  color: #ffc6e2;
+}
+
+.bedtime-loading-overlay.active {
+  display: flex;
+}
+
+.bedtime-paw-loader {
+  position: relative;
+  width: 92px;
+  height: 84px;
+  filter: drop-shadow(0 0 24px rgba(255, 91, 172, 0.45));
+  animation: bedtimePawFloat 1.9s ease-in-out infinite;
+}
+
+.bedtime-paw-toe,
+.bedtime-paw-pad {
+  position: absolute;
+  display: block;
+  background: linear-gradient(145deg, #050306, #ff76b7 72%);
+  border: 1px solid rgba(255, 181, 222, 0.48);
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.42),
+    0 0 18px rgba(255, 91, 172, 0.36);
+}
+
+.bedtime-paw-toe {
+  width: 23px;
+  height: 28px;
+  border-radius: 50%;
+  animation: bedtimeToePulse 1.2s ease-in-out infinite;
+}
+
+.bedtime-paw-pad {
+  left: 25px;
+  bottom: 4px;
+  width: 44px;
+  height: 42px;
+  border-radius: 48% 48% 52% 52%;
+  animation: bedtimePadPulse 1.2s ease-in-out infinite;
+}
+
+.toe-a { left: 8px; top: 28px; transform: rotate(-24deg); animation-delay: 0s; }
+.toe-b { left: 24px; top: 8px; transform: rotate(-8deg); animation-delay: 0.12s; }
+.toe-c { left: 48px; top: 8px; transform: rotate(8deg); animation-delay: 0.24s; }
+.toe-d { right: 8px; top: 28px; transform: rotate(24deg); animation-delay: 0.36s; }
+
+.bedtime-loading-text {
+  font-size: 13px;
+  letter-spacing: 0;
+  color: rgba(255, 213, 237, 0.8);
+}
+
+@keyframes bedtimeGlow {
+  0%, 100% { transform: scale(0.96); opacity: 0.58; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes bedtimePawFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes bedtimeNoteFloat {
+  0%, 100% { transform: translateY(0) rotate(-8deg); opacity: 0.54; }
+  50% { transform: translateY(-8px) rotate(9deg); opacity: 1; }
+}
+
+@keyframes bedtimeToePulse {
+  0%, 100% { opacity: 0.68; }
+  50% { opacity: 1; }
+}
+
+@keyframes bedtimePadPulse {
+  0%, 100% { transform: scale(0.98); }
+  50% { transform: scale(1.04); }
+}
+
+@media (max-width: 420px) {
+  .dating-content {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .bedtime-avatar-ring {
+    width: 136px;
+    height: 136px;
+  }
+
+  .bedtime-avatar {
+    width: 114px;
+    height: 114px;
+  }
+
+  .bedtime-segment {
+    font-size: 15px;
+    line-height: 1.82;
+  }
+}
+
+/* ===== Dating Movie ===== */
+.dating-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.dating-movie-feature-icon {
+  color: #d14b54;
+  background: color-mix(in srgb, #d14b54 12%, var(--glass-strong));
+}
+
+.dating-movie-page {
+  position: fixed;
+  inset: 0;
+  height: var(--dating-movie-visual-viewport-height, auto);
+  z-index: 842;
+  display: none;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  color: #f3f0ea;
+  background: #121212;
+  overflow: hidden;
+  overscroll-behavior: none;
+  transform: translateY(var(--dating-movie-visual-viewport-offset-top, 0px));
+}
+
+.dating-movie-page.active {
+  display: flex;
+}
+
+.movie-nav {
+  flex: 0 0 auto;
+  color: #f5f1e9;
+  background: rgba(20, 20, 20, 0.96);
+  border-bottom: 1px solid rgba(211, 171, 103, 0.24);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.movie-nav .chat-nav-back,
+.movie-nav .chat-nav-btn {
+  color: #f6eee2 !important;
+  background: #272523 !important;
+  border: 1px solid rgba(211, 171, 103, 0.3) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+.movie-nav .chat-conv-nav-title {
+  color: #f8f3e9;
+}
+
+.movie-nav .chat-conv-nav-subtitle {
+  max-width: min(58vw, 440px);
+  color: rgba(224, 195, 144, 0.72);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dating-movie-layout {
+  width: min(980px, 100%);
+  flex: 1;
+  min-height: 0;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #161616;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dating-movie-player-section {
+  flex: 0 0 auto;
+  min-width: 0;
+  background: #090909;
+  border-bottom: 1px solid rgba(211, 171, 103, 0.18);
+}
+
+.dating-movie-screen {
+  position: relative;
+  width: min(100%, 85.333vh, 960px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #020202;
+}
+
+.dating-movie-page.keyboard-visible .dating-movie-screen {
+  width: min(100%, var(--dating-movie-keyboard-screen-width, 960px));
+}
+
+.dating-movie-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: 0;
+  background: #020202;
+  object-fit: contain;
+}
+
+.dating-movie-media.active {
+  display: block;
+}
+
+.dating-movie-start-button {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  padding: 0 0 0 3px;
+  border: 1px solid rgba(224, 189, 130, 0.48);
+  border-radius: 50%;
+  color: #fff;
+  background: #a93e47;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.dating-movie-start-button[hidden] {
+  display: none;
+}
+
+.dating-movie-start-button:active:not(:disabled) {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.dating-movie-start-button:disabled {
+  opacity: 0.48;
+  cursor: default;
+}
+.dating-movie-screen-empty {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  color: rgba(235, 226, 211, 0.44);
+  font-size: 13px;
+}
+
+.dating-movie-screen-empty.active {
+  display: flex;
+}
+
+.dating-movie-screen-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  place-items: center;
+  pointer-events: none;
+  background: rgba(2, 2, 2, 0.68);
+}
+
+.dating-movie-screen-loading.active {
+  display: grid;
+}
+
+.dating-movie-player-status {
+  position: absolute;
+  z-index: 4;
+  left: 10px;
+  right: 10px;
+  top: 10px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px 7px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 7px;
+  color: rgba(247, 241, 231, 0.88);
+  background: rgba(28, 27, 26, 0.94);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dating-movie-player-status[hidden] {
+  display: none;
+}
+
+.dating-movie-player-status[data-state="error"] {
+  border-color: rgba(209, 75, 84, 0.48);
+}
+
+.dating-movie-player-status[data-state="ready"] {
+  border-color: rgba(211, 171, 103, 0.36);
+}
+
+.dating-movie-player-status-text {
+  min-width: 0;
+  flex: 1;
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.dating-movie-player-status-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 6px;
+}
+
+.dating-movie-player-status-actions button {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(211, 171, 103, 0.28);
+  border-radius: 6px;
+  color: #e4c48d;
+  background: #2c2925;
+  cursor: pointer;
+}
+
+.dating-movie-player-status-actions button[hidden] {
+  display: none;
+}
+
+.dating-movie-screen-loading span {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-top-color: #d4aa68;
+  border-right-color: #d14b54;
+  border-radius: 50%;
+  animation: datingMovieSpin 0.78s linear infinite;
+}
+
+@keyframes datingMovieSpin {
+  to { transform: rotate(360deg); }
+}
+
+.dating-movie-toolbar {
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 7px 12px;
+  background: #1d1c1b;
+}
+
+.dating-movie-toolbar-row,
+.dating-movie-toolbar-status-row {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dating-movie-toolbar-row {
+  min-height: 32px;
+  gap: 8px;
+}
+
+.dating-movie-toolbar-status-row {
+  min-height: 18px;
+  gap: 10px;
+}
+
+.dating-movie-select-wrap {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d5ad6b;
+}
+
+.dating-movie-select-wrap select {
+  min-width: 0;
+  width: 100%;
+  height: 30px;
+  padding: 0 26px 0 0;
+  border: 0;
+  outline: none;
+  color: #f3eee4;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+}
+
+.dating-movie-select-wrap select option {
+  color: #171717;
+  background: #fff;
+}
+
+.dating-movie-toolbar-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dating-movie-tool-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(211, 171, 103, 0.25);
+  border-radius: 6px;
+  color: #d9b87e;
+  background: #292724;
+  cursor: pointer;
+}
+
+.dating-movie-tool-btn[hidden] {
+  display: none;
+}
+
+.dating-movie-frame-status {
+  min-width: 0;
+  flex: 1;
+  color: rgba(240, 226, 202, 0.5);
+  font-size: 10px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dating-movie-frame-status[data-state="active"] {
+  color: #d9bd8d;
+}
+
+.dating-movie-frame-status[data-state="error"] {
+  color: #e38c92;
+}
+
+.dating-movie-progress {
+  flex: 0 0 auto;
+  max-width: 55%;
+  color: rgba(240, 226, 202, 0.58);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dating-movie-progress[data-known="true"] {
+  color: #dec291;
+}
+
+.dating-movie-chat {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #171717;
+}
+
+.dating-movie-messages {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 15px 14px 18px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.dating-movie-chat-empty {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  color: rgba(239, 231, 220, 0.38);
+  font-size: 13px;
+  text-align: center;
+}
+
+.dating-movie-message-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.dating-movie-message-row.user {
+  justify-content: flex-end;
+}
+
+.dating-movie-message-avatar {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(211, 171, 103, 0.3);
+  border-radius: 50%;
+  color: #d5ad6b;
+  background: #282521;
+}
+
+.dating-movie-message-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.dating-movie-message-main {
+  min-width: 0;
+  max-width: min(76%, 620px);
+}
+
+.dating-movie-message-row.user .dating-movie-message-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.dating-movie-message-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 2px 5px;
+  color: rgba(237, 225, 205, 0.48);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.dating-movie-message-meta span {
+  color: rgba(211, 171, 103, 0.66);
+  font-variant-numeric: tabular-nums;
+}
+
+.dating-movie-message-bubble {
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 7px;
+  color: #f1ede6;
+  background: #262524;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.dating-movie-message-row.user .dating-movie-message-bubble {
+  color: #fff8f6;
+  background: #a93e47;
+  border-color: rgba(255, 204, 208, 0.16);
+}
+
+.dating-movie-compose {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px 42px;
+  align-items: end;
+  gap: 7px;
+  padding: 9px 10px calc(9px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1f1f1f;
+}
+
+.dating-movie-compose textarea {
+  width: 100%;
+  min-height: 42px;
+  max-height: 96px;
+  resize: none;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+  outline: none;
+  color: #f5f0e9;
+  background: #2a2928;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  overflow-y: auto;
+}
+
+.dating-movie-compose textarea::placeholder {
+  color: rgba(239, 232, 222, 0.36);
+}
+
+.dating-movie-compose textarea:focus {
+  border-color: rgba(211, 171, 103, 0.6);
+}
+
+.dating-movie-compose-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.dating-movie-compose-btn.send {
+  color: #fff;
+  background: #b7424c;
+}
+
+.dating-movie-compose-btn.retry {
+  color: #e0bd82;
+  background: #2b2926;
+  border-color: rgba(211, 171, 103, 0.28);
+}
+
+.dating-movie-compose-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.dating-movie-compose-btn:disabled,
+.dating-movie-compose textarea:disabled {
+  opacity: 0.46;
+  cursor: default;
+}
+
+.dating-movie-compose-btn.is-loading svg {
+  visibility: hidden;
+}
+
+.dating-movie-compose-btn.is-loading::after {
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: datingMovieSpin 0.72s linear infinite;
+}
+
+.dating-movie-settings-panel {
+  width: min(540px, calc(100vw - 24px));
+  max-height: min(88vh, 760px);
+}
+
+.dating-movie-settings-body {
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 13px;
+}
+
+.dating-movie-settings-section h3 {
+  margin: 0 0 11px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.dating-movie-add-grid {
+  display: grid;
+  grid-template-columns: 0.72fr 1.45fr auto;
+  align-items: end;
+  gap: 8px;
+}
+
+.dating-movie-add-grid label,
+.dating-movie-vision-fields label {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text3);
+  font-size: 11px;
+}
+
+.dating-movie-add-grid input,
+.dating-movie-vision-fields input {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: 7px;
+  outline: none;
+  color: var(--text);
+  background: var(--glass);
+  font-size: 13px;
+}
+
+.dating-movie-add-grid input:focus,
+.dating-movie-vision-fields input:focus {
+  border-color: var(--text2);
+}
+
+.dating-movie-add-btn {
+  min-width: 66px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+
+.dating-movie-catalog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.dating-movie-settings-empty {
+  padding: 18px 8px;
+  color: var(--text3);
+  font-size: 12px;
+  text-align: center;
+}
+
+.dating-movie-catalog-item {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px;
+  border: 1px solid var(--glass-border);
+  border-radius: 7px;
+  background: var(--glass);
+}
+
+.dating-movie-catalog-type {
+  flex: 0 0 auto;
+  min-width: 38px;
+  padding: 4px 6px;
+  border-radius: 5px;
+  color: #fff;
+  background: #a93e47;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.dating-movie-catalog-main {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dating-movie-catalog-main strong,
+.dating-movie-catalog-main em {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dating-movie-catalog-main strong {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.dating-movie-catalog-main em {
+  color: var(--text3);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.dating-movie-catalog-item > button {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 7px;
+  color: #b7424c;
+  background: var(--glass-strong);
+  cursor: pointer;
+}
+
+.dating-movie-vision-details {
+  margin-top: 15px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.dating-movie-vision-details summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.dating-movie-vision-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.dating-movie-vision-details summary::after {
+  content: "›";
+  flex: 0 0 auto;
+  color: var(--text3);
+  font-size: 22px;
+  transform: rotate(90deg);
+  transition: transform 0.16s ease;
+}
+
+.dating-movie-vision-details[open] summary::after {
+  transform: rotate(-90deg);
+}
+
+.dating-movie-vision-summary {
+  min-width: 0;
+  flex: 1;
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dating-movie-vision-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 3px 0 5px;
+}
+
+.dating-movie-model-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 8px;
+}
+
+.dating-movie-model-row .dating-secondary-btn {
+  width: 84px;
+  min-height: 40px;
+  flex: 0 0 auto;
+}
+
+.dating-movie-model-list {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 1px 0 4px;
+  scrollbar-width: none;
+}
+
+.dating-movie-model-list::-webkit-scrollbar {
+  display: none;
+}
+
+.dating-movie-model-list button {
+  flex: 0 0 auto;
+  max-width: 220px;
+  min-height: 30px;
+  padding: 5px 9px;
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  color: var(--text2);
+  background: var(--glass);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dating-movie-model-list button.active {
+  color: #fff;
+  background: #a93e47;
+  border-color: transparent;
+}
+
+@media (max-width: 560px) {
+  .dating-movie-layout {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .dating-movie-screen {
+    width: min(100%, 78.222vh);
+  }
+
+  .dating-movie-add-grid {
+    grid-template-columns: 1fr auto;
+  }
+
+  .dating-movie-add-grid label:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .dating-movie-message-main {
+    max-width: 82%;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .dating-movie-compose {
+    grid-template-columns: minmax(0, 1fr) 40px 40px;
+    gap: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .dating-movie-compose-btn {
+    width: 40px;
+    height: 42px;
+  }
+
+  .dating-movie-toolbar {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .dating-movie-select-wrap {
+    gap: 5px;
+  }
+
+  .dating-movie-toolbar-actions {
+    gap: 4px;
+  }
+
+  .dating-movie-tool-btn {
+    width: 30px;
+  }
+
+  .dating-movie-progress {
+    max-width: 66%;
+  }
+}

@@ -1,0 +1,478 @@
+/* Thick black-and-white comic line style. */
+body.theme-white {
+  --comic-paper: var(--bg);
+  --comic-ink: var(--text);
+  --comic-muted: var(--text3);
+  --comic-border: 3px solid var(--comic-ink);
+  --comic-border-thin: 2px solid var(--comic-ink);
+  --comic-shadow: 5px 5px 0 var(--comic-ink);
+  --comic-shadow-sm: 3px 3px 0 var(--comic-ink);
+  background-color: var(--comic-paper) !important;
+}
+
+body.theme-white:not(.has-wallpaper) {
+  background-image: none !important;
+}
+
+body.theme-white.dark-mode:not(.has-wallpaper) {
+  background-image: none !important;
+}
+
+body.theme-white *,
+body.theme-white *::before,
+body.theme-white *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  text-shadow: none !important;
+}
+
+/* MCP has its own monochrome pixel surfaces and hard shadows. */
+body.theme-white :not(:where(.toolbox-page, .toolbox-page *, .mcp-approval-modal, .mcp-approval-modal *)) {
+  box-shadow: none !important;
+}
+
+body.theme-white svg {
+  stroke-width: 2.4px !important;
+}
+
+body.theme-white .settings-page,
+body.theme-white .chat-page,
+body.theme-white .chat-sub-page,
+body.theme-white .forum-app-page,
+body.theme-white .novel-app-page,
+body.theme-white .novel-page,
+body.theme-white .memory-page,
+body.theme-white .worldbook-page,
+body.theme-white .regex-page {
+  background-color: var(--comic-paper) !important;
+  background-image: none !important;
+}
+
+body.theme-white.dark-mode .settings-page,
+body.theme-white.dark-mode .chat-page,
+body.theme-white.dark-mode .chat-sub-page,
+body.theme-white.dark-mode .forum-app-page,
+body.theme-white.dark-mode .novel-app-page,
+body.theme-white.dark-mode .novel-page,
+body.theme-white.dark-mode .memory-page,
+body.theme-white.dark-mode .worldbook-page,
+body.theme-white.dark-mode .regex-page {
+  background-image: none !important;
+}
+
+body.theme-white .glass-app-icon,
+body.theme-white .datetime-widget,
+body.theme-white .battery-widget,
+body.theme-white .theme-toggle,
+body.theme-white .text-bubble,
+body.theme-white .polaroid,
+body.theme-white .printer-body,
+body.theme-white .receipt-paper,
+body.theme-white .photo-frame-inner,
+body.theme-white .p2-record-sleeve,
+body.theme-white .custom-widget-wrapper,
+body.theme-white .upload-panel,
+body.theme-white .wallpaper-section,
+body.theme-white .app-icon-grid,
+body.theme-white .theme-option,
+body.theme-white .css-placeholder-btn,
+body.theme-white .reset-btn,
+body.theme-white .settings-group,
+body.theme-white .settings-back,
+body.theme-white .settings-item-icon,
+body.theme-white .api-test-result,
+body.theme-white .chat-modal-panel,
+body.theme-white .chat-fg-modal-panel,
+body.theme-white .chat-group-select-panel,
+body.theme-white .chat-avatar-modal-panel,
+body.theme-white .cs-modal-panel,
+body.theme-white .chat-npc-card,
+body.theme-white .profile-user-card,
+body.theme-white .profile-section,
+body.theme-white .chat-forward-viewer-bubble,
+body.theme-white .chat-plus-icon,
+body.theme-white .chat-img-desc-card,
+body.theme-white .chat-img-bubble,
+body.theme-white .sticker-picker-item,
+body.theme-white .persona-card,
+body.theme-white .sticker-pack-card,
+body.theme-white .mem-card,
+body.theme-white .cs-char-bar,
+body.theme-white .cs-section,
+body.theme-white .forum-post-card,
+body.theme-white .forum-board-card,
+body.theme-white .forum-card,
+body.theme-white .forum-comment-card,
+body.theme-white .novel-cover,
+body.theme-white .novel-shelf-item,
+body.theme-white .novel-review-item,
+body.theme-white .novel-modal-panel,
+body.theme-white .novel-reader-catalog-panel,
+body.theme-white .novel-reader-voice-panel,
+body.theme-white .novel-reader-more-menu,
+body.theme-white .novel-dedicated-wb-card {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border) !important;
+  border-radius: 6px !important;
+  color: var(--text) !important;
+  box-shadow: var(--comic-shadow) !important;
+}
+
+body.theme-white .photo-bubble,
+body.theme-white .p2-record-widget {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.theme-white .photo-bubble {
+  padding: 0 !important;
+}
+
+body.theme-white .dock,
+body.theme-white .chat-tab-bar,
+body.theme-white .chat-multiselect-bar,
+body.theme-white .moments-comment-bar,
+body.theme-white .forum-bottom-nav,
+body.theme-white .forum-sub-cats,
+body.theme-white .mem-stats-bar {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--comic-shadow-sm) !important;
+}
+
+body.theme-white .dock {
+  border-radius: 12px !important;
+}
+
+body.theme-white .chat-input-bar,
+body.theme-white .chat-plus-panel,
+body.theme-white .chat-sticker-picker,
+body.theme-white .chat-quote-bar {
+  background: var(--comic-paper) !important;
+  border: 0 !important;
+  border-top: var(--comic-border-thin) !important;
+  border-radius: 0 !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+}
+
+body.theme-white .chat-nav-back,
+body.theme-white .chat-nav-btn,
+body.theme-white .chat-profile-btn,
+body.theme-white .forum-fab,
+body.theme-white .forum-boards-add,
+body.theme-white .forum-sub-cat-add,
+body.theme-white .chat-conv-delete,
+body.theme-white .chat-contact-action-btn,
+body.theme-white .profile-section-add-btn,
+body.theme-white .persona-card-btn,
+body.theme-white .sticker-pack-btn,
+body.theme-white .api-btn,
+body.theme-white .api-btn-sm,
+body.theme-white .api-lib-btn,
+body.theme-white .backend-log-copy-btn,
+body.theme-white .settings-header-btn,
+body.theme-white .btn-primary,
+body.theme-white .btn-secondary,
+body.theme-white .chat-form-save,
+body.theme-white .chat-confirm-btn,
+body.theme-white .moments-comment-send {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 5px !important;
+  color: var(--text) !important;
+  box-shadow: var(--comic-shadow-sm) !important;
+}
+
+body.theme-white .btn-primary,
+body.theme-white .chat-form-save,
+body.theme-white .chat-confirm-btn,
+body.theme-white .api-btn-save,
+body.theme-white .forum-fab,
+body.theme-white .moments-comment-send {
+  background: var(--comic-ink) !important;
+  color: var(--comic-paper) !important;
+}
+
+body.theme-white .chat-msg-bubble,
+body.theme-white .msg-bubble-text,
+body.theme-white .ccst-preview-bubble {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border) !important;
+  border-radius: 6px !important;
+  color: var(--text) !important;
+  box-shadow: var(--comic-shadow-sm) !important;
+}
+
+body.theme-white .msg-right .chat-msg-bubble,
+body.theme-white .msg-bubble-text.msg-self,
+body.theme-white .ccst-bubble-right {
+  background: var(--comic-ink) !important;
+  border-color: var(--comic-ink) !important;
+  color: var(--comic-paper) !important;
+}
+
+body.theme-white .msg-left .chat-msg-bubble {
+  border-top-left-radius: 0 !important;
+}
+
+body.theme-white .msg-right .chat-msg-bubble {
+  border-top-right-radius: 0 !important;
+}
+
+body.theme-white .chat-img-desc-card,
+body.theme-white .msg-right .chat-msg-bubble.chat-img-desc-card,
+body.theme-white .chat-rp-card,
+body.theme-white .chat-tf-card,
+body.theme-white .chat-gf-card,
+body.theme-white .chat-delivery-order-card,
+body.theme-white .chat-dl-card,
+body.theme-white .chat-location-card,
+body.theme-white .msg-right .chat-msg-bubble.forum-card-bubble,
+body.theme-white .chat-forward-card {
+  background: var(--comic-paper) !important;
+  color: var(--text) !important;
+  border: var(--comic-border) !important;
+  border-radius: 6px !important;
+  box-shadow: var(--comic-shadow-sm) !important;
+}
+
+body.theme-white .chat-rp-card::before,
+body.theme-white .chat-tf-card::before,
+body.theme-white .chat-gf-card::before,
+body.theme-white .chat-delivery-order-card::before,
+body.theme-white .chat-dl-card::before {
+  background: var(--comic-ink) !important;
+}
+
+body.theme-white .chat-rp-card-footer,
+body.theme-white .chat-tf-card-footer,
+body.theme-white .chat-gf-card-footer,
+body.theme-white .chat-dl-card-footer {
+  background: var(--comic-paper) !important;
+  border-top: var(--comic-border-thin) !important;
+}
+
+body.theme-white .chat-input-wrap,
+body.theme-white .chat-field-input,
+body.theme-white .chat-form-input,
+body.theme-white .chat-form-textarea,
+body.theme-white .chat-form-select,
+body.theme-white .chat-persona-input,
+body.theme-white .chat-npc-name-input,
+body.theme-white .chat-npc-setting,
+body.theme-white .chat-npc-voice-input,
+body.theme-white .chat-avatar-url-input,
+body.theme-white .upload-url-input,
+body.theme-white .api-input,
+body.theme-white .wcss-editor,
+body.theme-white .ccst-scope-select,
+body.theme-white .moments-comment-input,
+body.theme-white .novel-setting-input {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 5px !important;
+  color: var(--text) !important;
+}
+
+body.theme-white .settings-item,
+body.theme-white .chat-conv-item,
+body.theme-white .chat-contact-item,
+body.theme-white .chat-select-item,
+body.theme-white .forum-post-card,
+body.theme-white .forum-card-footer,
+body.theme-white .forum-comment-item,
+body.theme-white .novel-catalog-item,
+body.theme-white .profile-section-header,
+body.theme-white .favorite-group-item,
+body.theme-white .favorite-item-card,
+body.theme-white .persona-card,
+body.theme-white .sticker-pack-card,
+body.theme-white .moments-card {
+  border-color: var(--comic-ink) !important;
+}
+
+body.theme-white .chat-conv-item,
+body.theme-white .chat-contact-item,
+body.theme-white .chat-select-item,
+body.theme-white .settings-item,
+body.theme-white .forum-comment-item,
+body.theme-white .novel-catalog-item,
+body.theme-white .profile-section-header {
+  border-bottom: var(--comic-border-thin) !important;
+}
+
+body.theme-white .chat-conv-avatar,
+body.theme-white .chat-contact-avatar,
+body.theme-white .chat-select-avatar,
+body.theme-white .chat-npc-avatar,
+body.theme-white .chat-msg-avatar,
+body.theme-white .profile-avatar-wrap,
+body.theme-white .polaroid-avatar,
+body.theme-white .forum-post-avatar,
+body.theme-white .moments-card-avatar,
+body.theme-white .moments-bg-avatar,
+body.theme-white .p2-record-label,
+body.theme-white .app-icon-preview {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 6px !important;
+  color: var(--text) !important;
+  box-shadow: var(--comic-shadow-sm) !important;
+}
+
+body.theme-white .theme-preview-white {
+  background-color: #fff !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 5px !important;
+}
+
+body.theme-white .p2-record-label {
+  border-radius: 50% !important;
+}
+
+body.theme-white .theme-option.selected,
+body.theme-white .chat-select-check.active,
+body.theme-white .forum-sub-cat-item.active,
+body.theme-white .api-model-tag.active {
+  outline: 3px solid var(--comic-ink) !important;
+  outline-offset: 2px !important;
+}
+
+body.theme-white .theme-check,
+body.theme-white .settings-toggle.on,
+body.theme-white .settings-toggle.active {
+  background: var(--comic-ink) !important;
+  color: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+}
+
+body.theme-white .settings-toggle,
+body.theme-white .api-slider {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+}
+
+body.theme-white .settings-toggle::after {
+  background: var(--comic-ink) !important;
+  border: 2px solid var(--comic-paper) !important;
+}
+
+body.theme-white .api-slider::-webkit-slider-thumb {
+  background: var(--comic-ink) !important;
+  border: 2px solid var(--comic-paper) !important;
+}
+
+body.theme-white .api-slider::-moz-range-thumb {
+  background: var(--comic-ink) !important;
+  border: 2px solid var(--comic-paper) !important;
+}
+
+body.theme-white .polaroid-photo,
+body.theme-white .photo-frame-slot,
+body.theme-white .gallery-slide,
+body.theme-white .receipt-paper img,
+body.theme-white .chat-img-bubble img,
+body.theme-white .moments-img-item,
+body.theme-white .moments-pub-img-item,
+body.theme-white .novel-cover-img {
+  border: var(--comic-border-thin) !important;
+  border-radius: 4px !important;
+  filter: none !important;
+}
+
+body.theme-white .polaroid-tape {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 2px !important;
+  transform: rotate(-4deg);
+}
+
+body.theme-white .receipt-tear {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 5px, var(--comic-ink) 5px 8px, transparent 8px 13px) !important;
+}
+
+body.theme-white .receipt-printer-widget::before,
+body.theme-white .receipt-printer-widget::after,
+body.theme-white .datetime-widget::before,
+body.theme-white .datetime-widget::after {
+  display: none !important;
+}
+
+body.theme-white .social-bar,
+body.theme-white .moments-likes,
+body.theme-white .moments-comments,
+body.theme-white .forum-post-tag,
+body.theme-white .forum-sub-cat-item,
+body.theme-white .chat-select-tag,
+body.theme-white .api-model-tag,
+body.theme-white .api-temp-value,
+body.theme-white .api-temp-desc,
+body.theme-white .backend-log-message,
+body.theme-white .backend-log-response,
+body.theme-white .backend-log-raw {
+  background: var(--comic-paper) !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 4px !important;
+}
+
+body.theme-white .notification,
+body.theme-white .edit-mode-done-btn {
+  background: var(--comic-ink) !important;
+  border: var(--comic-border-thin) !important;
+  border-radius: 5px !important;
+  color: var(--comic-paper) !important;
+  box-shadow: var(--comic-shadow-sm) !important;
+}
+
+body.theme-white .chat-modal-overlay,
+body.theme-white .upload-modal {
+  background: rgba(255,255,255,0.72) !important;
+}
+
+body.theme-white.dark-mode .chat-modal-overlay,
+body.theme-white.dark-mode .upload-modal {
+  background: rgba(0,0,0,0.74) !important;
+}
+
+@media (max-height: 720px) {
+  body.theme-white #page2 .gallery-container {
+    aspect-ratio: 16 / 7.2 !important;
+  }
+
+  body.theme-white #page2 .social-bar {
+    margin-top: 6px !important;
+    padding: 5px 12px !important;
+  }
+
+  body.theme-white #page2 .p2-main {
+    gap: 8px !important;
+  }
+
+  body.theme-white #page2 .glass-app-icon {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  body.theme-white #page2 .glass-app-label {
+    font-size: 9px !important;
+    max-width: 52px !important;
+  }
+
+  body.theme-white #page2 .p2-record-widget {
+    min-height: 110px !important;
+  }
+
+  body.theme-white #page2 .p2-record-sleeve {
+    height: 88px !important;
+  }
+
+  body.theme-white #page2 .receipt-printer-widget {
+    min-height: 88px !important;
+    padding: 10px 8px !important;
+  }
+}

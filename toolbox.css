@@ -1,0 +1,627 @@
+/* MCP：黑白像素界面。独立配色，不继承桌面主题的彩色变量。 */
+.toolbox-page,
+.mcp-approval-modal {
+  --mcp-paper: #fff;
+  --mcp-ink: #111;
+  --mcp-muted: #595959;
+  --mcp-line: #d6d6d6;
+  --mcp-font: "SFMono-Regular", Consolas, "Liberation Mono", "PingFang SC", "Microsoft YaHei", monospace;
+  color-scheme: light;
+  color: var(--mcp-ink);
+  font: 14px/1.6 var(--mcp-font);
+  text-align: left;
+}
+
+.toolbox-page,
+.toolbox-page *,
+.toolbox-page *::before,
+.toolbox-page *::after,
+.mcp-approval-modal,
+.mcp-approval-modal * {
+  box-sizing: border-box;
+}
+
+.toolbox-page :is(h1, p),
+.toolbox-page .form-group label {
+  margin: 0;
+}
+
+.toolbox-page {
+  position: fixed;
+  inset: 0;
+  z-index: 838;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--mcp-paper);
+}
+
+.toolbox-page.active { display: flex; }
+
+.toolbox-page .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  min-height: 0;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  background: var(--mcp-paper);
+}
+
+.toolbox-page .header,
+.toolbox-page .modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  border-bottom: 2px solid var(--mcp-ink);
+}
+
+.toolbox-page .toolbox-heading { min-width: 0; }
+
+.toolbox-page .toolbox-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.toolbox-page .toolbox-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  background: currentColor;
+  box-shadow: 8px 0 0 currentColor, 0 8px 0 currentColor;
+  transform: translateY(-3px);
+}
+
+.toolbox-page .header-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.toolbox-page :is(button, input, select),
+.mcp-approval-actions button {
+  border-radius: 0;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toolbox-page :is(.btn-icon, .btn-add, .btn-modal),
+.mcp-approval-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 2px solid var(--mcp-ink);
+  background: var(--mcp-paper);
+  color: var(--mcp-ink);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--mcp-ink);
+  touch-action: manipulation;
+}
+
+.toolbox-page .btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+}
+
+.toolbox-page .icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: none;
+  shape-rendering: crispEdges;
+}
+
+.toolbox-page .toolbar {
+  flex-shrink: 0;
+  padding: 20px 24px 24px;
+}
+
+.toolbox-page .toolbox-intro {
+  margin-bottom: 16px;
+  color: var(--mcp-muted);
+  font-size: 13px;
+}
+
+.toolbox-page .btn-add {
+  width: 100%;
+  min-height: 48px;
+}
+
+.toolbox-page :is(.btn-add, .toolbox-save),
+.mcp-approval-actions .mcp-approval-allow {
+  background: var(--mcp-ink);
+  color: var(--mcp-paper);
+  box-shadow: 3px 3px 0 var(--mcp-paper), 4px 4px 0 1px var(--mcp-ink);
+}
+
+.toolbox-page .toolbox-list-heading {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 24px 12px;
+  color: var(--mcp-muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.toolbox-page .list-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  padding: 0 24px 28px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mcp-ink) var(--mcp-paper);
+}
+
+.toolbox-page .empty-tips {
+  padding: 40px 16px;
+  border: 2px dashed var(--mcp-line);
+  color: var(--mcp-muted);
+  text-align: center;
+  justify-content: center;
+}
+
+.toolbox-page .tool-item {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid var(--mcp-ink);
+  background: var(--mcp-paper);
+  box-shadow: 4px 4px 0 var(--mcp-ink);
+  cursor: pointer;
+}
+
+.toolbox-page .tool-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toolbox-page .tool-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.toolbox-page .tool-name {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.toolbox-page .tool-status {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 0 6px;
+  border: 1px solid currentColor;
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+}
+
+.toolbox-page .tool-status.is-enabled {
+  background: var(--mcp-ink);
+  color: var(--mcp-paper);
+  border-color: var(--mcp-ink);
+}
+
+.toolbox-page .tool-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--mcp-line);
+  color: var(--mcp-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.toolbox-page .tool-note-warning {
+  padding-left: 8px;
+  border-left: 2px solid var(--mcp-ink);
+  color: var(--mcp-ink);
+  font-weight: 700;
+}
+
+.toolbox-page .modal-overlay,
+.mcp-approval-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(20px, env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.toolbox-page .modal-overlay {
+  z-index: 100;
+  display: none;
+}
+
+.toolbox-page .modal,
+.mcp-approval-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 440px;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border: 2px solid var(--mcp-ink);
+  border-radius: 0;
+  background: var(--mcp-paper);
+  color: var(--mcp-ink);
+  box-shadow: 6px 6px 0 var(--mcp-ink);
+}
+
+.toolbox-page .modal-header { padding: 16px 20px; }
+
+.toolbox-page .modal-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.toolbox-page .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  padding: 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mcp-ink) var(--mcp-paper);
+}
+
+.toolbox-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toolbox-page .form-group label {
+  color: var(--mcp-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.toolbox-page .toolbox-field-hint {
+  color: var(--mcp-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.toolbox-page .toolbox-field-hint summary {
+  padding: 6px 0;
+  color: var(--mcp-ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.toolbox-page .toolbox-field-hint p + p { margin-top: 8px; }
+
+.toolbox-page .form-control {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--mcp-ink);
+  background: var(--mcp-paper);
+  color: var(--mcp-ink);
+  font-size: 16px;
+  line-height: 1.5;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.toolbox-page .form-control::placeholder {
+  color: #757575;
+  opacity: 1;
+}
+
+.toolbox-page .form-control:focus {
+  outline: 2px solid var(--mcp-ink);
+  outline-offset: 2px;
+}
+
+.toolbox-page select.form-control { appearance: auto; -webkit-appearance: menulist; }
+
+.toolbox-page .toolbox-role-picker {
+  min-width: 0;
+  margin: 0;
+  padding: 8px 12px 12px;
+  border: 1px solid var(--mcp-ink);
+}
+
+.toolbox-page .toolbox-role-picker[hidden] { display: none; }
+
+.toolbox-page .toolbox-role-picker legend {
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.toolbox-page .toolbox-role-list {
+  max-height: 208px;
+  margin-bottom: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.toolbox-page .toolbox-role-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--mcp-line);
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.toolbox-page .toolbox-role-option input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--mcp-ink);
+}
+
+.toolbox-page .toolbox-role-option span { min-width: 0; }
+
+.toolbox-page .toolbox-role-option.is-missing { color: var(--mcp-muted); }
+
+.toolbox-page .toolbox-key-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toolbox-page :is(#toolboxTavilyHelper, #toolboxLuckinHelper, #toolboxAmapHelper) {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  color: var(--mcp-ink);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.toolbox-page :is(#toolboxTavilyHelper, #toolboxLuckinHelper, #toolboxAmapHelper) .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.toolbox-page .modal-footer {
+  display: flex;
+  flex-shrink: 0;
+  gap: 12px;
+  padding: 16px 20px 20px;
+  border-top: 2px solid var(--mcp-ink);
+}
+
+.toolbox-page .btn-modal {
+  flex: 1;
+  min-width: 0;
+}
+
+.toolbox-page .switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.toolbox-page .switch-container > span {
+  color: var(--mcp-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.toolbox-page .toggle-switch {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 50px;
+  height: 44px;
+}
+
+.toolbox-page .toggle-switch input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toolbox-page .slider {
+  position: absolute;
+  inset: 8px 0;
+  border: 2px solid var(--mcp-ink);
+  background: var(--mcp-paper);
+  pointer-events: none;
+}
+
+.toolbox-page .slider::before {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  background: var(--mcp-ink);
+  content: "";
+}
+
+.toolbox-page input:checked + .slider { background: var(--mcp-ink); }
+
+.toolbox-page input:checked + .slider::before {
+  transform: translateX(22px);
+  background: var(--mcp-paper);
+}
+
+.toolbox-page :is(button, a, select, summary, .tool-item, .toolbox-role-option input):focus-visible,
+.toolbox-page input:focus-visible + .slider,
+.mcp-approval-actions button:focus-visible {
+  outline: 2px dashed var(--mcp-ink);
+  outline-offset: 5px;
+}
+
+.toolbox-page :is(button, input, select):disabled,
+.toolbox-page input:disabled + .slider {
+  opacity: 0.45;
+  cursor: wait;
+}
+
+.toolbox-page button:active:not(:disabled),
+.mcp-approval-actions button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.mcp-approval-modal { z-index: 10050; }
+
+.mcp-approval-card {
+  max-width: 520px;
+  gap: 12px;
+  padding: 20px;
+}
+
+.mcp-approval-card h3 {
+  flex-shrink: 0;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--mcp-ink);
+  font-size: 18px;
+}
+
+.mcp-approval-summary {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.mcp-approval-endpoint {
+  color: var(--mcp-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mcp-approval-label {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mcp-approval-arguments {
+  min-height: 48px;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px dashed var(--mcp-ink);
+  border-radius: 0;
+  background: #f5f5f5;
+  color: inherit;
+  font: 12px/1.7 var(--mcp-font);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.mcp-approval-actions {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 4px 4px 4px 0;
+}
+
+.mcp-approval-actions button { min-width: 104px; }
+
+@media (hover: hover) {
+  .toolbox-page .tool-item:hover { background: #f5f5f5; }
+
+  .toolbox-page button:hover:not(:disabled),
+  .mcp-approval-actions button:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+@media (min-width: 560px) {
+  .toolbox-page {
+    padding: 32px;
+    background: #f5f5f5;
+  }
+
+  .toolbox-page .container {
+    max-height: 840px;
+    border: 2px solid var(--mcp-ink);
+    box-shadow: 8px 8px 0 var(--mcp-ink);
+  }
+}
+
+@media (max-width: 359px), (max-height: 500px) {
+  .toolbox-page .header { padding: 16px; }
+  .toolbox-page .toolbar { padding: 16px 16px 20px; }
+
+  .toolbox-page .toolbox-list-heading {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .toolbox-page .list-container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .toolbox-page :is(.modal-header, .modal-body, .modal-footer),
+  .mcp-approval-card {
+    padding: 12px;
+  }
+
+  .mcp-approval-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+  }
+}

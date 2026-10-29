@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>FG手机</title>
+
+<!-- 邮局应用使用的铅笔风字体，页面其余部分不受影响 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json?v=20260907-cat">
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=20260907-cat" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=20260907-cat">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=20260907-cat">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="桌面">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+
+<!-- 外部样式 -->
+<link rel="stylesheet" href="css/core.css?v=7">
+<link rel="stylesheet" href="css/widgets.css?v=5">
+<link rel="stylesheet" href="css/page2.css">
+<link rel="stylesheet" href="css/settings.css?v=4">
+<link rel="stylesheet" href="css/appearance.css">
+<link rel="stylesheet" href="css/chat.css?v=213">
+<link rel="stylesheet" href="css/chat-anonymous.css">
+<link rel="stylesheet" href="css/forum.css?v=4">
+<link rel="stylesheet" href="css/weibo.css?v=13">
+<link rel="stylesheet" href="css/night-radio.css?v=3">
+<link rel="stylesheet" href="css/dating.css?v=11">
+<link rel="stylesheet" href="css/check-in.css?v=15">
+<link rel="stylesheet" href="css/couple-space.css?v=27">
+<link rel="stylesheet" href="css/novel.css?v=84">
+<link rel="stylesheet" href="css/games.css?v=2">
+<link rel="stylesheet" href="css/werewolf.css?v=4">
+<link rel="stylesheet" href="css/music.css?v=27">
+    <link rel="stylesheet" href="css/mahjong.css?v=16">
+<link rel="stylesheet" href="css/phone-check.css?v=15">
+<link rel="stylesheet" href="css/shop.css?v=20261002-shop-gift2">
+<link rel="stylesheet" href="css/comic-theme.css?v=7">
+<link rel="stylesheet" href="css/default-clean.css?v=2">
+<link rel="stylesheet" href="css/toolbox.css?v=20261003-amap1">
+<link rel="stylesheet" href="css/post-office.css?v=20260929-letters3-postal-letter-reply">
+
+</head>
+<body>
+<script>
+(function(){
+  window.__fgEarlyErrorQueue = window.__fgEarlyErrorQueue || [];
+  if (window.__fgEarlyErrorBound) return;
+  window.__fgEarlyErrorBound = true;
+
+  function pushEarlyError(kind, data) {
+    if (window.__fgRuntimeErrorReady) return;
+    data = data || {};
+    data.kind = kind;
+    data.time = Date.now();
+    window.__fgEarlyErrorQueue.push(data);
+  }
+
+  window.addEventListener('error', function(event) {
+    if (!event) return;
+    var target = event.target || event.srcElement;
+    if (target && target !== window) {
+      var tag = (target.tagName || '').toLowerCase();
+      if (tag !== 'script' && tag !== 'link') return;
+      if (tag === 'link' && String(target.rel || '').toLowerCase().indexOf('stylesheet') < 0) return;
+      pushEarlyError('resource', {
+        message: tag + ' \u52a0\u8f7d\u5931\u8d25',
+        filename: target.src || target.href || '',
+        lineno: '',
+        colno: '',
+        stack: ''
+      });
+      return;
+    }
+    pushEarlyError('error', {
+      message: event.message || '\u8fd0\u884c\u65f6\u5f02\u5e38',
+      filename: event.filename || '',
+      lineno: event.lineno || '',
+      colno: event.colno || '',
+      stack: event.error && event.error.stack ? event.error.stack : ''
+    });
+  }, true);
+
+  window.addEventListener('unhandledrejection', function(event) {
+    var reason = event ? event.reason : null;
+    pushEarlyError('unhandledrejection', {
+      message: reason && reason.message ? reason.message : String(reason || '\u672a\u5904\u7406 Promise \u5f02\u5e38'),
+      filename: '',
+      lineno: '',
+      colno: '',
+      stack: reason && reason.stack ? reason.stack : ''
+    });
+  }, true);
+})();
+(function(){
+  try {
+    var t = localStorage.getItem('_theme');
+    var d = localStorage.getItem('_dark');
+    if (t && t !== 'default') document.body.classList.add('theme-' + t);
+    if (d === '1') document.body.classList.add('dark-mode');
+    document.body.classList.add('theme-ready');
+  } catch(e){
+    document.body.classList.add('theme-ready');
+  }
+})();
+</script>
+
+<div class="notification" id="notification"></div>
+<div class="chat-toast-notification" id="chatToastNotification" onclick="onChatToastClick()" role="button" tabindex="0" aria-live="polite">
+  <div class="chat-toast-avatar" id="chatToastAvatar"></div>
+  <div class="chat-toast-body">
+    <div class="chat-toast-name" id="chatToastName"></div>
+    <div class="chat-toast-preview" id="chatToastPreview"></div>
+  </div>
+  <div class="chat-toast-close" id="chatToastClose" onclick="dismissChatToast(event)" aria-label="关闭通知">&times;</div>
+</div>
+
+<!-- 头像上传弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="avatarModal">
+  <div class="upload-panel">
+    <h3>设置头像</h3>
+    <input type="text" class="upload-url-input" id="avatarUrlInput" placeholder="输入图片URL...">
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('avatarModal')">取消</button>
+      <button class="btn-primary" onclick="applyAvatarUrl()">确认URL</button>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:11px;">— 或 —</div>
+    <div class="upload-btn-row">
+      <label for="avatarFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input" id="avatarFileInput" onchange="handleAvatarFile(event)">
+
+<div class="upload-modal keyboard-safe-modal" id="datetimePhotoModal">
+  <div class="upload-panel">
+    <h3>时间小组件图片</h3>
+    <input type="text" class="upload-url-input" id="datetimePhotoUrlInput" placeholder="输入图片URL...">
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('datetimePhotoModal')">取消</button>
+      <button class="btn-primary" onclick="applyDatetimePhotoUrl()">确认URL</button>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:11px;">— 或 —</div>
+    <div class="upload-btn-row">
+      <label for="datetimePhotoFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input" id="datetimePhotoFileInput" onchange="handleDatetimePhotoFile(event)">
+
+<!-- 拍立得上传弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="polaroidModal">
+  <div class="upload-panel">
+    <h3>设置拍立得照片</h3>
+    <input type="text" class="upload-url-input" id="polaroidUrlInput" placeholder="输入图片URL...">
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('polaroidModal')">取消</button>
+      <button class="btn-primary" onclick="applyPolaroidUrl()">确认URL</button>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:11px;">— 或 —</div>
+    <div class="upload-btn-row">
+      <label for="polaroidFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input" id="polaroidFileInput" onchange="handlePolaroidFile(event)">
+
+<!-- 唱片图片上传弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="vinylModal">
+  <div class="upload-panel">
+    <h3>设置唱片图片</h3>
+    <input type="text" class="upload-url-input" id="vinylUrlInput" placeholder="输入图片URL...">
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('vinylModal')">取消</button>
+      <button class="btn-primary" onclick="applyVinylUrl()">确认URL</button>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:11px;">— 或 —</div>
+    <div class="upload-btn-row">
+      <label for="vinylFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input" id="vinylFileInput" onchange="handleVinylFile(event)">
+
+<!-- 三图相框上传弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="photoFrameModal">
+  <div class="upload-panel">
+    <h3>设置相框图片</h3>
+    <input type="text" class="upload-url-input" id="photoFrameUrlInput" placeholder="输入图片URL...">
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('photoFrameModal')">取消</button>
+      <button class="btn-primary" onclick="applyPhotoFrameUrl()">确认URL</button>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:11px;">— 或 —</div>
+    <div class="upload-btn-row">
+      <label for="photoFrameFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input" id="photoFrameFileInput" onchange="handlePhotoFrameFile(event)">
+
+<!-- 画廊图片上传弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="galleryModal">
+  <div class="upload-panel">
+    <h3>设置图片</h3>
+    <input type="text" class="upload-url-input" id="galleryUrlInput" placeholder="输入图片URL...">
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('galleryModal')">取消</button>
+      <button class="btn-primary" onclick="applyGalleryUrl()">确认URL</button>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:11px;">— 或 —</div>
+    <div class="upload-btn-row">
+      <label for="galleryFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input" id="galleryFileInput" onchange="handleGalleryFile(event)">
+
+<!-- 第二页唱片小组件上传弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="p2RecordModal">
+  <div class="upload-panel p2-record-panel" style="max-width:390px;">
+    <h3>设置唱片小组件</h3>
+    <div class="p2-record-modal-body">
+      <div class="p2-record-modal-preview">
+        <div class="p2-record-modal-cover">
+          <span id="p2RecordCoverPreviewText">暂无长方形图片</span>
+          <img id="p2RecordCoverPreviewImg" src="" alt="" style="display:none;">
+        </div>
+        <div class="p2-record-modal-disc">
+          <span id="p2RecordLabelPreviewText">暂无唱片图片</span>
+          <img id="p2RecordLabelPreviewImg" src="" alt="" style="display:none;">
+        </div>
+      </div>
+      <div class="media-bg-section">
+        <label>长方形图片</label>
+        <input type="text" class="upload-url-input" id="p2RecordCoverUrlInput" placeholder="输入图片URL...">
+        <div class="upload-btn-row">
+          <label for="p2RecordCoverFileInput" class="btn-secondary p2-record-local-upload-btn">本地上传</label>
+          <button type="button" class="btn-primary" onclick="applyP2RecordCoverUrl()">确认URL</button>
+        </div>
+      </div>
+      <div class="media-bg-section">
+        <label>唱片图片</label>
+        <input type="text" class="upload-url-input" id="p2RecordLabelUrlInput" placeholder="输入图片URL...">
+        <div class="upload-btn-row">
+          <label for="p2RecordLabelFileInput" class="btn-secondary p2-record-local-upload-btn">本地上传</label>
+          <button type="button" class="btn-primary" onclick="applyP2RecordLabelUrl()">确认URL</button>
+        </div>
+      </div>
+    </div>
+    <div class="upload-btn-row" style="margin-top:4px;">
+      <button type="button" class="btn-secondary" onclick="closeModal('p2RecordModal')">关闭</button>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input mobile-image-input" id="p2RecordCoverFileInput" onchange="handleP2RecordCoverFile(event)">
+<input type="file" accept="image/*" class="hidden-input mobile-image-input" id="p2RecordLabelFileInput" onchange="handleP2RecordLabelFile(event)">
+
+<!-- 小票打印机设置弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="receiptPrinterModal">
+  <div class="upload-panel receipt-printer-panel" style="max-width:380px;">
+    <h3>小票打印机</h3>
+    <div class="receipt-printer-modal-body">
+      <div class="receipt-modal-preview" id="receiptModalPreview">
+        <span id="receiptModalPreviewText">暂无票根图片</span>
+        <img id="receiptModalPreviewImg" src="" alt="" style="display:none;">
+      </div>
+      <div class="media-bg-section">
+        <label>票根图片</label>
+        <input type="text" class="upload-url-input" id="receiptTicketUrlInput" placeholder="输入图片URL...">
+        <div class="upload-btn-row">
+          <button type="button" class="btn-secondary receipt-local-upload-btn" onclick="triggerReceiptTicketUpload()">本地上传</button>
+          <button type="button" class="btn-primary" onclick="applyReceiptTicketUrl()">确认URL</button>
+        </div>
+      </div>
+    </div>
+    <div class="upload-btn-row" style="margin-top:4px;">
+      <button type="button" class="btn-secondary" onclick="closeModal('receiptPrinterModal')">关闭</button>
+    </div>
+  </div>
+</div>
+<input type="file" accept="image/*" class="hidden-input mobile-image-input" id="receiptTicketFileInput" onchange="handleReceiptTicketFile(event)">
+
+<!-- 小组件库弹窗 -->
+<div class="upload-modal" id="widgetLibraryModal">
+  <div class="upload-panel" style="max-width:400px;max-height:80vh;overflow-y:auto;">
+    <h3>小组件库</h3>
+    <div class="widget-library-desc" style="text-align:center;color:var(--text3);font-size:11px;margin:-8px 0 4px;">点击可将小组件添加回桌面</div>
+    <div class="widget-library-list" id="widgetLibraryList"></div>
+    <div class="upload-btn-row">
+      <button class="btn-secondary" type="button" onclick="closeModal('widgetLibraryModal')">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主屏幕 ========== -->
+<div class="pages-wrapper">
+<div class="pages-track" id="pagesTrack">
+
+<!-- ===== 第一页 ===== -->
+<div class="page" id="page1">
+
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <div class="battery-widget">
+      <span id="batteryPercent">--</span>
+      <span style="font-size:11px">Battery</span>
+      <div class="battery-icon">
+        <div class="battery-level" id="batteryLevel" style="width:0%"></div>
+      </div>
+      <span style="font-size:11px;opacity:0.5">✓ ♪</span>
+    </div>
+    <div class="theme-toggle" id="themeToggle" title="切换深色模式">☀</div>
+  </div>
+
+  <!-- 日期时间组件 -->
+  <div class="datetime-widget">
+    <div class="datetime-main">
+    <div class="avatar-wrap" id="avatarWrap" onclick="openModal('avatarModal')" title="点击更换头像">
+      <span class="avatar-placeholder" id="avatarPlaceholder">👤</span>
+      <img id="avatarImg" src="" alt="" style="display:none">
+      <div class="avatar-hint">✏</div>
+    </div>
+    <div class="datetime-info">
+      <input type="text" class="greeting-input" id="greetingInput" value="Hello, my new day!" maxlength="40">
+      <div class="date-text" id="dateText"></div>
+    </div>
+    <div class="datetime-right">
+      <div class="time-display" id="timeDisplay">00:00</div>
+      <div class="location-text">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <input type="text" class="location-input" id="locationInput" value="北京" maxlength="10" placeholder="地点">
+      </div>
+    </div>
+    </div>
+    <div class="datetime-photo-row">
+      <button class="datetime-photo-slot" type="button" onclick="openDatetimePhotoUpload(0)">
+        <span class="datetime-photo-placeholder" id="datetimePhotoPh0">点击上传</span>
+        <img id="datetimePhotoImg0" src="" alt="" style="display:none">
+      </button>
+      <button class="datetime-photo-slot" type="button" onclick="openDatetimePhotoUpload(1)">
+        <span class="datetime-photo-placeholder" id="datetimePhotoPh1">点击上传</span>
+        <img id="datetimePhotoImg1" src="" alt="" style="display:none">
+      </button>
+      <button class="datetime-photo-slot" type="button" onclick="openDatetimePhotoUpload(2)">
+        <span class="datetime-photo-placeholder" id="datetimePhotoPh2">点击上传</span>
+        <img id="datetimePhotoImg2" src="" alt="" style="display:none">
+      </button>
+    </div>
+  </div>
+  <div class="widget-label">时间小组件</div>
+
+  <!-- 主内容区 -->
+  <div class="main-area">
+
+    <div class="polaroid" data-widget-cols="2" data-widget-rows="2" onclick="openModal('polaroidModal')">
+      <div class="polaroid-tape"></div>
+      <div class="polaroid-photo" id="polaroidPhoto">
+        <div class="polaroid-placeholder" id="polaroidPlaceholder">
+          <span>📷</span>
+          <em>点击上传照片</em>
+        </div>
+        <img id="polaroidImg" src="" alt="" style="display:none; width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="polaroid-caption"><input type="text" class="polaroid-caption-input" id="polaroidCaption" value="memories ✏" maxlength="20" placeholder="写点什么吧"></div>
+    </div>
+
+    <div class="apps-2x2" data-widget-cols="2" data-widget-rows="2">
+      <div class="glass-app" onclick="openChat()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="chat-home-badge" id="chatHomeBadge"></span></div>
+        <span class="glass-app-label">Chat</span>
+      </div>
+      <div class="glass-app" onclick="openForumApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="13" y2="14"/></svg></div>
+        <span class="glass-app-label">论坛</span>
+      </div>
+      <div class="glass-app" onclick="openWeiboApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <span class="glass-app-label">Weibo</span>
+      </div>
+      <div class="glass-app" onclick="openGamesApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="7" rx="2"/><path d="M6 14H4a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h0"/><path d="M18 14h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h0"/><line x1="9" y1="8" x2="9" y2="11"/><line x1="15" y1="8" x2="15" y2="11"/><path d="M9 8h6"/></svg></div>
+        <span class="glass-app-label">游戏</span>
+      </div>
+    </div>
+
+    <div class="glass-app" onclick="openNovelApp()">
+      <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <span class="glass-app-label">小说</span>
+    </div>
+    <div class="glass-app" onclick="openPhoneCheckApp()">
+      <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+      <span class="glass-app-label">查手机</span>
+    </div>
+
+    <div class="silver-record-widget" data-drag-id="w-text-bubble-c0" data-widget-cols="2" data-widget-rows="2">
+      <div class="record-upload-hit" onclick="openModal('vinylModal')" title="更换唱片图片">
+        <div class="record-disc">
+          <div class="record-label">
+            <div class="record-placeholder" id="vinylLabel">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>上传图片</span>
+            </div>
+            <img class="record-label-img" id="vinylImg" src="" alt="" style="display:none">
+          </div>
+          <div class="record-hole"></div>
+        </div>
+        <div class="record-tonearm" aria-hidden="true">
+          <div class="record-pivot"></div>
+          <div class="record-arm-line"></div>
+          <div class="record-needle"></div>
+        </div>
+      </div>
+      <input type="text" class="record-title-input" id="vinylText" value="自由编辑" maxlength="24" placeholder="自由编辑">
+    </div>
+
+    <div class="glass-app" onclick="openCoupleSpaceApp()">
+      <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <span class="glass-app-label">情侣空间</span>
+    </div>
+    <div class="glass-app" onclick="openShopApp()">
+      <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+      <span class="glass-app-label">购物</span>
+    </div>
+
+  </div>
+</div><!-- /page1 -->
+
+<!-- ===== 第二页 ===== -->
+<div class="page" id="page2">
+
+  <!-- 顶部图片大气泡 -->
+  <div class="photo-bubble">
+    <div class="gallery-container">
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-slide" onclick="openGalleryUpload(0)">
+          <div class="gallery-slide-placeholder" id="galleryPh0"><span>📷</span><em>点击上传</em></div>
+          <img id="galleryImg0" src="" alt="">
+        </div>
+        <div class="gallery-slide" onclick="openGalleryUpload(1)">
+          <div class="gallery-slide-placeholder" id="galleryPh1"><span>📷</span><em>点击上传</em></div>
+          <img id="galleryImg1" src="" alt="">
+        </div>
+        <div class="gallery-slide" onclick="openGalleryUpload(2)">
+          <div class="gallery-slide-placeholder" id="galleryPh2"><span>📷</span><em>点击上传</em></div>
+          <img id="galleryImg2" src="" alt="">
+        </div>
+      </div>
+      <div class="gallery-dots">
+        <div class="gallery-dot active" onclick="goGallery(0)"></div>
+        <div class="gallery-dot" onclick="goGallery(1)"></div>
+        <div class="gallery-dot" onclick="goGallery(2)"></div>
+      </div>
+    </div>
+    <div class="social-bar">
+      <input type="text" class="social-text-input" id="socialTextInput" value="today is a good day ~" maxlength="30" placeholder="写点什么吧">
+      <div class="social-icons-group">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2-main">
+
+    <div class="apps-2x2" data-widget-cols="2" data-widget-rows="2">
+      <div class="glass-app" onclick="openMusicApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <span class="glass-app-label">音乐</span>
+      </div>
+      <div class="glass-app" onclick="openDatingApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <span class="glass-app-label">约会</span>
+      </div>
+      <div class="glass-app" onclick="openCheckInApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8"/><path d="M8 13h5"/><path d="M17 17l3 3"/><circle cx="16" cy="16" r="2.5"/></svg></div>
+        <span class="glass-app-label">查岗</span>
+      </div>
+      <div class="glass-app" onclick="openNightRadioApp()">
+        <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1A10 10 0 0 1 19.1 4.9"/><path d="M7.8 16.2a6 6 0 0 1 8.4-8.4"/><circle cx="12" cy="12" r="2.2"/><path d="M12 14.2v6.3"/><path d="M8.5 20.5h7"/></svg></div>
+        <span class="glass-app-label">深夜电台</span>
+      </div>
+    </div>
+
+    <div class="p2-record-widget" data-widget-cols="2" data-widget-rows="2" data-drag-id="w-p2-record-widget-c3" id="p2RecordWidget" onclick="openP2RecordModal()">
+        <div class="p2-record-sleeve" title="点击上传长方形图片">
+          <div class="p2-record-cover-placeholder" id="p2RecordCoverPlaceholder">
+            <span>封面</span>
+            <em>点击上传</em>
+          </div>
+          <img class="p2-record-cover-img" id="p2RecordCoverImg" src="" alt="">
+        </div>
+        <div class="p2-record-disc-wrap" title="点击上传唱片图片">
+          <div class="p2-record-disc">
+            <div class="p2-record-label">
+              <div class="p2-record-label-placeholder" id="p2RecordLabelPlaceholder">
+                <span>唱片</span>
+              </div>
+              <img class="p2-record-label-img" id="p2RecordLabelImg" src="" alt="">
+            </div>
+            <div class="p2-record-hole"></div>
+          </div>
+        </div>
+        <div class="p2-record-note" aria-hidden="true">♪</div>
+        <div class="p2-record-star p2-record-star-a" aria-hidden="true">★</div>
+        <div class="p2-record-star p2-record-star-b" aria-hidden="true">★</div>
+    </div>
+
+    <div class="receipt-printer-widget" data-widget-cols="2" data-widget-rows="2" data-drag-id="w-schedule-widget-c3" id="receiptPrinterWidget" onclick="openReceiptPrinterModal()">
+        <div class="receipt-printer-overlay"></div>
+        <div class="printer-body">
+          <div class="printer-slot"></div>
+        </div>
+        <div class="receipt-paper" id="receiptPaper">
+          <div class="receipt-ticket-frame">
+            <div class="receipt-ticket-placeholder" id="receiptTicketPlaceholder">
+              <span>票根</span>
+              <em>点击上传</em>
+            </div>
+            <img class="receipt-ticket-image" id="receiptTicketImg" src="" alt="">
+          </div>
+          <div class="receipt-caption">票根打印中...</div>
+          <div class="receipt-ornament">+◇—— ☆ ——◇+</div>
+          <div class="receipt-tear" aria-hidden="true"></div>
+        </div>
+      </div>
+
+    <div class="glass-app" data-drag-id="app-漂流瓶-c3" onclick="openPostOfficeApp()">
+      <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/><path d="M8 19v2h8v-2"/></svg></div>
+      <span class="glass-app-label">邮局</span>
+    </div>
+    <div class="glass-app" onclick="openToolboxApp()">
+      <div class="glass-app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6V4h6v2"/><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 11h18"/><path d="M10 11v2h4v-2"/></svg></div>
+      <span class="glass-app-label">工具箱</span>
+    </div>
+
+    <div class="text-bubble" data-widget-cols="2">
+      <textarea class="bubble-textarea" id="p2BubbleText" placeholder="写点什么吧..."></textarea>
+    </div>
+
+  </div>
+</div><!-- /page2 -->
+
+</div><!-- /pages-track -->
+
+<!-- 页面指示器 -->
+<div class="page-dots" id="pageDots">
+  <div class="page-dot active"></div>
+  <div class="page-dot"></div>
+</div>
+
+<!-- Dock -->
+<div class="dock">
+  <div class="glass-app" onclick="openWorldBook()">
+    <div class="glass-app-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="13" y2="11"/></svg></div>
+    <span class="glass-app-label">世界书</span>
+  </div>
+  <div class="glass-app" onclick="openRegex()">
+    <div class="glass-app-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg></div>
+    <span class="glass-app-label">正则</span>
+  </div>
+  <div class="glass-app" onclick="openSettings()">
+    <div class="glass-app-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+    <span class="glass-app-label">设置</span>
+  </div>
+  <div class="glass-app" onclick="openAppearance()">
+    <div class="glass-app-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div>
+    <span class="glass-app-label">外观设置</span>
+  </div>
+</div>
+
+</div><!-- /pages-wrapper -->
+
+<!-- ========== 设置页面 ========== -->
+<div class="settings-page" id="settingsPage">
+  <div class="settings-header">
+    <div class="settings-header-inner">
+      <div class="settings-back" onclick="closeSettings()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="settings-title">设置</div>
+    </div>
+  </div>
+  <div class="settings-body">
+
+    <div class="settings-group">
+      <div class="settings-item" onclick="openApiSettings()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="settings-item-label">API 设置</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="openImageGenSettings()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <span class="settings-item-label">图片配置</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="openVoiceSettings()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <span class="settings-item-label">语音配置</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="openDataManagePage()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <span class="settings-item-label">数据管理</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="openSoundSettings()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </div>
+        <span class="settings-item-label">声音与音效</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="openFontSettings()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        </div>
+        <span class="settings-item-label">字体设置</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-item">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <span class="settings-item-label">低性能模式</span>
+        <div class="settings-toggle" id="toggleLowPerf" onclick="toggleLowPerformance()"></div>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <span class="settings-item-label">后台消息推送</span>
+        <div class="settings-toggle" id="togglePush" role="switch" aria-label="后台消息推送" aria-checked="false" tabindex="0" onclick="toggleSetting('togglePush')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSetting('togglePush')}"></div>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <span class="settings-item-label">悬浮球</span>
+        <div class="settings-toggle" id="toggleFloat" role="switch" aria-label="悬浮球" aria-checked="false" tabindex="0" onclick="toggleFloatBall()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFloatBall()}"></div>
+      </div>
+      <div class="settings-item location-setting-item">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="settings-item-label-group">
+          <span class="settings-item-label">获取当前位置</span>
+          <span class="settings-item-desc" id="locationSettingStatus" aria-live="polite">已关闭</span>
+        </div>
+        <div class="settings-toggle" id="toggleLocation" role="switch" aria-label="获取当前位置" aria-checked="false" tabindex="0" onclick="toggleCurrentLocation(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCurrentLocation(event)}"></div>
+      </div>
+      <div class="settings-item float-icon-settings" id="floatIconSettings" style="display:none;">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <div class="float-icon-label">
+          <span class="settings-item-label">悬浮球图标更换</span>
+          <span class="float-icon-preview" id="floatIconPreview" aria-label="悬浮球图标预览"></span>
+        </div>
+        <div class="float-icon-actions">
+          <button type="button" class="float-icon-action-btn" onclick="document.getElementById('floatIconUploadInput').click()">上传</button>
+          <button type="button" class="float-icon-action-btn" onclick="openFloatIconUrlPrompt()">图片URL</button>
+          <button type="button" class="float-icon-action-btn" onclick="resetFloatBallIcon()">重置</button>
+        </div>
+        <input type="file" id="floatIconUploadInput" accept="image/*" style="display:none;" onchange="handleFloatIconUpload(event)">
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        </div>
+        <span class="settings-item-label">全屏模式</span>
+        <div class="settings-toggle" id="toggleFullscreen" onclick="toggleFullscreenMode()"></div>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-item" onclick="openBackendLog()">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span class="settings-item-label">后台日志</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="showNotification('关于手机 - 占位功能')">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <span class="settings-item-label">关于手机</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="settings-item" onclick="openModal('disclaimerModal')">
+        <div class="settings-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </div>
+        <span class="settings-item-label">免责声明</span>
+        <span class="settings-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 数据管理页面容器（从 html/data-manage.html 动态加载） -->
+<div id="dmPageContainer"></div>
+
+<!-- settings-sub.html 动态加载 -->
+<div id="settingsSubContainer"></div>
+
+<!-- appearance-all.html 动态加载 -->
+<div id="appearanceAllContainer"></div>
+
+<!-- worldbook.html 动态加载 -->
+<div id="worldbookContainer"></div>
+
+<!-- regex.html 动态加载 -->
+<div id="regexContainer"></div>
+
+<!-- forum.html 动态加载 -->
+<div id="forumContainer"></div>
+
+<!-- weibo.html 动态加载 -->
+<div id="weiboContainer"></div>
+
+<!-- night-radio.html 动态加载 -->
+<div id="nightRadioContainer"></div>
+
+<!-- ========== 邮局主页面（与 Chat 一样随首页加载） ========== -->
+<div class="post-office-app" id="postOfficeAppPage" aria-hidden="true">
+<main class="post-container">
+
+        <!-- 顶部导航栏 (左边返回键，中间标题，右边收信箱图标按钮) -->
+        <header class="top-navbar">
+            <!-- 导航栏左侧：返回键 -->
+            <button class="nav-btn nav-back-btn" id="backBtn" aria-label="返回上一页" title="返回">
+                <svg class="nav-icon-svg" viewBox="0 0 24 24">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+
+            <!-- 导航栏中间：标题 -->
+            <div class="nav-title">
+                <h1>慢递邮局</h1>
+                <span>PENCIL POST &bull; 07 STATION</span>
+            </div>
+
+            <!-- 导航栏右侧：收信箱图标按钮 (占位并记录留存信件) -->
+            <button class="nav-btn nav-inbox-btn" id="inboxBtn" aria-label="收信箱" title="查看收信箱">
+                <svg class="nav-icon-svg" viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span class="inbox-badge" id="inboxDot" aria-live="polite">0</span>
+            </button>
+        </header>
+
+        <!-- 中间展示区：工整精致铅笔细线条邮箱 -->
+        <section class="mailbox-stage">
+            <!-- 邮戳底纹 (端正平直) -->
+            <div class="postmark-bg">
+                <span class="mark-text">AIR MAIL</span>
+                <div class="mark-line"></div>
+                <div class="mark-line"></div>
+                <span class="mark-text">2026.POST</span>
+            </div>
+
+            <!-- 投信飞行演员 (发信动效元素) -->
+            <div class="fly-actor-envelope" id="flyActorEnvelope">
+                <span class="stamp-dot"></span>
+            </div>
+
+            <!-- 邮箱主体 -->
+            <div class="mailbox-art-wrapper" id="mailboxArt" title="点击摇动信旗或投信">
+                <!-- 细线规整矢量插画 -->
+                <svg class="mailbox-svg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- 细密铅笔排线素描阴影 Pattern -->
+                        <pattern id="pencilShading" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                            <line x1="0" y1="0" x2="0" y2="5" stroke="#2e3138" stroke-width="0.6" opacity="0.2" />
+                        </pattern>
+                        <!-- 柔和金属质感渐变 -->
+                        <linearGradient id="metalPencilGrad" x1="60" y1="40" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="45%" stop-color="#f6f6f4" />
+                            <stop offset="100%" stop-color="#eaeae6" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- 地面素描投影 (平正对称) -->
+                    <ellipse cx="130" cy="308" rx="66" ry="6" fill="url(#pencilShading)" opacity="0.6"/>
+                    <path d="M 64 308 L 196 308" stroke="#888d98" stroke-width="1" stroke-linecap="round"/>
+
+                    <!-- 底盘 (规整水平) -->
+                    <path d="M 106 302 L 115 276 L 145 276 L 154 302 Z" fill="#ebebe7" stroke="#545863" stroke-width="1" stroke-linejoin="round"/>
+
+                    <!-- 立柱主体 (铅笔细线条) -->
+                    <rect x="122" y="202" width="16" height="74" fill="#f4f4f1" stroke="#545863" stroke-width="1"/>
+                    <rect x="123" y="203" width="5" height="72" fill="url(#pencilShading)" opacity="0.4"/>
+                    <line x1="122" y1="226" x2="138" y2="226" stroke="#888d98" stroke-width="0.8"/>
+                    <line x1="122" y1="254" x2="138" y2="254" stroke="#888d98" stroke-width="0.8"/>
+
+                    <!-- 托盘垫块 (横平竖直) -->
+                    <rect x="100" y="198" width="60" height="5" rx="1" fill="#deded9" stroke="#545863" stroke-width="1"/>
+
+                    <!-- 邮箱主体桶身 (标准圆拱复古造型，线条精细工整) -->
+                    <path d="M 60 84
+                             C 60 38, 200 38, 200 84
+                             L 200 198
+                             L 60 198
+                             Z"
+                          fill="url(#metalPencilGrad)"
+                          stroke="#2e3138"
+                          stroke-width="1.2"
+                          stroke-linejoin="round"/>
+
+                    <!-- 侧面素描排线阴影 (暗部) -->
+                    <path d="M 168 84
+                             C 178 84, 198 72, 198 84
+                             L 198 198
+                             L 168 198
+                             Z"
+                          fill="url(#pencilShading)"
+                          opacity="0.5"/>
+
+                    <!-- 顶部圆弧高光细线 -->
+                    <path d="M 72 76 C 82 50, 178 50, 188 76" stroke="#888d98" stroke-width="0.8" stroke-linecap="round"/>
+
+                    <!-- 投信口护檐与狭缝 (MAIL SLOT) -->
+                    <g class="flap-cover" id="flapCover">
+                        <rect x="84" y="74" width="92" height="22" rx="3" fill="#ffffff" stroke="#545863" stroke-width="1"/>
+                        <circle cx="89" cy="85" r="1.3" fill="#545863"/>
+                        <circle cx="171" cy="85" r="1.3" fill="#545863"/>
+                        <rect x="95" y="82" width="70" height="6" rx="2" fill="#2e3138"/>
+                        <text x="130" y="79" font-family="'Caveat', sans-serif" font-size="9" fill="#888d98" text-anchor="middle" letter-spacing="1">POST</text>
+                    </g>
+
+                    <!-- 取信门面板 (规整矩形细线) -->
+                    <rect x="78" y="110" width="104" height="78" rx="5" fill="#fafaf8" stroke="#545863" stroke-width="1"/>
+                    <rect x="83" y="115" width="94" height="68" rx="3" fill="none" stroke="#cbd0d8" stroke-width="0.8"/>
+                    <circle cx="130" cy="144" r="4.5" fill="#ebebe7" stroke="#545863" stroke-width="0.9"/>
+                    <path d="M 129 144 L 131 144 L 132 150 L 128 150 Z" fill="#2e3138"/>
+
+                    <!-- 铭牌 -->
+                    <rect x="104" y="164" width="52" height="14" rx="2" fill="#f0ede7" stroke="#888d98" stroke-width="0.8"/>
+                    <text x="130" y="174" font-family="'Noto Serif SC', serif" font-size="7.5" fill="#2e3138" text-anchor="middle" letter-spacing="1">信件收集</text>
+
+                    <!-- 侧边信旗 (Signal Flag) -->
+                    <g class="flag-group" id="signalFlag" title="点击竖起/放下信旗">
+                        <circle cx="200" cy="115" r="3.5" fill="#deded8" stroke="#545863" stroke-width="1"/>
+                        <path d="M 200 115 L 200 62" stroke="#545863" stroke-width="1.3" stroke-linecap="round"/>
+                        <path d="M 201 62 L 227 62 L 222 74 L 227 86 L 201 86 Z"
+                              fill="var(--tint-post-red-faint)"
+                              stroke="#c05c59"
+                              stroke-width="1"
+                              stroke-linejoin="round"/>
+                        <line x1="204" y1="64" x2="222" y2="84" stroke="var(--tint-post-red)" stroke-width="0.7" opacity="0.6"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="status-whisper" id="statusWhisper">
+                <span>投递时光，静候回音</span>
+            </div>
+        </section>
+
+        <!-- 底部功能按键区：接收与发送两个细线条精致按钮 -->
+        <footer class="action-panel">
+            <!-- 接收按钮 -->
+            <button class="pencil-btn btn-receive" id="btnReceive" title="收取新来信件">
+                <svg class="btn-icon-svg" viewBox="0 0 24 24">
+                    <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>接收</span>
+            </button>
+
+            <!-- 发送按钮 -->
+            <button class="pencil-btn btn-send" id="btnSend" title="寄出一封信笺">
+                <svg class="btn-icon-svg" viewBox="0 0 24 24">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span>发送</span>
+            </button>
+        </footer>
+
+    </main>
+
+    <!-- 弹窗 A: 右上角【收信箱】弹窗 (可查看已留存信件列表) -->
+    <div class="pencil-modal-overlay" id="inboxModal">
+        <div class="pencil-modal-card">
+            <div class="modal-header">
+                <h3>
+                    <span>📬</span> 收信箱 · <span id="inboxCount">0 封</span>
+                </h3>
+                <button class="modal-close-btn" data-close="inboxModal">&times;</button>
+            </div>
+
+            <div id="inboxEmptyView" class="modal-empty-state" style="text-align: center; padding: 16px 8px;">
+                <div style="font-size: 28px; margin-bottom: 8px; opacity: 0.85;">🕊️</div>
+                <p style="font-size: 13px; color: var(--pencil-line-medium); line-height: 1.6;"><strong>暂无已归档信件</strong></p>
+                <p style="margin-top: 6px; font-size: 13px; color: var(--pencil-line-thin);">
+                    点击「接收 → 抽取一封信」，从已有私聊角色中抽取来信；成功收到的信会自动留存在此处。
+                </p>
+                <span style="display: inline-block; margin-top: 12px; font-size: 11px; color: var(--pencil-line-thin); border: 1px solid var(--pencil-line-ultra-thin); border-radius: 4px; padding: 2px 10px; background: var(--bg-paper-light);">[信箱抽屉 · 点击信件可放大看信]</span>
+            </div>
+
+            <div id="inboxListView" class="inbox-list" style="display: none;"></div>
+
+            <div class="modal-footer">
+                <button class="pencil-btn" style="height: 36px; padding: 0 18px; font-size: 13px;" data-close="inboxModal">
+                    知晓了
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹窗 B: 【接收】弹窗 (内置信封抽取、加载动画，并支持点击放大) -->
+    <div class="pencil-modal-overlay" id="receiveModal">
+        <div class="pencil-modal-card">
+            <div class="modal-header">
+                <h3>
+                    <span>📥</span> 抽取一封信
+                </h3>
+                <button class="modal-close-btn" data-close="receiveModal">&times;</button>
+            </div>
+
+            <!-- 核心：抽取信封加载动画层 (Loading Animation) -->
+            <div class="pencil-loading-layer" id="drawLoadingLayer" role="status" aria-live="polite">
+                <div class="sketch-loader-spinner">
+                    <svg class="loader-svg" viewBox="0 0 60 60">
+                        <circle class="loader-track" cx="30" cy="30" r="24" />
+                        <circle class="loader-head" cx="30" cy="30" r="24" />
+                    </svg>
+                    <div class="loader-center-emblem">✉</div>
+                </div>
+                <div class="loader-label">
+                    <span id="drawLoadingText">正在抽选私聊角色</span>
+                    <span class="dot-bounce">.</span>
+                    <span class="dot-bounce">.</span>
+                    <span class="dot-bounce">.</span>
+                </div>
+                <div class="sketch-progress-track">
+                    <div class="sketch-progress-bar" id="drawProgressBar"></div>
+                </div>
+            </div>
+
+            <!-- 抽取信封动效区 (点击信纸触发放大看信) -->
+            <div class="envelope-stage" id="drawEnvelopeStage">
+                <div class="envelope-interactive" id="envelopeInteractive">
+                    <!-- 抽出信纸 (可点击放大看信) -->
+                    <div class="env-letter-sheet" id="envLetterSheet" title="点击信纸可放大看信">
+                        <div class="sheet-stamp-mark">POST</div>
+                        <div class="sheet-sender" id="sheetSender"></div>
+                        <div class="sheet-body" id="sheetBody"></div>
+                        <div class="sheet-date" id="sheetDate"></div>
+                        <div class="sheet-zoom-tag">🔍 点击放大看信</div>
+                    </div>
+
+                    <!-- 封套正面口袋 -->
+                    <div class="env-pocket-cover">
+                        <svg viewBox="0 0 230 136" class="env-pocket-svg">
+                            <polygon points="0,0 115,76 0,136" fill="#f4f4f1" stroke="#545863" stroke-width="1"/>
+                            <polygon points="230,0 115,76 230,136" fill="#f7f7f5" stroke="#545863" stroke-width="1"/>
+                            <polygon points="0,136 115,66 230,136" fill="#fbfbfa" stroke="#545863" stroke-width="1"/>
+                        </svg>
+                    </div>
+
+                    <!-- 顶部封盖 (翻开动画) -->
+                    <div class="env-flap-element" id="envFlapElement">
+                        <svg viewBox="0 0 230 70" class="env-flap-svg">
+                            <polygon points="0,0 115,68 230,0" fill="#fafaf8" stroke="#545863" stroke-width="1"/>
+                            <circle cx="115" cy="54" r="3.5" fill="#c05c59" opacity="0.6"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="draw-guide-text" id="drawGuideText" aria-live="polite">还没有来信。点击下方按钮调用角色的会话 API（未配置时使用全局 API），抽取童年、现在或未来的信。</div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="pencil-btn btn-receive" id="fetchLetterAction" style="height: 36px; padding: 0 16px; font-size: 13px;">
+                    <svg class="btn-icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24">
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span id="fetchBtnText">抽取一封信</span>
+                </button>
+                <button class="pencil-btn" style="height: 36px; padding: 0 16px; font-size: 13px;" data-close="receiveModal">
+                    收起
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹窗 C: 【发送】信件撰写弹窗 (内置发信加载动画) -->
+    <div class="pencil-modal-overlay" id="sendModal">
+        <div class="pencil-modal-card">
+            <div class="modal-header">
+                <h3>
+                    <span>✍️</span> 撰写慢递信笺
+                </h3>
+                <button class="modal-close-btn" data-close="sendModal">&times;</button>
+            </div>
+
+            <!-- 核心：发信加载动画层 (Loading Animation) -->
+            <div class="pencil-loading-layer" id="sendLoadingLayer">
+                <div class="sketch-loader-spinner">
+                    <svg class="loader-svg" viewBox="0 0 60 60">
+                        <circle class="loader-track" cx="30" cy="30" r="24" />
+                        <circle class="loader-head" cx="30" cy="30" r="24" />
+                    </svg>
+                    <div class="loader-center-emblem">🕊</div>
+                </div>
+                <div class="loader-label">
+                    <span id="sendLoadingText">正在火漆封缄信件</span>
+                    <span class="dot-bounce">.</span>
+                    <span class="dot-bounce">.</span>
+                    <span class="dot-bounce">.</span>
+                </div>
+                <div class="sketch-progress-track">
+                    <div class="sketch-progress-bar" id="sendProgressBar"></div>
+                </div>
+            </div>
+
+            <!-- 写信表单内容 -->
+            <form class="letter-write-area" id="sendLetterForm" onsubmit="return false;">
+                <div>
+                    <label for="letterRecipientSelect" style="font-size: 12px; color: var(--pencil-line-medium); display: block; margin-bottom: 4px;">收件人角色：</label>
+                    <select class="sketch-input sketch-select" id="letterRecipientSelect" aria-describedby="letterRecipientHint">
+                        <option value="">正在读取私聊角色…</option>
+                    </select>
+                    <input type="hidden" id="letterTo" value="">
+                    <p class="letter-recipient-hint" id="letterRecipientHint">仅显示已经建立私聊的角色；寄出后会自动请求一次回信。</p>
+                </div>
+                <div>
+                    <label style="font-size: 12px; color: var(--pencil-line-medium); display: block; margin-bottom: 4px;">信笺内容：</label>
+                    <textarea class="sketch-textarea" id="letterContent" placeholder="在此处落笔写下你的问候与心事..."></textarea>
+                </div>
+                <p class="draw-guide-text">信件会保存为本地寄信存根；角色生成的回信会作为新信件放入收信箱，不会写入私聊。</p>
+            </form>
+
+            <div class="modal-footer" id="sendModalFooter">
+                <button class="pencil-btn" style="height: 36px; padding: 0 16px; font-size: 13px;" data-close="sendModal">
+                    取消
+                </button>
+                <button class="pencil-btn btn-send" id="submitSendBtn" style="height: 36px; padding: 0 18px; font-size: 13px;">
+                    <svg class="btn-icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <span>寄出并等待回信</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 弹窗 D: 【放大看信】全屏沉浸式信笺弹窗 ================= -->
+    <div class="pencil-modal-overlay" id="zoomLetterModal" style="z-index: 160;">
+        <div class="zoom-letter-container">
+            <div class="zoom-letter-paper">
+                <!-- 顶部信笺标识与邮票 -->
+                <div class="zoom-letter-header">
+                    <div class="zoom-post-badge">
+                        <span class="badge-sub">慢递邮政专用信笺</span>
+                        <span class="badge-id" id="zoomLetterSerial"></span>
+                    </div>
+                    <div class="zoom-header-right">
+                        <div class="zoom-postage-stamp">
+                            <span class="stamp-text">POST</span>
+                            <span class="stamp-val">80</span>
+                        </div>
+                        <button class="modal-close-btn" data-close="zoomLetterModal" title="关闭大图阅读">&times;</button>
+                    </div>
+                </div>
+
+                <!-- 放大正文内容 -->
+                <div class="zoom-letter-content">
+                    <div class="zoom-letter-greeting" id="zoomLetterRecipient"></div>
+                    <div class="zoom-letter-body" id="zoomLetterBody"></div>
+                    <div class="zoom-letter-sign-block">
+                        <div class="zoom-letter-sender" id="zoomLetterSender"></div>
+                        <div class="zoom-letter-date" id="zoomLetterDate"></div>
+                    </div>
+                </div>
+
+                <!-- 放大底部操作栏 -->
+                <div class="zoom-letter-footer">
+                    <div class="zoom-postmark-tag">慢递所 · 验证印讫</div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="pencil-btn btn-receive" id="saveLetterToInboxBtn" style="height: 36px; padding: 0 14px; font-size: 13px;">
+                            <span>📥 留存入信箱</span>
+                        </button>
+                        <button class="pencil-btn" style="height: 36px; padding: 0 14px; font-size: 13px;" data-close="zoomLetterModal">
+                            <span>收起信笺</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示气泡 Toast -->
+    <div class="toast-msg" id="toastMsg">提示文字</div>
+</div>
+
+<!-- toolbox.html 动态加载 -->
+<div id="toolboxContainer"></div>
+
+<!-- dating.html 动态加载 -->
+<div id="datingContainer"></div>
+
+<!-- couple-space.html 动态加载 -->
+<div id="coupleSpaceContainer"></div>
+
+<!-- novel.html 动态加载 -->
+<div id="novelContainer"></div>
+
+<!-- 游戏App容器 -->
+<div id="gamesContainer"></div>
+
+<!-- 音乐App容器 -->
+<div id="musicContainer"></div>
+
+<!-- 麻将App容器 -->
+<div id="mahjongContainer"></div>
+
+<!-- 狼人杀App容器 -->
+<div id="werewolfContainer"></div>
+
+<!-- ========== Chat 主页面 ========== -->
+<div class="chat-page" id="chatPage">
+  <div class="chat-nav">
+    <div class="chat-nav-inner">
+      <div class="chat-nav-back" onclick="closeChat()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-nav-title" id="chatNavTitle">消息</div>
+      <div class="chat-nav-actions" id="chatNavActions">
+        <div class="chat-nav-btn" onclick="showNewChatModal()" title="新建会话">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="chat-profile-btn" onclick="openChatSidebar()" title="个人中心">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-body">
+    <div class="chat-tab-panel active" id="chatTabMessages"></div>
+    <div class="chat-tab-panel" id="chatTabContacts"></div>
+    <div class="chat-tab-panel" id="chatTabMoments">
+      <div class="moments-bg-area" id="momentsBgArea" onclick="openMomentsBgUpload(event)">
+        <div class="moments-bg-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>点击更换封面</span>
+        </div>
+        <div class="moments-bg-profile">
+          <span class="moments-bg-nickname" id="momentsBgNickname">用户</span>
+          <div class="moments-bg-avatar" id="momentsBgAvatar">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="moments-feed" id="momentsFeedList"></div>
+    </div>
+    <div class="chat-tab-panel" id="chatTabAnon"></div>
+  </div>
+  <div class="chat-tab-bar">
+    <div class="chat-tab-item active" data-tab="messages" onclick="switchChatTab('messages')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span class="chat-tab-badge" id="chatTabMsgBadge"></span>
+      <span class="chat-tab-label">消息</span>
+    </div>
+    <div class="chat-tab-item" data-tab="contacts" onclick="switchChatTab('contacts')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+      <span class="chat-tab-label">联系人</span>
+    </div>
+    <div class="chat-tab-item" data-tab="moments" onclick="switchChatTab('moments')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="chat-tab-label">朋友圈</span>
+    </div>
+    <div class="chat-tab-item" data-tab="anon" onclick="switchChatTab('anon')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span class="chat-tab-label">匿名</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 新建联系人页面 ========== -->
+<div class="chat-sub-page" id="chatNewContactPage">
+  <div class="chat-nav">
+    <div class="chat-nav-inner">
+      <div class="chat-nav-back" onclick="closeNewContactPage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-nav-title" id="chatNewContactTitle">新建联系人</div>
+    </div>
+  </div>
+  <div class="chat-form-body">
+    <!-- 角色头像 + 基本信息 -->
+    <div class="chat-char-header">
+      <div class="chat-char-avatar-wrap polaroid-avatar" onclick="openChatAvatarUpload('contact',0)">
+        <div class="chat-char-avatar-inner">
+          <img id="chatContactAvatarImg" src="" alt="" style="display:none">
+          <span class="chat-char-avatar-ph" id="chatContactAvatarPh">+</span>
+        </div>
+        <div class="polaroid-avatar-label">角色头像</div>
+      </div>
+      <div class="chat-char-fields">
+        <input class="chat-field-input" id="chatContactName" placeholder="角色名字" maxlength="30">
+        <input class="chat-field-input" id="chatContactAge" placeholder="年龄" maxlength="10">
+        <input class="chat-field-input" id="chatContactIdentity" placeholder="身份" maxlength="30">
+      </div>
+    </div>
+
+    <!-- 角色人设 -->
+    <div class="chat-form-section">
+      <label class="chat-form-label">角色人设</label>
+      <textarea class="chat-form-textarea" id="chatContactSetting" placeholder="输入角色人设内容..."></textarea>
+    </div>
+
+    <!-- NPC列表 -->
+    <div class="chat-form-section">
+      <label class="chat-form-label">NPC人设</label>
+      <div class="chat-npc-list" id="chatNpcList"></div>
+      <button class="chat-add-npc-btn" onclick="addChatNpc()">+ 添加NPC</button>
+    </div>
+
+    <!-- 角色语言 -->
+    <div class="chat-form-section">
+      <label class="chat-form-label">角色语言 <span style="font-weight:400;font-size:11px;color:var(--text3);">仅线上聊天</span></label>
+      <select class="chat-form-select" id="chatContactLanguage">
+        <option value="普通话">普通话</option>
+        <option value="粤语">粤语</option>
+        <option value="English">English</option>
+        <option value="日本語">日本語</option>
+        <option value="한국어">한국어</option>
+        <option value="Français">Français</option>
+        <option value="Deutsch">Deutsch</option>
+        <option value="Español">Español</option>
+        <option value="Português">Português</option>
+        <option value="Italiano">Italiano</option>
+        <option value="Русский">Русский</option>
+        <option value="العربية">العربية</option>
+        <option value="ภาษาไทย">ภาษาไทย</option>
+        <option value="Tiếng Việt">Tiếng Việt</option>
+        <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+        <option value="Bahasa Melayu">Bahasa Melayu</option>
+        <option value="हिन्दी">हिन्दी</option>
+        <option value="Türkçe">Türkçe</option>
+        <option value="Nederlands">Nederlands</option>
+        <option value="Polski">Polski</option>
+      </select>
+    </div>
+
+    <!-- MiniMax音色ID -->
+    <div class="chat-form-section">
+      <label class="chat-form-label">MiniMax音色ID <span style="font-weight:400;font-size:11px;color:var(--text3);">绑定角色语音音色</span></label>
+      <input type="text" class="chat-form-input" id="chatContactVoiceId" placeholder="填入MiniMax音色ID，如 male-qn-qingse">
+    </div>
+
+    <!-- 开场白 -->
+    <div class="chat-form-section">
+      <div class="chat-form-label-row">
+        <label class="chat-form-label" for="chatContactOpening">开场白 <span id="chatContactOpeningHint" style="font-weight:400;font-size:11px;color:var(--text3);">每行一条气泡消息</span></label>
+        <label class="chat-form-switch">
+          <span>线下开场白</span>
+          <span class="cs-switch">
+            <input type="checkbox" id="chatContactOpeningOffline" onchange="updateContactOpeningModeUi()">
+            <span class="cs-switch-slider"></span>
+          </span>
+        </label>
+      </div>
+      <textarea class="chat-form-textarea" id="chatContactOpening" placeholder="每按一次回车键分隔一条开场白气泡消息..." style="min-height:60px;"></textarea>
+    </div>
+
+    <!-- 绑定世界书 -->
+    <div class="chat-form-section">
+      <label class="chat-form-label">绑定世界书分组</label>
+      <select class="chat-form-select" id="chatWbSelect">
+        <option value="">无</option>
+      </select>
+    </div>
+
+    <!-- 绑定正则 -->
+    <div class="chat-form-section">
+      <label class="chat-form-label">绑定正则分组</label>
+      <select class="chat-form-select" id="chatRgSelect">
+        <option value="">无</option>
+      </select>
+    </div>
+
+    <button class="chat-form-save" onclick="saveContact()">保存</button>
+  </div>
+</div>
+
+<!-- ========== 创建会话页面 ========== -->
+<div class="chat-sub-page" id="chatCreatePage">
+  <div class="chat-nav">
+    <div class="chat-nav-inner">
+      <div class="chat-nav-back" onclick="closeCreateChatPage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-nav-title" id="chatCreateTitle">创建会话</div>
+    </div>
+  </div>
+  <div class="chat-create-body" id="chatCreateBody"></div>
+</div>
+
+<!-- ========== 聊天会话页面 ========== -->
+<div class="chat-sub-page" id="chatConvPage">
+  <div class="chat-conv-nav" id="chatConvNav">
+    <div class="chat-conv-nav-inner">
+      <div class="chat-nav-back" onclick="closeChatConvPage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-conv-nav-title-wrap" id="chatConvNavTitleWrap">
+        <div class="chat-conv-nav-title" id="chatConvNavTitle">聊天</div>
+        <div class="chat-conv-nav-subtitle chat-online-status" id="chatConvNavStatus">在线</div>
+      </div>
+      <div class="chat-conv-nav-actions">
+        <div class="chat-nav-btn char-heart-btn" id="charHeartVoiceBtn" onclick="openCharHeartVoice()" title="角色心声">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="chat-nav-btn" id="chatModeBookBtn" onclick="switchToOfflineMode()" title="切换到线下剧情">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="chat-nav-btn" id="chatConvSettingsBtn" onclick="openChatConvSettings()" title="设置">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div class="chat-nav-btn chat-nav-search-btn" id="chatNavSearchBtn" onclick="openChatSearchPanel()" title="搜索聊天记录">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        </div>
+        <div class="chat-nav-more-wrap" id="chatNavMoreWrap">
+          <div class="chat-nav-btn chat-nav-more-btn" onclick="toggleChatNavMoreMenu(event)" title="更多">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+          </div>
+          <div class="chat-nav-more-menu" id="chatNavMoreMenu">
+            <button class="chat-nav-more-item" id="chatNavMoreHeartItem" type="button" onclick="onChatNavMoreAction('heart')">角色心声</button>
+            <button class="chat-nav-more-item" id="chatNavMorePhoneCheckItem" type="button" onclick="onChatNavMoreAction('phoneCheck')">查手机</button>
+            <button class="chat-nav-more-item" type="button" onclick="onChatNavMoreAction('offline')">线下剧情</button>
+            <button class="chat-nav-more-item" type="button" onclick="onChatNavMoreAction('settings')">聊天设置</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-messages-area" id="chatMessagesArea"></div>
+  <div class="chat-mcp-progress" id="chatMcpProgress" role="status" aria-live="polite" aria-atomic="false" aria-label="工具调用状态" hidden></div>
+  <div class="chat-quote-bar" id="chatQuoteBar"></div>
+  <div class="chat-input-plus-wrap" id="chatInputPlusWrap">
+  <div class="chat-input-bar" id="chatInputBar" style="position:relative;">
+    <div class="at-mention-panel" id="atMentionPanel"></div>
+    <div class="chat-input-plus-btn" id="chatPlusBtn" onclick="toggleChatPlusPanel()" title="更多">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="chatPlusBtnIcon"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </div>
+    <div class="chat-input-emoji-btn" onclick="toggleStickerPicker()" title="表情包">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea class="chat-input-field" id="chatInputField" placeholder="输入消息..." rows="1" oninput="onChatInputChange(); onAtMentionInput(this);" onkeydown="onChatInputKeydown(event)"></textarea>
+      <button class="chat-input-voice-btn" type="button" onclick="openVoiceInputModal()" title="语音消息" aria-label="发送语音消息">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </button>
+    </div>
+    <button class="chat-input-send-btn" id="chatSendBtn" type="button" onclick="sendChatMessage()" title="发送消息或请求角色回复" aria-label="发送消息或请求角色回复">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="chatSendBtnIcon"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+  <div class="chat-plus-panel" id="chatPlusPanel">
+    <div class="chat-plus-pages" id="chatPlusPages">
+      <div class="chat-plus-page">
+        <div class="chat-plus-grid">
+          <div class="chat-plus-item" onclick="openChatImageSendModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>图片</span>
+          </div>
+          <div class="chat-plus-item" onclick="startUserVoiceCall()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <span>语音通话</span>
+          </div>
+          <div class="chat-plus-item" onclick="startUserVideoCall()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+            <span>视频通话</span>
+          </div>
+          <div class="chat-plus-item" onclick="openLocationSendModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <span>位置</span>
+          </div>
+          <div class="chat-plus-item" onclick="openSendRedPacketModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="1" width="18" height="22" rx="3"/><line x1="3" y1="7" x2="21" y2="7"/><circle cx="12" cy="14" r="3"/></svg></div>
+            <span>红包</span>
+          </div>
+          <div class="chat-plus-item" onclick="openSendTransferModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <span>转账</span>
+          </div>
+          <div class="chat-plus-item" onclick="openSendGiftModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+            <span>礼物</span>
+          </div>
+          <div class="chat-plus-item" onclick="openSendDeliveryModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+            <span>外卖代付</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-plus-page">
+        <div class="chat-plus-grid">
+          <div class="chat-plus-item" onclick="showNotification('游戏 - 功能开发中')">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></div>
+            <span>游戏</span>
+          </div>
+          <div class="chat-plus-item" onclick="openChatNovelTogetherModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <span>看书</span>
+          </div>
+          <div class="chat-plus-item" onclick="openChatMusicShareModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <span>音乐</span>
+          </div>
+          <div class="chat-plus-item" onclick="openVideoTogetherModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+            <span>视频</span>
+          </div>
+          <div class="chat-plus-item" onclick="openChatScheduleModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <span>日程表</span>
+          </div>
+          <div class="chat-plus-item" onclick="openSideTheaterModal()">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <span>小剧场</span>
+          </div>
+          <div class="chat-plus-item" onclick="showNotification('占卜 - 功能开发中')">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <span>占卜</span>
+          </div>
+          <div class="chat-plus-item" onclick="showNotification('屏幕共享 - 功能开发中')">
+            <div class="chat-plus-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <span>屏幕共享</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-plus-dots" id="chatPlusDots">
+      <span class="chat-plus-dot active"></span>
+      <span class="chat-plus-dot"></span>
+    </div>
+  </div>
+  </div>
+  <!-- 表情包选择面板 -->
+  <div class="chat-sticker-picker" id="chatStickerPicker">
+    <div class="sticker-picker-tabs" id="stickerPickerTabs"></div>
+    <div class="sticker-picker-grid" id="stickerPickerGrid"></div>
+  </div>
+</div>
+
+<!-- 图片发送弹窗（合并版） -->
+<div class="upload-modal keyboard-safe-modal" id="chatImageSendModal">
+  <div class="upload-panel chat-image-unified-panel">
+    <div class="chat-image-tab-bar">
+      <button class="chat-image-tab active" data-tab="desc" onclick="switchImageTab('desc')">文字描述图</button>
+      <button class="chat-image-tab" data-tab="upload" onclick="switchImageTab('upload')">图片上传</button>
+    </div>
+    <div class="chat-image-tab-content" id="chatImageTabDesc" style="display:block;">
+      <textarea class="chat-image-desc-input" id="chatImageDescInput" placeholder="描述你想发送的图片内容..." rows="4"></textarea>
+      <div class="upload-btn-row">
+        <button class="btn-secondary" onclick="closeModal('chatImageSendModal')">取消</button>
+        <button class="btn-primary" onclick="sendImageDescMessage()">发送</button>
+      </div>
+    </div>
+    <div class="chat-image-tab-content" id="chatImageTabUpload" style="display:none;">
+      <div class="chat-image-upload-section">
+        <label for="chatImageLocalInput" class="chat-image-local-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>从相册/文件选择图片</span>
+        </label>
+      </div>
+      <div class="chat-image-upload-divider"><span>或输入图片链接</span></div>
+      <input type="text" class="chat-image-url-input" id="chatImageUrlInput" placeholder="请输入图片URL..." />
+      <div class="chat-image-url-preview" id="chatImageUrlPreview" style="display:none;"><img id="chatImageUrlPreviewImg" src="" alt="" /></div>
+      <div class="upload-btn-row">
+        <button class="btn-secondary" onclick="closeModal('chatImageSendModal')">取消</button>
+        <button class="btn-primary" onclick="sendImageUrlMessage()">发送链接图片</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="chatImageLocalInput" accept="image/*" style="display:none;" onchange="onLocalImagePicked(this)">
+
+<!-- 语音消息输入弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="voiceInputModal">
+  <div class="upload-panel voice-input-panel">
+    <h3>发送语音消息</h3>
+    <textarea class="voice-input-textarea" id="voiceInputText" placeholder="输入语音内容..." rows="4"></textarea>
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('voiceInputModal')">取消</button>
+      <button class="btn-primary" onclick="confirmSendVoice()">发送语音</button>
+    </div>
+  </div>
+</div>
+
+<!-- 位置发送弹窗 -->
+<div class="upload-modal keyboard-safe-modal" id="locationSendModal">
+  <div class="upload-panel location-send-panel">
+    <h3>发送位置</h3>
+    <div class="location-form-group">
+      <label>地点名称</label>
+      <input type="text" class="location-form-input" id="locationNameInput" placeholder="如：星巴克(国贸店)" maxlength="30">
+    </div>
+    <div class="location-form-group">
+      <label>详细地址</label>
+      <input type="text" class="location-form-input" id="locationAddrInput" placeholder="如：北京市朝阳区建国门外大街1号" maxlength="60">
+    </div>
+    <div class="location-form-group">
+      <label>距离（可选）</label>
+      <input type="text" class="location-form-input" id="locationDistInput" placeholder="如：350米、1.2km" maxlength="20">
+    </div>
+    <div class="upload-btn-row">
+      <button class="btn-secondary" onclick="closeModal('locationSendModal')">取消</button>
+      <button class="btn-primary" onclick="sendLocationMessage()">发送位置</button>
+    </div>
+  </div>
+</div>
+
+<!-- 首次获取当前位置提醒 -->
+<div class="upload-modal keyboard-safe-modal location-permission-modal" id="locationPermissionModal" role="dialog" aria-modal="true" aria-labelledby="locationPermissionTitle" aria-describedby="locationPermissionDescription">
+  <div class="upload-panel location-permission-panel">
+    <div class="location-permission-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <h3 id="locationPermissionTitle">允许角色获取当前位置？</h3>
+    <p class="location-permission-description" id="locationPermissionDescription">开启后，浏览器会请求定位权限并更新设备位置；坐标会发送给 BigDataCloud 地址服务，解析所在城市、区县或乡镇。私聊、群聊及角色主动消息回复时，会将最新位置和地址发送给你配置的聊天模型。启用瑞幸等位置相关 MCP 工具后，调用时也会向对应服务发送坐标，用于查询附近门店或点单。瑞幸真实下单需另行确认，付款由你自行完成。</p>
+    <div class="location-permission-note">地址为区域级，不保证精确到门牌。关闭后立即停止定位和后续共享；已发送给模型的内容无法撤回。实时定位可能增加电量消耗，请仅在信任所用服务时开启。</div>
+    <div class="upload-btn-row">
+      <button type="button" class="btn-secondary" onclick="cancelCurrentLocationPermission()">暂不允许</button>
+      <button type="button" class="btn-primary" onclick="confirmCurrentLocationPermission()">允许获取并共享</button>
+    </div>
+  </div>
+</div>
+
+<!-- 日程表生成弹窗 -->
+<div class="chat-modal-overlay keyboard-safe-modal" id="chatScheduleModal">
+  <div class="chat-modal-panel chat-schedule-modal" onclick="event.stopPropagation()">
+    <div class="chat-schedule-header">
+      <div>
+        <div class="chat-modal-title">今日日程表</div>
+        <div class="chat-schedule-target" id="chatScheduleTargetName">当前会话角色</div>
+      </div>
+      <button class="chat-schedule-close" type="button" onclick="closeChatScheduleModal()" aria-label="关闭">×</button>
+    </div>
+    <div class="chat-schedule-question" id="chatScheduleQuestion">是否生成该会话角色的当天日程表？</div>
+    <div class="chat-schedule-body" id="chatScheduleBody"></div>
+    <div class="chat-schedule-actions">
+      <button class="btn-secondary" type="button" onclick="closeChatScheduleModal()">取消</button>
+      <button class="btn-primary" type="button" id="chatScheduleGenerateBtn" onclick="generateChatScheduleForToday()">生成</button>
+    </div>
+  </div>
+</div>
+
+<!-- 音乐分享弹窗 -->
+<div class="chat-modal-overlay keyboard-safe-modal" id="chatMusicShareModal" onclick="if(event.target===this) closeChatMusicShareModal()">
+  <div class="chat-modal-panel chat-music-share-panel" onclick="event.stopPropagation()">
+    <div class="chat-music-share-header">
+      <strong>分享音乐</strong>
+      <button type="button" onclick="closeChatMusicShareModal()" aria-label="关闭">×</button>
+    </div>
+    <div class="chat-music-search-box">
+      <input id="chatMusicSearchInput" type="search" placeholder="歌曲名 / 歌手 / 专辑" autocomplete="off" onkeydown="chatMusicSearchKeydown(event)">
+      <button type="button" onclick="chatSubmitMusicSearch()">搜索</button>
+    </div>
+    <div class="chat-music-search-status" id="chatMusicSearchStatus"></div>
+    <div class="chat-music-search-results" id="chatMusicSearchResults"></div>
+  </div>
+</div>
+
+<!-- chat-features.html 动态加载 -->
+<div id="chatFeaturesContainer"></div>
+
+<!-- ========== 线下剧情模式页面 ========== -->
+<div class="chat-sub-page" id="chatOfflinePage">
+  <div class="chat-conv-nav" id="chatOfflineNav">
+    <div class="chat-conv-nav-inner">
+      <div class="chat-nav-back" onclick="closeOfflineMode()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-conv-nav-title-wrap" id="chatOfflineNavTitleWrap">
+        <div class="chat-conv-nav-title" id="chatOfflineNavTitle">会话名称</div>
+        <div class="chat-conv-nav-subtitle" id="chatOfflineNavSubtitle">线下剧情</div>
+      </div>
+      <div class="chat-conv-nav-actions">
+        <div class="chat-nav-btn" onclick="switchToOnlineFromOffline()" title="返回线上聊天">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="chat-nav-btn" onclick="openChatConvSettings()" title="设置">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-messages-area" id="chatOfflineMessagesArea"></div>
+  <div class="chat-input-bar" id="chatOfflineInputBar">
+    <div class="chat-offline-plus-wrap" id="chatOfflinePlusWrap">
+      <div class="chat-offline-plus-panel" id="chatOfflinePlusPanel" aria-hidden="true">
+        <button class="chat-offline-plus-menu-btn" type="button" onclick="generateOfflineSceneImageFromPlus()" title="根据当前场景生成图片" aria-label="根据当前场景生成图片">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M12 13l2.5 2.5L17 12l4 5"/><path d="M13 3l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2z"/></svg>
+          <span class="chat-offline-plus-menu-label">生图</span>
+        </button>
+      </div>
+      <div class="chat-input-plus-btn" id="chatOfflinePlusBtn" onclick="onOfflinePlusBtnClick()" title="更多">
+        <svg id="chatOfflinePlusBtnIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea class="chat-input-field" id="chatOfflineInputField" placeholder="输入线下剧情..." rows="1" oninput="onOfflineInputChange()" onkeydown="onOfflineInputKeydown(event)"></textarea>
+    </div>
+    <div class="chat-input-send-btn" id="chatOfflineSendBtn" onclick="sendOfflineMessage()" title="发送">
+      <svg class="offline-send-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <div class="offline-send-spinner" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 番外小剧场页面 ========== -->
+<div class="chat-sub-page" id="sideTheaterPage">
+  <div class="chat-conv-nav">
+    <div class="chat-conv-nav-inner">
+      <div class="chat-nav-back" onclick="closeSideTheaterPage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-conv-nav-title-wrap">
+        <div class="chat-conv-nav-title" id="sideTheaterPageTitle">番外小剧场</div>
+        <div class="chat-conv-nav-subtitle" id="sideTheaterPageSubtitle"></div>
+      </div>
+      <div class="chat-conv-nav-actions">
+        <div class="chat-nav-btn" onclick="openSideTheaterHistoryFromPage()" title="历史小剧场">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13a9 9 0 1 0 2.64-7.36L3 8"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="side-theater-page-body" id="sideTheaterPageBody"></div>
+</div>
+
+<div class="chat-modal-overlay keyboard-safe-modal" id="sideTheaterModal">
+  <div class="chat-modal-panel side-theater-modal-panel">
+    <div class="side-theater-modal-head">
+      <button class="side-theater-icon-btn" id="sideTheaterHistoryBack" type="button" onclick="switchSideTheaterModalView('form')" title="返回" style="visibility:hidden;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="chat-modal-title" id="sideTheaterModalTitle">番外小剧场</div>
+      <button class="side-theater-icon-btn" type="button" onclick="closeSideTheaterModal()" title="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="side-theater-modal-view active" id="sideTheaterFormView">
+      <label class="side-theater-label" for="sideTheaterPrompt">番外剧情提示词</label>
+      <textarea class="chat-form-textarea side-theater-prompt" id="sideTheaterPrompt" placeholder="输入想看的番外剧情..." rows="5"></textarea>
+      <label class="side-theater-label">生成格式</label>
+      <div class="side-theater-format-tabs">
+        <button class="side-theater-format-tab active" type="button" data-side-theater-format="text" onclick="setSideTheaterFormat('text')"><span>Aa</span>纯文字</button>
+        <button class="side-theater-format-tab" type="button" data-side-theater-format="html" onclick="setSideTheaterFormat('html')"><span>&lt;/&gt;</span>互动 HTML</button>
+      </div>
+      <div class="side-theater-format-note" id="sideTheaterFormatNote">HTML 模式支持内嵌 CSS 与 JavaScript 互动效果；禁止 CDN、外链 JS 和任何外部资源。</div>
+      <label class="side-theater-label">字数范围</label>
+      <div class="side-theater-word-row" id="sideTheaterWordRange">
+        <div class="cs-reply-range-input-wrap">
+          <label for="sideTheaterWordMin">最少</label>
+          <input type="number" class="cs-reply-range-input" id="sideTheaterWordMin" min="1" value="800">
+        </div>
+        <span class="cs-reply-range-sep">~</span>
+        <div class="cs-reply-range-input-wrap">
+          <label for="sideTheaterWordMax">最多</label>
+          <input type="number" class="cs-reply-range-input" id="sideTheaterWordMax" min="1" value="1500">
+        </div>
+        <span class="cs-reply-range-unit">字</span>
+      </div>
+      <label class="side-theater-unlimited">
+        <input type="checkbox" id="sideTheaterUnlimited" onchange="onSideTheaterUnlimitedChange()">
+        <span>不限字数</span>
+      </label>
+      <button class="side-theater-history-btn" type="button" onclick="switchSideTheaterModalView('history')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13a9 9 0 1 0 2.64-7.36L3 8"/><path d="M12 7v5l3 2"/></svg>
+        <span>历史小剧场</span>
+      </button>
+      <div class="side-theater-actions">
+        <button class="btn-secondary" type="button" onclick="closeSideTheaterModal()">取消</button>
+        <button class="btn-primary" id="sideTheaterGenerateBtn" type="button" onclick="generateSideTheater()">生成</button>
+      </div>
+    </div>
+    <div class="side-theater-modal-view" id="sideTheaterHistoryView">
+      <div class="side-theater-history-list" id="sideTheaterHistoryList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- chat-settings-page.html 动态加载 -->
+<div id="chatSettingsContainer"></div>
+
+<!-- ========== 记忆模块（内联） ========== -->
+<div id="memoryContainer">
+<!-- ========== 记忆页面 ========== -->
+<div class="chat-sub-page" id="memoryPage">
+  <div class="chat-nav">
+    <div class="chat-nav-inner">
+      <div class="chat-nav-back" onclick="closeMemoryPage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="chat-nav-title" id="memoryNavTitle">记忆</div>
+      <div class="chat-nav-actions">
+        <button type="button" class="chat-nav-btn mem-import-nav-btn" onclick="openMemoryImport()" title="导入TXT记忆" aria-label="导入TXT记忆">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 12v6"/><path d="m9 15 3 3 3-3"/></svg>
+        </button>
+        <div class="chat-nav-btn" onclick="openMemorySettings()" title="记忆设置">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mem-stats-bar">
+    <div class="mem-stats-item"><span class="mem-stats-value" id="memStatDays">0</span><span class="mem-stats-label">陪伴天数</span></div>
+    <div class="mem-stats-divider"></div>
+    <div class="mem-stats-item"><span class="mem-stats-value" id="memStatOnline">0</span><span class="mem-stats-label">线上消息</span></div>
+    <div class="mem-stats-divider"></div>
+    <div class="mem-stats-item"><span class="mem-stats-value" id="memStatOffline">0</span><span class="mem-stats-label">线下消息</span></div>
+  </div>
+  <div class="mem-tabs">
+    <div class="mem-tab active" data-mem-tab="longterm" onclick="switchMemTab('longterm')">长期记忆</div>
+    <div class="mem-tab" data-mem-tab="core" onclick="switchMemTab('core')">核心记忆</div>
+    <div class="mem-tab" data-mem-tab="storyline" onclick="switchMemTab('storyline')">剧情线</div>
+  </div>
+  <div class="mem-body">
+    <div class="mem-tab-panel active" id="memPanelLongterm"></div>
+    <div class="mem-tab-panel" id="memPanelCore"></div>
+    <div class="mem-tab-panel" id="memPanelStoryline"></div>
+  </div>
+  <div class="mem-add-btn" onclick="addMemoryItem()" title="手动添加">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </div>
+</div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="memImportModal" onclick="if(event.target===this) closeMemoryImport()">
+  <div class="chat-modal-panel mem-import-panel" role="dialog" aria-modal="true" aria-labelledby="memImportTitle">
+    <div class="chat-modal-title" id="memImportTitle">导入 TXT 到角色记忆</div>
+    <div class="mem-import-toolbar">
+      <button type="button" class="mem-import-file-btn" onclick="selectMemoryImportFile()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span>选择 TXT</span>
+      </button>
+      <span class="mem-import-count" id="memImportCharCount" aria-live="polite">0 / 96000 字</span>
+    </div>
+    <div class="mem-import-hint" id="memImportHint">内容会发送到当前会话使用的 API（专属或全局）分析；系统将去重后写入长期记忆与核心记忆。</div>
+    <input type="file" id="memImportFile" accept=".txt,text/plain" hidden onchange="handleMemoryImportFile(event)">
+    <textarea id="memImportText" class="chat-form-textarea mem-import-textarea" placeholder="选择 TXT，或在此粘贴聊天记录、角色资料与旧记忆..." rows="12" aria-describedby="memImportHint memImportCharCount" oninput="updateMemoryImportCount()"></textarea>
+    <div class="mem-import-actions">
+      <button type="button" class="btn-secondary" id="memImportCancelBtn" onclick="closeMemoryImport()">取消</button>
+      <button type="button" class="btn-primary mem-import-ai-btn" id="memImportAiBtn" onclick="startMemoryImport()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+        <span id="memImportAiBtnText">AI 分析并导入</span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="memSettingsModal">
+  <div class="chat-modal-panel mem-settings-panel">
+    <div class="chat-modal-title">记忆设置</div>
+    <div class="mem-set-section">
+      <div class="mem-set-header" onclick="toggleMemSummaryPrompt()"><span class="mem-set-header-label">记忆总结词</span><svg id="memSummaryArrow" class="mem-set-arrow collapsed" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div id="memSummaryPromptBody" style="display:none;padding:0 0 8px;"><textarea id="memSummaryPromptInput" class="chat-form-textarea" placeholder="自定义总结词，影响AI总结的方向和风格..." rows="3" style="min-height:60px;"></textarea></div>
+    </div>
+    <div class="mem-set-section">
+      <div class="mem-set-item"><span class="mem-set-item-label">自动总结</span><label class="cs-switch"><input type="checkbox" id="memAutoSummaryToggle" onchange="onMemAutoSummaryChange()"><span class="cs-switch-slider"></span></label></div>
+      <div class="mem-set-interval" id="memAutoIntervalArea" style="display:none;"><span class="mem-set-hint">每隔</span><input type="number" id="memAutoInterval" class="mem-set-num-input" value="10" min="1" max="999"><span class="mem-set-hint">回合自动总结</span></div>
+    </div>
+    <div class="mem-set-section">
+      <div class="mem-set-title">手动总结</div>
+      <div class="mem-set-round-info"><span class="mem-set-hint">已连续总结到回合:</span><span class="mem-set-round-badge" id="memLastRound">0</span></div>
+      <div class="mem-set-range-row"><span class="mem-set-hint">从第</span><input type="number" id="memManualFrom" class="mem-set-num-input" value="1" min="1"><span class="mem-set-hint">到第</span><input type="number" id="memManualTo" class="mem-set-num-input" value="1" min="1"><span class="mem-set-hint">回合</span></div>
+      <button class="mem-set-sum-btn" id="memManualSumBtn" onclick="manualSummarize()">手动总结</button>
+    </div>
+    <div class="mem-set-section">
+      <div class="mem-set-title">长期记忆提炼总结</div>
+      <div class="mem-set-round-info"><span class="mem-set-hint">长期记忆总数:</span><span class="mem-set-round-badge" id="memLongtermCount">0</span></div>
+      <div class="mem-set-range-row"><span class="mem-set-hint">从第</span><input type="number" id="memRefineFrom" class="mem-set-num-input" value="1" min="1" onchange="onMemRefineRangeChange()"><span class="mem-set-hint">到第</span><input type="number" id="memRefineTo" class="mem-set-num-input" value="1" min="1" onchange="onMemRefineRangeChange()"><span class="mem-set-hint">条</span></div>
+      <button class="mem-set-sum-btn" id="memRefineBtn" onclick="startMemoryRefine()">开始提炼</button>
+    </div>
+    <button class="mem-set-close-btn" onclick="closeMemorySettings()">关闭</button>
+  </div>
+</div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="memRefineReviewModal">
+  <div class="chat-modal-panel mem-refine-panel">
+    <div class="chat-modal-title">审核提炼结果</div>
+    <div class="mem-refine-meta" id="memRefinePreviewMeta"></div>
+    <div class="mem-refine-list" id="memRefinePreviewList"></div>
+    <button class="mem-refine-add-btn" type="button" onclick="addMemRefinePreviewItem()">添加一条</button>
+    <div class="mem-refine-actions">
+      <button class="btn-secondary" onclick="closeMemoryRefineReview()" style="flex:1;">取消</button>
+      <button class="btn-primary" onclick="saveMemoryRefineReview()" style="flex:1;">保存并替换</button>
+    </div>
+  </div>
+</div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="memEditModal"><div class="chat-modal-panel mem-edit-panel"><div class="chat-modal-title" id="memEditTitle">编辑记忆</div><input id="memEditItemTitle" class="chat-form-input" placeholder="剧情标题" style="display:none;margin-bottom:8px;"><textarea id="memEditContent" class="chat-form-textarea" placeholder="记忆内容..." rows="5"></textarea><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeMemEditModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveMemEdit()" style="flex:1;">保存</button></div><button id="memEditDeleteBtn" class="mem-edit-delete-btn" onclick="deleteMemEdit()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>删除此记忆</button></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="csReplySettingsModal"><div class="chat-modal-panel cs-modal-panel" style="max-width:340px;"><div class="chat-modal-title">回复设置</div><div class="cs-reply-section"><div class="cs-reply-section-title">线上回复</div><div class="cs-reply-section-desc">角色一次性回复的消息气泡条数区间</div><div class="cs-reply-range-row"><div class="cs-reply-range-input-wrap"><label>最少</label><input type="number" class="cs-reply-range-input" id="csOnlineReplyMin" min="1" max="99" value="1"></div><span class="cs-reply-range-sep">~</span><div class="cs-reply-range-input-wrap"><label>最多</label><input type="number" class="cs-reply-range-input" id="csOnlineReplyMax" min="1" max="99" value="3"></div><span class="cs-reply-range-unit">条</span></div></div><div class="cs-reply-section" style="margin-top:16px;"><div class="cs-reply-section-title">线下回复</div><div class="cs-reply-section-desc">角色在线下剧情一次性生成的字数区间</div><div class="cs-reply-range-row"><div class="cs-reply-range-input-wrap"><label>最少</label><input type="number" class="cs-reply-range-input" id="csOfflineReplyMin" min="10" max="9999" value="100"></div><span class="cs-reply-range-sep">~</span><div class="cs-reply-range-input-wrap"><label>最多</label><input type="number" class="cs-reply-range-input" id="csOfflineReplyMax" min="10" max="9999" value="300"></div><span class="cs-reply-range-unit">字</span></div></div><div style="display:flex;gap:8px;margin-top:16px;"><button class="btn-secondary" onclick="closeCsReplySettingsModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveCsReplySettings()" style="flex:1;">保存</button></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="csRemarkModal"><div class="chat-modal-panel cs-modal-panel"><div class="chat-modal-title" id="csRemarkModalTitle">角色备注</div><input class="chat-form-input" id="csRemarkInput" placeholder="输入备注..." maxlength="50"><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeCsRemarkModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveCsRemark()" style="flex:1;">保存</button></div></div></div>
+<div class="chat-modal-overlay" id="csGroupMemberModal"><div class="chat-modal-panel cs-modal-panel" style="max-height:80vh;display:flex;flex-direction:column;"><div class="chat-modal-title" style="display:flex;align-items:center;justify-content:space-between;"><span>群成员管理</span><span style="font-size:12px;color:var(--text3);font-weight:normal;" id="csGmCount"></span></div><div id="csGroupMemberList" style="flex:1;overflow-y:auto;min-height:100px;max-height:55vh;"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeGroupMemberModal()" style="flex:1;">关闭</button><button class="btn-primary" onclick="openGroupInviteModal()" style="flex:1;">邀请成员</button></div></div></div>
+<div class="chat-modal-overlay" id="csGmActionModal"><div class="chat-modal-panel cs-modal-panel" style="max-width:320px;"><div class="chat-modal-title" id="csGmActionTitle">成员操作</div><div id="csGmActionContent"></div><div style="margin-top:12px;"><button class="btn-secondary" onclick="closeGmActionModal()" style="width:100%;">取消</button></div></div></div>
+<div class="chat-modal-overlay" id="csGroupInviteModal"><div class="chat-modal-panel cs-modal-panel" style="max-height:80vh;display:flex;flex-direction:column;"><div class="chat-modal-title">邀请成员</div><div id="csGroupInviteList" style="flex:1;overflow-y:auto;min-height:100px;max-height:55vh;"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeGroupInviteModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="confirmGroupInvite()" style="flex:1;">确认邀请</button></div></div></div>
+<div class="chat-modal-overlay" id="csPersonaModal"><div class="chat-modal-panel cs-modal-panel"><div class="chat-modal-title">切换用户人设</div><div class="cs-persona-list" id="csPersonaList"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeCsPersonaModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="clearCsPersona()" style="flex:1;">清除人设</button></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="csApiModal"><div class="chat-modal-panel cs-modal-panel cs-api-modal"><div class="chat-modal-title">专属API设置</div><div class="cs-api-form"><label class="cs-api-label">API地址</label><input class="chat-form-input" id="csApiUrl" placeholder="https://api.example.com/v1"><label class="cs-api-label">密钥</label><input class="chat-form-input" id="csApiKey" placeholder="sk-..." type="password"><label class="cs-api-label">模型</label><div class="cs-api-model-row"><input class="chat-form-input" id="csApiModel" placeholder="gpt-4o" style="flex:1;"><button class="btn-primary cs-api-fetch-btn" onclick="csFetchModels()">拉取模型</button></div><div class="cs-api-model-list" id="csApiModelList" style="display:none;"></div><label class="cs-api-label">温度 <span class="cs-api-hint" id="csApiTempVal">0.7</span></label><input type="range" class="cs-slider" id="csApiTemp" min="0" max="2" step="0.1" value="0.7" oninput="document.getElementById('csApiTempVal').textContent=this.value"><label class="cs-api-label">重复惩罚 <span class="cs-api-hint" id="csApiRepVal">1.0</span></label><div class="cs-api-hint-desc">降低模型重复已有内容的倾向，值越高越不易重复</div><input type="range" class="cs-slider" id="csApiRepPenalty" min="0" max="2" step="0.1" value="1.0" oninput="document.getElementById('csApiRepVal').textContent=this.value"><label class="cs-api-label">频率惩罚 <span class="cs-api-hint" id="csApiFreqVal">0.0</span></label><div class="cs-api-hint-desc">根据词语在文本中的出现频率进行惩罚，减少高频词的使用</div><input type="range" class="cs-slider" id="csApiFreqPenalty" min="0" max="2" step="0.1" value="0.0" oninput="document.getElementById('csApiFreqVal').textContent=this.value"><label class="cs-api-label">存在惩罚 <span class="cs-api-hint" id="csApiPresVal">0.0</span></label><div class="cs-api-hint-desc">对已出现过的词语施加惩罚，鼓励模型谈论新话题</div><input type="range" class="cs-slider" id="csApiPresPenalty" min="0" max="2" step="0.1" value="0.0" oninput="document.getElementById('csApiPresVal').textContent=this.value"><div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;"><label class="cs-api-label" style="margin-bottom:0;">流式输出</label><label class="cs-switch"><input type="checkbox" id="csApiStreamToggle"><span class="cs-switch-slider"></span></label></div><div class="cs-api-hint-desc">开启后使用 SSE 流式接收，适用于支持 stream 的 API</div></div><div style="display:flex;gap:8px;margin-top:16px;"><button class="btn-secondary" onclick="closeCsApiModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveCsApi()" style="flex:1;">保存</button></div></div></div>
+<div class="chat-modal-overlay" id="csStatsModal"><div class="chat-modal-panel cs-modal-panel"><div class="chat-modal-title">聊天统计</div><table class="cs-stats-table" id="csStatsTable"><tr><td>聊天天数</td><td id="csStatDays">0</td></tr><tr><td>消息总数</td><td id="csStatMsgs">0</td></tr><tr><td>累计Token</td><td id="csStatTokens">0</td></tr><tr><td>最近一次消耗Token</td><td id="csStatLastTokens">0</td></tr></table><div style="margin-top:12px;"><button class="btn-secondary" onclick="closeCsStatsModal()" style="width:100%;">关闭</button></div></div></div>
+<div class="chat-modal-overlay" id="csWbGroupModal"><div class="chat-modal-panel cs-modal-panel"><div class="chat-modal-title">绑定世界书分组（可多选）</div><div class="cs-wb-group-list" id="csWbGroupList"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeCsWbGroupModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveCsWbGroupBind()" style="flex:1;">确认</button></div></div></div>
+<div class="chat-modal-overlay" id="csStickerGroupModal"><div class="chat-modal-panel cs-modal-panel"><div class="chat-modal-title">绑定表情包分组（可多选）</div><div class="cs-wb-group-list" id="csStickerGroupList"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeCsStickerGroupModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveCsStickerGroupBind()" style="flex:1;">确认</button></div></div></div>
+<div class="chat-modal-overlay" id="csRgGroupModal"><div class="chat-modal-panel cs-modal-panel"><div class="chat-modal-title">绑定正则分组（可多选）</div><div class="cs-wb-group-list" id="csRgGroupList"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeCsRgGroupModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="saveCsRgGroupBind()" style="flex:1;">确认</button></div></div></div>
+<div class="chat-modal-overlay" id="chatNewChatModal"><div class="chat-modal-panel"><div class="chat-modal-title">新建会话</div><div class="chat-modal-option" onclick="startCreatePrivateChat()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>私聊</span></div><div class="chat-modal-option" onclick="startCreateGroupChat()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>群聊</span></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="charExportModal"><div class="chat-fg-modal-panel" style="max-width:340px;"><div class="chat-modal-title">导出角色卡</div><div style="margin-bottom:10px;"><label class="wb-form-label" style="margin-bottom:4px;display:block;">角色名称</label><input class="chat-form-input" id="charExportName" placeholder="角色名称" maxlength="50"></div><div style="margin-bottom:10px;"><label class="wb-form-label" style="margin-bottom:4px;display:block;">导出格式</label><select class="api-input" id="charExportFormat" style="width:100%;" onchange="onCharExportFormatChange()"><option value="json">JSON 文件</option><option value="png">PNG 文件（头像嵌入数据）</option></select></div><div id="charExportOptions" style="margin-bottom:10px;"><div id="charExportVoiceRow" style="display:none;margin-bottom:6px;"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;"><input type="checkbox" id="charExportVoice" checked> 导出音色ID</label></div><div style="margin-bottom:4px;"><label class="wb-form-label" style="margin-bottom:4px;display:block;">附加数据（可多选）</label><div style="display:flex;flex-direction:column;gap:4px;"><label id="charExportWbLabel" style="display:none;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;"><input type="checkbox" id="charExportWbCheck"> 导出世界书分组</label><label id="charExportRgLabel" style="display:none;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;"><input type="checkbox" id="charExportRgCheck"> 导出正则分组</label></div></div></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeCharExportModal()" style="flex:1;">取消</button><button class="btn-primary" onclick="doExportContact()" style="flex:1;">导出</button></div></div></div>
+<input type="file" id="charImportFileInput" accept=".json,.png" style="display:none" onchange="handleImportContactFile(event)">
+<div class="chat-modal-overlay keyboard-safe-modal" id="chatFgModal"><div class="chat-fg-modal-panel"><div class="chat-modal-title" id="chatFgModalTitle">新建好友分组</div><input class="chat-form-input" id="chatFgNameInput" placeholder="输入分组名称..." maxlength="20"><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeChatFgModal()" style="flex:1;">取消</button><button class="btn-primary" id="chatFgModalSave" onclick="saveNewFriendGroup()" style="flex:1;">保存</button></div></div></div>
+<div class="chat-modal-overlay" id="chatFgSelectModal"><div class="chat-group-select-panel"><div class="chat-modal-title">选择好友分组</div><div id="chatFgSelectList"></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="momentsBgModal"><div class="chat-avatar-modal-panel"><h3>更换朋友圈封面</h3><input class="chat-avatar-url-input" id="momentsBgUrlInput" placeholder="输入图片URL..."><div class="chat-avatar-btn-row"><button class="btn-secondary" onclick="closeMomentsBgModal()">取消</button><button class="btn-primary" onclick="applyMomentsBgUrl()">确认URL</button></div><div class="chat-avatar-divider">— 或 —</div><div class="chat-avatar-btn-row"><label for="momentsBgFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label></div></div></div>
+<input type="file" accept="image/*" class="hidden-input" id="momentsBgFileInput" onchange="handleMomentsBgFile(event)">
+<div class="chat-modal-overlay moments-publish-overlay" id="momentsPublishModal"><div class="moments-publish-panel"><div class="moments-publish-header"><button class="btn-secondary" onclick="closeMomentsPublish()">取消</button><span class="moments-publish-title">发布朋友圈</span><button class="btn-primary" onclick="publishMoment()">发布</button></div><div class="moments-publish-body"><textarea class="moments-publish-textarea" id="momentsPublishText" placeholder="这一刻的想法..." rows="4"></textarea><div class="moments-publish-section-title">图片</div><div class="moments-pub-img-grid-wrap" id="momentsPublishImgGrid"></div><div class="moments-publish-section-title">地点</div><input class="chat-form-input" id="momentsPublishLocation" placeholder="添加地点（选填）"><div class="moments-publish-section-title">谁可以看</div><select class="chat-form-select moments-vis-select" id="momentsVisType" onchange="onMomentsVisTypeChange()"><option value="public">公开</option><option value="groups">选择分组</option><option value="contacts">选择联系人</option></select><div class="moments-vis-list" id="momentsVisGroups" style="display:none;"><div id="momentsVisGroupList"></div></div><div class="moments-vis-list" id="momentsVisContacts" style="display:none;"><div id="momentsVisContactList"></div></div></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="momentsImageAddModal"><div class="chat-avatar-modal-panel"><h3>添加图片</h3><input class="chat-avatar-url-input" id="momentsImgUrlInput" placeholder="输入图片URL..."><div class="chat-avatar-btn-row"><button class="btn-secondary" onclick="closeMomentsImageAdd()">取消</button><button class="btn-primary" onclick="addMomentsImageByUrl()">确认URL</button></div><div class="chat-avatar-divider">— 或 —</div><div class="chat-avatar-btn-row"><label for="momentsImgFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label></div><div class="chat-avatar-divider">— 或 文字描述图 —</div><input class="chat-avatar-url-input" id="momentsImgDescInput" placeholder="输入图片文字描述..."><div class="chat-avatar-btn-row"><button class="btn-primary" onclick="addMomentsImageByDesc()" style="width:100%">添加描述图</button></div></div></div>
+<input type="file" accept="image/*" multiple class="hidden-input" id="momentsImgFileInput" onchange="handleMomentsImageFile(event)">
+<div class="moments-img-preview-overlay" id="momentsImgPreview" onclick="closeMomentsImgPreview()"><img id="momentsImgPreviewImg" src="" alt=""></div>
+<div class="moments-comment-bar" id="momentsCommentBar"><input class="moments-comment-input" id="momentsCommentInput" placeholder="评论..." onkeydown="if(event.key==='Enter'){event.preventDefault();submitMomentsComment();}"><button id="momentsCommentSend" class="btn-primary moments-comment-send" onclick="submitMomentsComment()">发送</button><button class="moments-comment-close" onclick="closeMomentsCommentBar()">×</button></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="chatAvatarModal"><div class="chat-avatar-modal-panel"><h3>设置头像</h3><input class="chat-avatar-url-input" id="chatAvatarUrlInput" placeholder="输入图片URL..."><div class="chat-avatar-btn-row"><button class="btn-secondary" onclick="closeChatAvatarModal()">取消</button><button class="btn-primary" onclick="applyChatAvatarUrl()">确认URL</button></div><div class="chat-avatar-divider">— 或 —</div><div class="chat-avatar-btn-row"><label for="chatAvatarFileInput" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;display:block">本地上传图片</label></div></div></div>
+<input type="file" accept="image/*" class="hidden-input" id="chatAvatarFileInput" onchange="handleChatAvatarFile(event)">
+<div class="chat-sub-page" id="chatProfilePage"><div class="chat-nav"><div class="chat-nav-inner"><div class="chat-nav-back" onclick="closeChatProfilePage()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="chat-nav-title">个人中心</div></div></div><div class="chat-form-body" id="chatProfileBody"><div class="profile-user-card"><div class="profile-avatar-wrap" onclick="openProfileAvatarUpload()"><img id="profileAvatarImg" src="" alt="" style="display:none"><span class="profile-avatar-ph" id="profileAvatarPh"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span></div><div class="profile-user-info"><input class="profile-nickname-input" id="profileNickname" placeholder="点击设置昵称" maxlength="20" onblur="autoSaveProfile()"><input class="profile-signature-input" id="profileSignature" placeholder="点击设置个性签名" maxlength="50" onblur="autoSaveProfile()"></div></div><div class="profile-section"><div class="profile-section-header" onclick="toggleProfileSection('personaLib')"><svg class="profile-section-arrow" id="personaLibArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>用户人设库</span><span class="profile-section-count" id="personaLibCount">0</span><button class="profile-section-add-btn" onclick="event.stopPropagation();openNewPersona()">+ 新建</button></div><div class="profile-section-body" id="personaLibBody" style="display:none;"><div id="personaLibList"></div></div></div><div class="profile-section"><div class="profile-section-header" onclick="toggleProfileSection('balanceLib')"><svg class="profile-section-arrow" id="balanceLibArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>用户余额</span><span class="profile-section-count" id="balanceDisplay" style="font-weight:700;color:var(--text);">¥0.00</span></div><div class="profile-section-body" id="balanceLibBody" style="display:none;"><div class="balance-actions-row"><button class="profile-section-add-btn" onclick="openBalanceAddModal('income')">+ 收入</button><button class="profile-section-add-btn" onclick="openBalanceAddModal('expense')">- 支出</button></div><div class="balance-summary" id="balanceSummary"></div><div id="balanceRecordList"></div></div></div><div class="profile-section"><div class="profile-section-header" onclick="toggleProfileSection('stickerLib')"><svg class="profile-section-arrow" id="stickerLibArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>表情包管理库</span><span class="profile-section-count" id="stickerLibCount">0</span><button class="profile-section-add-btn" onclick="event.stopPropagation();importStickerPacks()">导入</button><button class="profile-section-add-btn" onclick="event.stopPropagation();exportStickerPacks()">导出</button><button class="profile-section-add-btn" onclick="event.stopPropagation();openNewStickerPack()">+ 新建</button><input type="file" id="stickerPackImportFile" accept=".json" style="display:none" onchange="handleStickerPackImport(event)"></div><div class="profile-section-body" id="stickerLibBody" style="display:none;"><div id="stickerLibList"></div></div></div><div class="profile-section"><div class="profile-section-header" onclick="openFavoritesPage()"><svg class="profile-section-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>收藏管理</span><span class="profile-section-count" id="favoritesCount">0</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;"><polyline points="9 18 15 12 9 6"/></svg></div></div><div class="profile-section"><div class="profile-section-header" onclick="toggleProfileSection('profileShelf')"><svg class="profile-section-arrow collapsed" id="profileShelfArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span>我的书架</span><span class="profile-section-count" id="profileShelfCount">0</span><button class="profile-section-add-btn" onclick="event.stopPropagation();triggerProfileShelfImport()">导入</button><input type="file" id="profileShelfImportFile" accept=".txt,text/plain,.pdf,application/pdf" multiple style="display:none" onchange="handleProfileShelfImport(event)"></div><div class="profile-section-body" id="profileShelfBody" style="display:none;"><div id="profileShelfList"></div></div></div></div></div>
+<div class="chat-sub-page" id="chatPersonaEditPage" style="z-index:815;"><div class="chat-nav"><div class="chat-nav-inner"><div class="chat-nav-back" onclick="closePersonaEditPage()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="chat-nav-title" id="personaEditTitle">新建用户人设</div></div></div><div class="chat-form-body"><div class="chat-char-header"><div class="chat-char-avatar-wrap polaroid-avatar" onclick="openChatAvatarUpload('persona',0)"><div class="chat-char-avatar-inner"><img id="personaEditAvatarImg" src="" alt="" style="display:none"><span class="chat-char-avatar-ph" id="personaEditAvatarPh">+</span></div><div class="polaroid-avatar-label">用户头像</div></div><div class="chat-char-fields"><input class="chat-field-input" id="personaEditName" placeholder="用户姓名" maxlength="30"><input class="chat-field-input" id="personaEditAge" placeholder="年龄" maxlength="10"><input class="chat-field-input" id="personaEditIdentity" placeholder="身份（如：学生、医生）" maxlength="30"></div></div><div class="chat-form-section"><label class="chat-form-label">人设内容</label><textarea class="chat-form-textarea" id="personaEditContent" placeholder="输入你的人设描述..."></textarea></div><button class="chat-form-save" onclick="savePersonaEdit()">保存人设</button></div></div>
+<div class="chat-sub-page" id="chatStickerEditPage" style="z-index:815;"><div class="chat-nav"><div class="chat-nav-inner"><div class="chat-nav-back" onclick="closeStickerEditPage()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="chat-nav-title" id="stickerEditTitle">新建表情包库</div></div></div><div class="chat-form-body"><div class="chat-form-section"><label class="chat-form-label">表情包库名称</label><input class="chat-form-input" id="stickerPackName" placeholder="输入表情包库名称" maxlength="20"></div><div class="chat-form-section"><label class="chat-form-label">添加表情包</label><div class="sticker-add-methods"><div class="sticker-url-row"><input class="chat-form-input" id="stickerUrlInput" placeholder="输入图片URL..." style="flex:1;"><input class="chat-form-input" id="stickerMeaningInput" placeholder="含义" style="width:80px;"><button class="btn-primary" onclick="addStickerByUrl()" style="padding:10px 14px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;">添加</button></div><div class="sticker-upload-row"><label for="stickerFileInput" class="btn-primary" style="flex:1;padding:10px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;text-align:center">本地上传图片</label><button class="btn-secondary" onclick="openBatchStickerUpload()" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">批量粘贴上传</button></div></div><input type="file" accept="image/*" multiple class="hidden-input" id="stickerFileInput" onchange="handleStickerFiles(event)"></div><div class="chat-form-section"><label class="chat-form-label">表情包预览 (<span id="stickerPreviewCount">0</span>个)</label><div class="sticker-preview-grid" id="stickerPreviewGrid"></div></div><button class="chat-form-save" onclick="saveStickerPack()">保存表情包库</button></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="stickerBatchModal"><div class="chat-modal-panel" style="width:320px;"><div class="chat-modal-title">批量粘贴上传</div><textarea class="chat-form-textarea" id="stickerBatchInput" placeholder="每行一个表情包，格式：&#10;含义：图片URL&#10;含义：图片URL&#10;（含义可省略，直接写URL也可以）" style="min-height:150px;"></textarea><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeBatchStickerUpload()" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">取消</button><button class="btn-primary" onclick="applyBatchStickerUpload()" style="flex:1;padding:10px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;">确认导入</button></div></div></div>
+<div class="chat-modal-overlay" id="stickerPreviewModal"><div class="chat-modal-panel" style="width:300px;text-align:center;"><img id="stickerPreviewModalImg" src="" alt="" style="max-width:100%;max-height:250px;border-radius:12px;margin-bottom:8px;"><div id="stickerPreviewModalMeaning" style="font-size:13px;color:var(--text2);margin-bottom:12px;"></div><button class="btn-secondary" onclick="document.getElementById('stickerPreviewModal').classList.remove('active')" style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">关闭</button></div></div>
+<div class="chat-modal-overlay" id="chatPersonaSelectModal"><div class="chat-group-select-panel" style="max-height:500px;"><div class="chat-modal-title">选择用户人设</div><div id="chatPersonaSelectList"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closePersonaSelectModal()" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">取消</button><button class="btn-primary" onclick="confirmPersonaSelect()" style="flex:1;padding:10px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;">确认选择</button></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="profileAvatarModal"><div class="chat-avatar-modal-panel"><h3>设置头像</h3><input class="chat-avatar-url-input" id="profileAvatarUrlInput" placeholder="输入图片URL..."><div class="chat-avatar-btn-row"><button class="btn-secondary" onclick="closeProfileAvatarModal()">取消</button><button class="btn-primary" onclick="applyProfileAvatarUrl()">确认URL</button></div><div class="chat-avatar-divider">— 或 —</div><div class="chat-avatar-btn-row"><button class="btn-primary" onclick="triggerProfileAvatarFile()" style="width:100%">本地上传图片</button></div><input type="file" accept="image/*" id="profileAvatarFileInput" onchange="handleProfileAvatarFile(event)" style="display:none;"></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="balanceAddModal"><div class="chat-modal-panel" style="width:300px;"><div class="chat-modal-title" id="balanceAddTitle">添加收入</div><input class="chat-form-input" id="balanceAmountInput" placeholder="金额" type="number" step="0.01" min="0" style="margin-bottom:8px;"><input class="chat-form-input" id="balanceNoteInput" placeholder="备注（可选）" maxlength="50" style="margin-bottom:12px;"><div style="display:flex;gap:8px;"><button class="btn-secondary" onclick="closeBalanceAddModal()" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">取消</button><button class="btn-primary" onclick="saveBalanceRecord()" style="flex:1;padding:10px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;">确认</button></div></div></div>
+<div class="chat-sub-page" id="chatFavoritesPage" style="z-index:815;"><div class="chat-nav"><div class="chat-nav-inner"><div class="chat-nav-back" onclick="closeFavoritesPage()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="chat-nav-title">收藏管理</div><div class="chat-nav-actions"><div class="chat-nav-btn" onclick="openNewFavoriteGroup()" title="新建收藏分组"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div></div></div><div class="chat-form-body" id="favoritesBody"><div id="favoriteGroupList"></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="favoriteGroupModal"><div class="chat-fg-modal-panel"><div class="chat-modal-title" id="favGroupModalTitle">新建收藏分组</div><input class="chat-form-input" id="favGroupNameInput" placeholder="输入分组名称..." maxlength="20"><div style="display:flex;gap:8px;margin-top:12px;"><button class="btn-secondary" onclick="closeFavoriteGroupModal()" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">取消</button><button class="btn-primary" onclick="saveFavoriteGroup()" style="flex:1;padding:10px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;">保存</button></div></div></div>
+<div class="chat-modal-overlay keyboard-safe-modal" id="favoriteItemModal"><div class="chat-modal-panel" style="width:320px;"><div class="chat-modal-title">添加收藏</div><input class="chat-form-input" id="favItemTitle" placeholder="标题" maxlength="50" style="margin-bottom:8px;"><textarea class="chat-form-textarea" id="favItemContent" placeholder="内容（文本、链接等）" style="min-height:80px;margin-bottom:8px;"></textarea><input class="chat-form-input" id="favItemImage" placeholder="图片URL（可选）" style="margin-bottom:12px;"><div style="display:flex;gap:8px;"><button class="btn-secondary" onclick="closeFavoriteItemModal()" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">取消</button><button class="btn-primary" onclick="saveFavoriteItem()" style="flex:1;padding:10px;border-radius:12px;border:none;font-size:13px;font-family:inherit;cursor:pointer;">保存</button></div></div></div>
+<div class="chat-modal-overlay" id="favoriteDetailModal"><div class="chat-modal-panel fav-detail-modal-panel"><div class="chat-modal-title fav-detail-title" id="favDetailTitle"></div><img class="fav-detail-image" id="favDetailImage" src="" alt="" style="display:none;" onclick="openFavoriteDetailImage(event)"><div class="fav-detail-content" id="favDetailContent"></div><button class="btn-secondary" onclick="closeFavoriteDetailModal()" style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--glass-border);font-size:13px;font-family:inherit;cursor:pointer;">关闭</button></div></div>
+<div class="chat-sidebar-mask" id="chatSidebarMask" style="display:none;"></div>
+</div>
+
+<!-- voice-video.html 动态加载 -->
+<div id="voiceVideoContainer"></div>
+<!-- phone-check.html 动态加载 -->
+<div id="phoneCheckContainer"></div>
+<!-- check-in.html 动态加载 -->
+<div id="checkInContainer"></div>
+
+<!-- 悬浮球 -->
+<div id="floatBall" class="float-ball" style="display:none;">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+</div>
+
+<div id="floatBallPanel" class="float-ball-panel">
+  <div class="float-ball-panel-backup">
+    <button type="button" class="fb-btn fb-backup-btn" onclick="fbExportCurrentDataBackup()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      导出当前数据备份
+    </button>
+  </div>
+  <div class="float-ball-panel-header">
+    <span class="float-ball-panel-title">API 快捷设置</span>
+    <div class="float-ball-panel-close" onclick="closeFloatPanel()">&times;</div>
+  </div>
+  <div class="float-ball-panel-body">
+    <div class="fb-form-item">
+      <label class="fb-label">API 地址</label>
+      <input type="text" class="fb-input" id="fbApiUrl" placeholder="https://api.openai.com/v1">
+    </div>
+    <div class="fb-form-item">
+      <label class="fb-label">API 密钥</label>
+      <div class="fb-key-row">
+        <input type="password" class="fb-input" id="fbApiKey" placeholder="sk-...">
+        <div class="fb-eye-btn" onclick="toggleFbKeyVisibility()">
+          <svg id="fbKeyEyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="fb-form-item">
+      <label class="fb-label">模型</label>
+      <div class="fb-model-row">
+        <input type="text" class="fb-input" id="fbApiModel" placeholder="gpt-4o" list="fbModelList">
+        <datalist id="fbModelList"></datalist>
+        <button class="fb-btn fb-btn-sm" onclick="fbFetchModels()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          拉取
+        </button>
+      </div>
+      <div id="fbModelTags" class="fb-model-tags"></div>
+    </div>
+    <div class="fb-form-item">
+      <label class="fb-label">温度 <span id="fbTempValue">0.7</span></label>
+      <input type="range" class="fb-slider" id="fbTemperature" min="0" max="2" step="0.1" value="0.7" oninput="document.getElementById('fbTempValue').textContent=parseFloat(this.value).toFixed(1)">
+    </div>
+    <div class="fb-actions">
+      <button class="fb-btn fb-btn-primary" onclick="fbApplySettings()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        应用
+      </button>
+      <button class="fb-btn" onclick="fbTestConnection()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        测试
+      </button>
+    </div>
+    <div id="fbTestResult" class="fb-test-result" style="display:none;">
+      <span id="fbTestIcon"></span>
+      <span id="fbTestText"></span>
+    </div>
+    <div id="fbLibrarySection" class="fb-library-section" style="display:none;">
+      <div class="fb-library-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        API 库
+      </div>
+      <div id="fbLibraryList" class="fb-library-list"></div>
+    </div>
+  </div>
+</div>
+<div id="floatBallOverlay" class="float-ball-overlay" onclick="closeFloatPanel()"></div>
+
+<!-- ========== 免责声明弹窗 ========== -->
+<div class="shop-page" id="shopPage">
+  <div class="shop-nav">
+    <button class="shop-icon-btn" type="button" onclick="closeShopApp()" aria-label="返回">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="shop-nav-title" id="shopNavTitle">主页</div>
+    <button class="shop-icon-btn" id="shopRefreshBtn" type="button" onclick="refreshShopCurrent()" aria-label="刷新">
+      <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+    </button>
+  </div>
+  <div class="shop-body" id="shopBody"></div>
+  <div class="shop-bottom-nav">
+    <button class="shop-bottom-item" type="button" data-shop-tab="taobao" onclick="switchShopTab('taobao')">桃宝</button>
+    <button class="shop-bottom-item" type="button" data-shop-tab="delivery" onclick="switchShopTab('delivery')">外卖</button>
+    <button class="shop-bottom-item" type="button" data-shop-tab="cart" onclick="switchShopTab('cart')">购物车</button>
+    <button class="shop-bottom-item" type="button" data-shop-tab="home" onclick="switchShopTab('home')">主页</button>
+  </div>
+</div>
+
+<div class="shop-modal-overlay keyboard-safe-modal" id="shopCategoryModal">
+  <div class="shop-modal">
+    <div class="shop-modal-title">新桃宝分类</div>
+    <input class="shop-input" id="shopCategoryNameInput" placeholder="分类名称" maxlength="12">
+    <div class="shop-price-row">
+      <input class="shop-input" id="shopCategoryMinInput" placeholder="最低价" type="number" min="0" step="1">
+      <input class="shop-input" id="shopCategoryMaxInput" placeholder="最高价" type="number" min="0" step="1">
+    </div>
+    <div class="shop-modal-actions">
+      <button class="shop-secondary-btn" type="button" onclick="closeShopCategoryModal()">取消</button>
+      <button class="shop-primary-btn" type="button" onclick="saveShopCategory()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="shop-modal-overlay" id="shopCheckoutModal">
+  <div class="shop-modal shop-checkout-modal">
+    <div class="shop-modal-title" id="shopCheckoutTitle">确认购买</div>
+    <div id="shopCheckoutSummary"></div>
+    <div class="shop-segment">
+      <button type="button" data-shop-buy-for="self" onclick="setShopBuyFor('self')">自己</button>
+      <button type="button" data-shop-buy-for="other" onclick="setShopBuyFor('other')">送给他人</button>
+    </div>
+    <div class="shop-checkout-hint" id="shopCheckoutHint">买给自己，支付后订单会保存在主页。</div>
+    <button class="shop-recipient-btn" id="shopRecipientBtn" type="button" onclick="openShopRecipientSelect()">选择收件角色</button>
+    <input type="hidden" id="shopRecipientInput">
+    <div class="shop-modal-actions">
+      <button class="shop-secondary-btn" type="button" onclick="closeShopCheckoutModal()">取消</button>
+      <button class="shop-primary-btn" type="button" onclick="shopPaySelf()">支付</button>
+      <button class="shop-primary-btn shop-orange-btn" type="button" onclick="openShopPayerSelect()">他人代付</button>
+    </div>
+  </div>
+</div>
+
+<div class="shop-modal-overlay" id="shopRecipientModal">
+  <div class="shop-modal">
+    <div class="shop-modal-title">选择角色</div>
+    <div class="shop-conv-list" id="shopRecipientList"></div>
+    <div class="shop-modal-actions">
+      <button class="shop-secondary-btn" type="button" onclick="closeShopRecipientSelect()">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="shop-modal-overlay" id="shopPayerModal">
+  <div class="shop-modal">
+    <div class="shop-modal-title">选择会话</div>
+    <div class="shop-conv-list" id="shopPayerConversationList"></div>
+    <div class="shop-modal-actions">
+      <button class="shop-secondary-btn" type="button" onclick="closeShopPayerSelect()">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="upload-modal" id="disclaimerModal">
+  <div class="upload-panel disclaimer-panel">
+    <h3>使用前法律声明与免责协议</h3>
+    <div class="disclaimer-age-warning">【重要年龄提示】本工具为技术产品，仅面向成年开发者与研究者。不建议未成年人购买和使用。</div>
+    <div class="disclaimer-body">
+      <p>请仔细阅读以下条款。您必须同意本协议全部内容方可使用本工具。</p>
+      <h4>1. 产品性质声明</h4>
+      <p>本工具是一个完全在您本地浏览器中运行的HTML网页文件（静态前端界面）。开发者仅提供此交互界面，不提供、不运营、不控制任何人工智能模型、算法、数据或API服务。</p>
+      <h4>2. 用户自行承担API责任</h4>
+      <p>您必须自行从合法、正规的第三方服务商处获取并配置API密钥。您对您所使用的API密钥的合法性、安全性及产生的所有费用、内容、后果承担全部责任。开发者不对任何第三方API服务的可用性、质量、安全性或合法性作任何担保。</p>
+      <h4>3. 用户内容合规承诺</h4>
+      <p>您承诺严格遵守《中华人民共和国网络安全法》、《网络信息内容生态治理规定》等所有适用法律法规，绝不使用本工具生成或传播任何违法违规内容，包括但不限于：</p>
+      <ul>
+        <li>危害国家安全、荣誉和利益的内容</li>
+        <li>煽动颠覆国家政权、破坏国家统一的内容</li>
+        <li>恐怖主义、极端主义内容</li>
+        <li>民族仇恨、民族歧视、破坏民族团结的内容</li>
+        <li>破坏国家宗教政策、宣扬邪教和封建迷信的内容</li>
+        <li>淫秽、色情、赌博、暴力、凶杀、恐怖内容</li>
+        <li>侮辱、诽谤、侵犯他人合法权益的内容</li>
+        <li>虚假信息、谣言等扰乱社会秩序的内容</li>
+        <li>法律、行政法规禁止的其他内容</li>
+      </ul>
+      <h4>4. 隐私与数据安全</h4>
+      <p>本工具的对话数据和 API 密钥存储于本地，不会发送给开发者。您主动使用联网功能时，浏览器会向您配置的 API 端点或界面中明示的第三方服务发送所需数据；启用 MCP 服务器后，角色选择工具时会向该服务器发送工具参数，并将其返回内容交给聊天模型生成最终回复。例如音乐搜索发送搜索词至 Apple，歌词检索发送歌曲信息至 LRCLIB，网易云扫码登录、网页登录 Cookie 验证、歌单及播放请求由站点服务转发至网易云音乐。相关第三方将依其政策处理请求。</p>
+      <h4>5. 责任豁免</h4>
+      <p>在任何情况下，开发者均不对因以下原因引起的任何直接、间接、附带、特殊、惩罚性或后果性损害承担责任：</p>
+      <ul>
+        <li>您使用或无法使用本工具</li>
+        <li>您使用第三方API服务产生的任何后果</li>
+        <li>您违反本声明或任何法律法规的行为</li>
+        <li>任何第三方对本工具的未经授权的访问、使用或修改</li>
+      </ul>
+      <h4>6. 知识产权</h4>
+      <p>本工具的HTML代码、界面设计等知识产权归开发者所有。您不得对本工具进行反向工程、反编译、破解或任何形式的非法修改。本声明未明示授权的其他权利均由开发者保留。</p>
+      <h4>7. 协议变更与终止</h4>
+      <p>开发者保留随时更新或修改本免责声明的权利。更新后的声明将在工具中公布后立即生效。如您不同意修改后的条款，请立即停止使用本工具。继续使用即视为接受修改后的声明。</p>
+    </div>
+    <div class="upload-btn-row">
+      <button class="btn-primary disclaimer-agree-btn" onclick="agreeDisclaimer()">我已阅读并同意</button>
+    </div>
+  </div>
+</div>
+
+<!-- JS 按依赖顺序加载 -->
+<script defer src="js/vendor/dexie.min.js?v=4.4.4"></script>
+<script defer src="js/db.js?v=11"></script>
+<script defer src="js/utils.js?v=20261004-luckin1-chatfix1"></script>
+<script defer src="js/theme.js"></script>
+<script defer src="js/datetime.js"></script>
+<script defer src="js/upload.js?v=2"></script>
+<script defer src="js/pages.js?v=2"></script>
+<script defer src="js/gallery.js?v=2"></script>
+<script defer src="js/p2-record-widget.js"></script>
+<script defer src="js/receipt-printer.js"></script>
+<script defer src="js/settings.js?v=20261004-luckin1-chatfix1"></script>
+<script defer src="js/api-settings.js"></script>
+<script defer src="js/float-ball.js?v=2"></script>
+<script defer src="js/voice-settings.js?v=5"></script>
+<script defer src="js/image-gen-settings.js?v=1"></script>
+<script defer src="js/font-settings.js?v=3"></script>
+<script defer src="js/sound-settings.js?v=2"></script>
+<script defer src="js/appearance.js?v=7"></script>
+<script defer src="js/widget-css.js?v=2"></script>
+<script defer src="js/worldbook.js"></script>
+<script defer src="js/regex.js"></script>
+<script defer src="js/chat-data.js?v=20261003-chat-reliability1"></script>
+<script defer src="js/chat-profile.js?v=20261003-chat-reliability1"></script>
+<script defer src="js/chat-contacts.js?v=6"></script>
+<script defer src="js/mcp-runtime.js?v=20261005-luckin2-cardpay1"></script>
+<script defer src="js/chat-luckin.js?v=20261005-luckin2-cardpay1"></script>
+<script defer src="js/chat-conversation.js?v=20261005-luckin2-cardpay1"></script>
+<script defer src="js/couple-space.js?v=39"></script>
+<script defer src="js/voice-call.js?v=5"></script>
+<script defer src="js/video-call.js?v=5"></script>
+<script defer src="js/video-together.js?v=2"></script>
+<script defer src="js/chat-settings.js?v=20261003-chat-reliability1"></script>
+<script defer src="js/chat-image-context-fix.js?v=20260923-image-context1"></script>
+<script defer src="js/chat-init.js?v=6"></script>
+<script defer src="js/moments.js?v=10"></script>
+<script defer src="js/memory.js?v=6"></script>
+<script defer src="js/chat-schedule.js?v=4"></script>
+<script defer src="js/chat-anonymous.js?v=2"></script>
+<script defer src="js/forum.js?v=7"></script>
+<script defer src="js/weibo.js?v=19"></script>
+<script defer src="js/night-radio.js?v=6"></script>
+<script defer src="js/post-office.js?v=20260929-letters8-postal-letter-reply"></script>
+<script defer src="js/dating.js?v=20260923-image-context1"></script>
+<script defer src="js/check-in.js?v=26"></script>
+<script defer src="js/games.js?v=1"></script>
+<script defer src="js/music.js?v=49"></script>
+<script defer src="js/shop.js?v=20261002-shop-gift2"></script>
+<script defer src="js/toolbox.js?v=20261004-luckin1-chatfix1"></script>
+<script defer src="js/app.js?v=3"></script>
+<script defer src="js/drag.js?v=2"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js?v=20261005-luckin2-cardpay1', { updateViaCache: 'none' })
+    .catch(error => {
+      console.error('Service worker registration failed:', error);
+    });
+}
+</script>
+</body>
+</html>
